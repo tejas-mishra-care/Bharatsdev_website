@@ -38,8 +38,9 @@ export function Header() {
         className={cn(
           'text-base font-semibold transition-colors relative',
           isActive ? 'text-primary' : 'text-foreground/80 hover:text-primary',
-          'after:content-[""] after:absolute after:bottom-[-6px] after:left-0 after:right-0 after:h-[3px] after:bg-primary after:scale-x-0 after:origin-left after:transition-transform after:duration-300',
-          isActive && 'after:scale-x-100'
+          'after:content-[""] after:absolute after:bottom-[-6px] after:left-0 after:right-0 after:h-[3px] after:bg-gradient-to-r after:from-primary after:to-accent after:scale-x-0 after:origin-left after:transition-transform after:duration-300 after:rounded-full',
+          isActive && 'after:scale-x-100',
+          'hover:after:scale-x-100'
         )}
       >
         {label}
@@ -51,7 +52,9 @@ export function Header() {
     <motion.header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-500 border-b",
-        hasScrolled ? 'h-20 bg-background/95 backdrop-blur-xl shadow-lg border-border/50' : 'h-24 bg-background/80 backdrop-blur-sm'
+        hasScrolled 
+          ? 'h-20 bg-background/95 backdrop-blur-xl shadow-xl shadow-black/5 border-border/50' 
+          : 'h-24 bg-background/80 backdrop-blur-sm border-transparent'
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
