@@ -1,7 +1,6 @@
 
 import { Hero } from '@/components/home/hero';
 import { TrustBar } from '@/components/home/trust-bar';
-import { StatsCounter } from '@/components/home/stats-counter';
 import { TechStackShowcase } from '@/components/home/tech-stack-showcase';
 import dynamic from 'next/dynamic';
 
@@ -18,7 +17,6 @@ export default function Home() {
   return (
     <div className="bg-background text-foreground">
       <Hero />
-      <StatsCounter />
       <TrustBar />
       <HeroCaseStudy />
       <Pillars />

@@ -163,7 +163,10 @@ export function Hero() {
         
         <motion.p
           variants={itemVariants}
-          className="text-white/90 max-w-3xl mx-auto mt-6 mb-12 text-balance text-xl md:text-2xl font-medium leading-relaxed"
+          className="text-white max-w-3xl mx-auto mt-6 mb-12 text-balance text-xl md:text-2xl font-medium leading-relaxed drop-shadow-lg"
+          style={{
+            textShadow: '0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3)',
+          }}
         >
           Finished assets. No retainers. No overhead. Direct access to our Founder/CTO on every project.
         </motion.p>
