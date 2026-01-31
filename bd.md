@@ -89,7 +89,7 @@ This page tells the story of the agency, its model, and its values.
 
 - **Hero Section**: Sets the stage with the core philosophy: "Built by Engineers. Run Like a System."
 - **Our Story**: A narrative explaining the founding principle of delivering finished assets, anchored by the UltraTech project as a defining moment.
-- **The Lean-Ops Advantage**: A three-card layout detailing the roles of the Founder/CTO (Tejas Mishra), the Head of PM (Shristi Mishra), and the on-demand Freelancer Network.
+- **The Lean-Ops Advantage**: A three-card layout detailing the roles of the Founder/CTO, the Head of PM, and the on-demand Freelancer Network.
 - **Our Philosophy**: Reinforces the core tenets: Project-Based is Better, Speed Without Sacrifice, and Proof Over Promises.
 - **How We Work**: A visual, 5-step timeline of the project engagement process.
 - **Our Values**: Four cards highlighting Precision, Transparency, Ownership, and Efficiency.
