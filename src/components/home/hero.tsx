@@ -139,7 +139,8 @@ export function Hero() {
           variants={itemVariants}
           className="text-white text-balance mb-8 gradient-text text-6xl md:text-8xl font-black leading-tight drop-shadow-2xl"
           style={{
-            textShadow: '0 0 40px rgba(74, 144, 226, 0.5)',
+            textShadow: '0 0 60px rgba(74, 144, 226, 0.6), 0 0 100px rgba(74, 144, 226, 0.3)',
+            filter: 'drop-shadow(0 4px 20px rgba(0, 0, 0, 0.3))',
           }}
         >
           <motion.span
