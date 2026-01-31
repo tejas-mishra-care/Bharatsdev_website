@@ -4,6 +4,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
+import { CursorFollower } from '@/components/ui/cursor-follower';
 import { cn } from '@/lib/utils';
 import { Inter } from 'next/font/google';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
@@ -38,6 +39,7 @@ export default function RootLayout({
         className={cn('min-h-screen bg-background font-body antialiased flex flex-col', inter.variable)}
       >
         <FirebaseClientProvider>
+          <CursorFollower />
           <ScrollProgress />
           <Header />
           <main className="flex-1">{children}</main>

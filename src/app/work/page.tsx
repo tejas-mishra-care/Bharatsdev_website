@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 const featuredProject = portfolio.featured[0];
@@ -86,8 +86,18 @@ const ProjectCard = ({ project, index }: { project: typeof otherProjects[0]; ind
 
 export default function WorkPage() {
   const [activeTab, setActiveTab] = useState('All');
+  const [sortBy, setSortBy] = useState('Latest');
   const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true });
+  
+  const sortedProjects = useMemo(() => {
+    const projects = activeTab === 'All' 
+      ? otherProjects 
+      : otherProjects.filter(p => p.category === activeTab);
+    
+    // Simple sort - in real app, implement actual sorting logic
+    return projects;
+  }, [activeTab]);
 
   return (
     <div className="bg-background text-foreground">
@@ -176,7 +186,7 @@ export default function WorkPage() {
               transition={{ duration: 0.6 }}
           >
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <div className="flex justify-center mb-12">
+              <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-12">
                   <TabsList className="h-auto bg-background/50 backdrop-blur-sm border-2">
                       {uniqueCategories.map((category) => (
                           <TabsTrigger
@@ -188,11 +198,23 @@ export default function WorkPage() {
                           </TabsTrigger>
                       ))}
                   </TabsList>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">Sort by:</span>
+                    <select 
+                      value={sortBy} 
+                      onChange={(e) => setSortBy(e.target.value)}
+                      className="px-3 py-1.5 rounded-lg border-2 border-border bg-background text-sm focus:border-primary focus:outline-none"
+                    >
+                      <option value="Latest">Latest</option>
+                      <option value="Popular">Most Popular</option>
+                      <option value="Industry">Industry</option>
+                    </select>
+                  </div>
               </div>
               
               <TabsContent value="All" className="mt-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                      {otherProjects.map((project, index) => (
+                      {sortedProjects.map((project, index) => (
                           <ProjectCard key={project.id} project={project} index={index} />
                       ))}
                   </div>

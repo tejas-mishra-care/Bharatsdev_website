@@ -5,7 +5,8 @@ import { MagneticButton } from '@/components/ui/magnetic-button';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Sparkles, Zap } from 'lucide-react';
-import { Hero3D } from './hero-3d';
+import { ParticleSystem } from './particle-system';
+import { useState, useEffect } from 'react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -50,72 +51,167 @@ const buttonVariants = {
 };
 
 export function Hero() {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const [windowSize, setWindowSize] = useState({ width: 1920, height: 1080 });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    const updateWindowSize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    
+    updateWindowSize();
+    window.addEventListener('resize', updateWindowSize);
+    
+    return () => window.removeEventListener('resize', updateWindowSize);
+  }, []);
+
   return (
-    <section className="relative py-20 md:py-32 bg-background overflow-hidden">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 gradient-mesh opacity-50" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.05),transparent_50%)]" />
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
+      {/* Particle System */}
+      <ParticleSystem />
+      
+      {/* Animated gradient overlays */}
+      <motion.div 
+        className="absolute inset-0 gradient-mesh opacity-60"
+        style={{ y }}
+      />
+      <motion.div 
+        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(217,89%,61%,0.2),transparent_70%)]"
+        style={{ opacity }}
+      />
+      
+      {/* Floating particles effect */}
+      {isMounted && (
+        <div className="absolute inset-0 overflow-hidden">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-primary/30 rounded-full"
+              initial={{
+                x: Math.random() * windowSize.width,
+                y: Math.random() * windowSize.height,
+              }}
+              animate={{
+                y: [null, Math.random() * windowSize.height],
+                x: [null, Math.random() * windowSize.width],
+              }}
+              transition={{
+                duration: Math.random() * 10 + 10,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            />
+          ))}
+        </div>
+      )}
       
       <motion.div
         className="container mx-auto text-center px-4 relative z-10"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
+        style={{ y }}
       >
-        <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-          <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-          <p className="font-semibold text-primary uppercase tracking-wider text-sm">
+        <motion.div 
+          variants={itemVariants} 
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/20 backdrop-blur-xl border-2 border-primary/30 mb-8 shadow-lg"
+          whileHover={{ scale: 1.05, boxShadow: '0 0 30px hsl(217,89%,61%,0.5)' }}
+        >
+          <motion.div
+            animate={{ rotate: [0, 360] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+          >
+            <Zap className="h-5 w-5 text-primary" />
+          </motion.div>
+          <p className="font-bold text-primary uppercase tracking-wider text-sm">
             Your Complete Digital Growth Engine
           </p>
         </motion.div>
         
         <motion.h1
           variants={itemVariants}
-          className="text-foreground text-balance mb-6 gradient-text text-5xl md:text-7xl font-bold"
+          className="text-white text-balance mb-8 gradient-text text-6xl md:text-8xl font-black leading-tight drop-shadow-2xl"
+          style={{
+            textShadow: '0 0 40px rgba(74, 144, 226, 0.5)',
+          }}
         >
-          We Don't Build Websites.<br />
-          We Architect Digital Ecosystems.
+          <motion.span
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            We Don't Build Websites.
+          </motion.span>
+          <br />
+          <motion.span
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="block mt-2"
+          >
+            We Architect Digital Ecosystems.
+          </motion.span>
         </motion.h1>
         
         <motion.p
           variants={itemVariants}
-          className="large max-w-3xl mx-auto mt-6 mb-10 text-balance text-xl"
+          className="text-white/90 max-w-3xl mx-auto mt-6 mb-12 text-balance text-xl md:text-2xl font-medium leading-relaxed"
         >
           Finished assets. No retainers. No overhead. Direct access to our Founder/CTO on every project.
         </motion.p>
         
         <motion.div
           variants={buttonVariants}
-          className="flex flex-col sm:flex-row justify-center gap-4"
+          className="flex flex-col sm:flex-row justify-center gap-6"
         >
-          <motion.div
-            whileHover="hover"
-            whileTap="tap"
-            variants={buttonVariants}
-          >
-            <Button asChild size="lg" className="group relative overflow-hidden">
+          <MagneticButton>
+            <Button asChild size="lg" className="group relative overflow-hidden text-lg px-8 py-6 bg-gradient-to-r from-primary to-accent text-white border-0 shadow-[0_0_30px_rgba(74,144,226,0.5)] hover:shadow-[0_0_50px_rgba(74,144,226,0.8)]">
               <Link href="/contact">
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="relative z-10 flex items-center gap-3">
+                  <Zap className="h-5 w-5" />
                   Start a Project
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform" />
                 </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <motion.span 
+                  className="absolute inset-0 bg-gradient-to-r from-accent to-primary"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
               </Link>
             </Button>
-          </motion.div>
+          </MagneticButton>
           
-          <motion.div
-            whileHover="hover"
-            whileTap="tap"
-            variants={buttonVariants}
-          >
-            <Button asChild size="lg" variant="outline" className="group">
+          <MagneticButton>
+            <Button asChild size="lg" variant="outline" className="group text-lg px-8 py-6 bg-white/10 backdrop-blur-xl border-2 border-white/30 text-white hover:bg-white/20 hover:border-white/50">
               <Link href="/work">
                 View Our Work
-                <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-2 transition-transform" />
               </Link>
             </Button>
-          </motion.div>
+          </MagneticButton>
+        </motion.div>
+        
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
+            <motion.div
+              className="w-1 h-3 bg-white rounded-full"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </div>
         </motion.div>
       </motion.div>
     </section>
