@@ -1,0 +1,221 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Brand Colors - BharatsDev */
+    --primary-blue: 217 89% 61%; /* #4A90E2 - Sky Blue */
+    --electric-blue: 217 91% 60%; /* #2563EB - Electric Blue for CTAs */
+    --vibrant-orange: 24 95% 53%; /* #F97316 - Vibrant Orange */
+    --bright-cyan: 188 94% 43%; /* #06B6D4 - Bright Cyan */
+    
+    /* Extended System */
+    --deep-navy: 215 100% 8%; /* #0A1628 - Deep Navy for headers */
+    --dark-blue: 215 50% 22%; /* #1E3A5F - Dark Blue */
+    --success-green: 142 76% 36%; /* #10B981 - Success Green */
+    --ghost-white: 220 14% 96%; /* #F9FAFB - Ghost White */
+    --cool-gray: 214 32% 91%; /* #E2E8F0 - Cool Gray */
+    --medium-gray: 215 16% 47%; /* #64748B - Medium Gray */
+    --charcoal: 222 47% 11%; /* #111827 - Charcoal */
+    --error-red: 0 84% 60%; /* #EF4444 - Error Red */
+
+    /* Semantic Colors */
+    --background: 0 0% 100%; /* White */
+    --foreground: 222 47% 11%; /* Charcoal */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 217 89% 61%; /* Sky Blue */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%; /* Ghost White */
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 9% 91%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 217 91% 60%; /* Electric Blue */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214 32% 91%; /* Cool Gray */
+    --input: 214 32% 91%;
+    --ring: 217 89% 61%;
+
+    --radius: 0.75rem;
+  }
+ 
+  .dark {
+    --background: 215 100% 8%; /* Deep Navy */
+    --foreground: 0 0% 100%;
+
+    --card: 215 50% 15%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 215 50% 15%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 217 89% 61%; /* Sky Blue */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 50% 20%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 215 16% 47%;
+    --muted-foreground: 215 14% 95%;
+    
+    --accent: 217 91% 60%; /* Electric Blue */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 215 50% 25%;
+    --input: 215 50% 25%;
+    --ring: 217 89% 61%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1,h2,h3,h4,h5,h6 {
+     @apply text-foreground tracking-tight;
+  }
+  h1 {
+    @apply text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-tight;
+  }
+  h2 {
+    @apply text-[clamp(2rem,4vw,3.5rem)] font-bold leading-tight;
+  }
+  h3 {
+    @apply text-[clamp(1.5rem,3vw,2rem)] font-semibold leading-tight;
+  }
+  h4 {
+    @apply text-[clamp(1.25rem,2.5vw,1.5rem)] font-semibold leading-snug;
+  }
+  p.large, .large {
+    @apply text-[clamp(1.125rem,2vw,1.25rem)] text-muted-foreground leading-relaxed;
+  }
+  p {
+    @apply text-[clamp(1rem,1.5vw,1.125rem)] text-muted-foreground leading-relaxed;
+  }
+
+  section {
+    @apply py-20 md:py-24;
+  }
+}
+
+@layer components {
+    .card {
+        @apply transition-all duration-500 ease-out;
+    }
+    .card:hover {
+        @apply shadow-2xl -translate-y-2 scale-[1.02];
+    }
+    .btn-primary, .btn-secondary, .btn-outline {
+        @apply transition-all duration-300 ease-out;
+    }
+    
+    /* Modern gradient backgrounds - BharatsDev Brand */
+    .gradient-primary {
+        background: linear-gradient(135deg, hsl(217, 89%, 61%) 0%, hsl(217, 91%, 60%) 50%, hsl(188, 94%, 43%) 100%);
+    }
+    
+    .gradient-hero {
+        background: linear-gradient(135deg, hsl(215, 100%, 8%) 0%, hsl(215, 50%, 22%) 50%, hsl(217, 89%, 61%) 100%);
+    }
+    
+    .gradient-cta {
+        background: linear-gradient(135deg, hsl(217, 91%, 60%) 0%, hsl(217, 89%, 61%) 100%);
+    }
+    
+    .gradient-mesh {
+        background: 
+            radial-gradient(at 0% 0%, hsl(217, 89%, 61%, 0.1) 0px, transparent 50%),
+            radial-gradient(at 100% 0%, hsl(217, 91%, 60%, 0.1) 0px, transparent 50%),
+            radial-gradient(at 100% 100%, hsl(188, 94%, 43%, 0.05) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, hsl(217, 89%, 61%, 0.05) 0px, transparent 50%);
+    }
+    
+    .gradient-text {
+        background: linear-gradient(135deg, hsl(217, 89%, 61%) 0%, hsl(217, 91%, 60%) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    /* Smooth scroll */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Glass morphism effect */
+    .glass {
+        @apply bg-background/80 backdrop-blur-xl border border-border/50;
+    }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

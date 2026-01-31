@@ -1,0 +1,88 @@
+{
+  "placeholderImages": [
+    {
+      "id": "logo-ultratech",
+      "description": "UltraTech Cement Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1585189223069-ae4c681896f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx1bHRyYXRlY2glMjBsb2dvfGVufDB8fHx8MTc2MzIwNjk5OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ultratech logo"
+    },
+    {
+      "id": "logo-mit",
+      "description": "MIT Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1656140269588-e643ed5258d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtaXQlMjBsb2dvfGVufDB8fHx8MTc2MzIwNjk5OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mit logo"
+    },
+    {
+      "id": "logo-dainik-bhaskar",
+      "description": "Dainik Bhaskar Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1703432931202-0706a656c8bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZGFpbmlrJTIwYmhhc2thciUyMGxvZ298ZW58MHx8fHwxNzYzMjA2OTk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dainik bhaskar logo"
+    },
+    {
+      "id": "logo-lokmat",
+      "description": "Lokmat Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1728406970302-8be1af6bda4c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsb2ttYXQlMjBsb2dvfGVufDB8fHx8MTc2MzIwNjk5OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "lokmat logo"
+    },
+    {
+      "id": "logo-sakal",
+      "description": "Sakal Marathi News Logo",
+      "imageUrl": "https://images.unsplash.com/photo-1761624159387-5f9d883b4415?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzYWthbCUyMGxvZ298ZW58MHx8fHwxNzYzMjA2OTk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sakal logo"
+    },
+    {
+      "id": "case-study-ultratech",
+      "description": "UltraTech Cement case study visual",
+      "imageUrl": "https://images.unsplash.com/photo-1640416198776-e24939eb9fdc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb25zdHJ1Y3Rpb24lMjBpbmR1c3RyeXxlbnwwfHx8fDE3NjMyMDY5OTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "construction industry"
+    },
+    {
+      "id": "portfolio-ultratech",
+      "description": "UltraTech Shashwat Portal",
+      "imageUrl": "https://images.unsplash.com/photo-1747656335550-7ed00ad9603c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxlbnRlcnByaXNlJTIwcG9ydGFsfGVufDB8fHx8MTc2MzIwNjk5OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "enterprise portal"
+    },
+    {
+      "id": "portfolio-jeevolve",
+      "description": "JEEvolve EdTech Platform",
+      "imageUrl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjB0ZWNobm9sb2d5fGVufDB8fHx8MTc2MzE4NzM4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "education technology"
+    },
+    {
+      "id": "portfolio-careercompass",
+      "description": "CareerCompassAI",
+      "imageUrl": "https://images.unsplash.com/photo-1762968280286-0bfcc4afd0ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhaSUyMGNhcmVlcnxlbnwwfHx8fDE3NjMyMDIwMTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ai career"
+    },
+    {
+      "id": "portfolio-sievelab",
+      "description": "SieveLab ConTech Calculator",
+      "imageUrl": "https://images.unsplash.com/photo-1759922378219-1d31edb644f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb25zdHJ1Y3Rpb24lMjBlbmdpbmVlcmluZ3xlbnwwfHx8fDE3NjMyMDY5OTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "construction engineering"
+    },
+    {
+      "id": "portfolio-ghamelacalc",
+      "description": "GhamelaCalc Civil Engineering Tool",
+      "imageUrl": "https://images.unsplash.com/photo-1721244654346-9be0c0129e36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZW5naW5lZXJpbmclMjBibHVlcHJpbnR8ZW58MHx8fHwxNzYzMTc5NzE4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "engineering blueprint"
+    },
+    {
+      "id": "portfolio-custom",
+      "description": "Custom Client Project",
+      "imageUrl": "https://images.unsplash.com/photo-1759262305241-53152f6573a9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtb2Rlcm4lMjBncmFwaGljfGVufDB8fHx8MTc2MzIwNjk5OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "modern graphic"
+    },
+    {
+      "id": "founder-photo",
+      "description": "Tejas Mishra, Founder",
+      "imageUrl": "https://images.unsplash.com/photo-1543132220-3ec99c6094dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBtYW58ZW58MHx8fHwxNzYzMTY5OTY4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional man"
+    },
+    {
+      "id": "shristi-photo",
+      "description": "Shristi Mishra, Project Manager",
+      "imageUrl": "https://images.unsplash.com/photo-1610631066894-62452ccb927c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwcm9mZXNzaW9uYWwlMjB3b21hbnxlbnwwfHx8fDE3NjMxOTg3ODB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional woman"
+    }
+  ]
+}
