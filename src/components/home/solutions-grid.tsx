@@ -36,7 +36,7 @@ const itemVariants = {
 
 export function SolutionsGrid() {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const isInView = useInView(ref, { once: true, margin: "-50px" });
 
     return (
         <section className="py-20 px-4 bg-secondary/30 relative overflow-hidden">

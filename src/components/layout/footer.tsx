@@ -68,7 +68,7 @@ export function Footer() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
             >
-              <Link href="/" className="flex items-center gap-3 mb-4">
+              <Link href="/" prefetch={true} className="flex items-center gap-3 mb-4">
                 <Logo className="h-10 w-10" />
                 <span className="text-xl font-bold text-white">Bharats<span className="text-primary">Dev</span></span>
               </Link>
@@ -117,6 +117,7 @@ export function Footer() {
                 >
                   <Link
                       href={link.href}
+                      prefetch={true}
                       className="text-gray-400 hover:text-white transition-colors text-base group flex items-center gap-2"
                   >
                     <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
@@ -138,6 +139,7 @@ export function Footer() {
                 >
                   <Link
                       href={link.href}
+                      prefetch={true}
                       className="text-gray-400 hover:text-white transition-colors text-base group flex items-center gap-2"
                   >
                     <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>

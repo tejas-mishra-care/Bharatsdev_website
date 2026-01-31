@@ -34,15 +34,15 @@ export function ParticleSystem() {
       window.addEventListener('resize', resizeCanvas);
     }
 
-    // Initialize particles
-    const particleCount = 50;
+    // Initialize particles - reduced count for performance
+    const particleCount = 30;
     const initParticles = () => {
       particlesRef.current = Array.from({ length: particleCount }).map(() => ({
         x: Math.random() * (canvas.width || 1920),
         y: Math.random() * (canvas.height || 1080),
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 1.5 + 0.5,
       }));
     };
     initParticles();
@@ -71,12 +71,12 @@ export function ParticleSystem() {
           const dy = particle.y - other.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 150) {
+          if (distance < 100) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `rgba(74, 144, 226, ${0.1 * (1 - distance / 150)})`;
-            ctx.lineWidth = 1;
+            ctx.strokeStyle = `rgba(74, 144, 226, ${0.08 * (1 - distance / 100)})`;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         });

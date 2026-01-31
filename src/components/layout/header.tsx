@@ -35,6 +35,7 @@ export function Header() {
     return (
       <Link
         href={href}
+        prefetch={true}
         className={cn(
           'text-base font-semibold transition-colors relative',
           isActive ? 'text-primary' : 'text-foreground/80 hover:text-primary',

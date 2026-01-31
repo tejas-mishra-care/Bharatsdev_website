@@ -8,22 +8,28 @@ export function CursorFollower() {
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
+    // Throttle mouse updates for performance
+    let rafId: number;
     const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+      });
     };
 
     const handleMouseEnter = () => setIsHovering(true);
     const handleMouseLeave = () => setIsHovering(false);
 
-    window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
     
     const interactiveElements = document.querySelectorAll('a, button, [role="button"]');
     interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', handleMouseEnter);
-      el.addEventListener('mouseleave', handleMouseLeave);
+      el.addEventListener('mouseenter', handleMouseEnter, { passive: true });
+      el.addEventListener('mouseleave', handleMouseLeave, { passive: true });
     });
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', updateMousePosition);
       interactiveElements.forEach(el => {
         el.removeEventListener('mouseenter', handleMouseEnter);

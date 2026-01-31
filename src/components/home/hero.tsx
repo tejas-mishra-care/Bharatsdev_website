@@ -51,11 +51,24 @@ const buttonVariants = {
 };
 
 export function Hero() {
+  const shouldReduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const y = shouldReduceMotion ? useTransform(scrollY, () => 0) : useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = shouldReduceMotion ? useTransform(scrollY, () => 1) : useTransform(scrollY, [0, 300], [1, 0]);
   const [windowSize, setWindowSize] = useState({ width: 1920, height: 1080 });
   const [isMounted, setIsMounted] = useState(false);
+  
+  // Disable particle system on mobile for performance
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     setIsMounted(true);
@@ -74,8 +87,9 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
-      {/* Particle System */}
-      <ParticleSystem />
+      <LazyMotion features={domAnimation}>
+        {/* Particle System - disabled on mobile */}
+        {!isMobile && <ParticleSystem />}
       
       {/* Animated gradient overlays */}
       <motion.div 
@@ -87,13 +101,13 @@ export function Hero() {
         style={{ opacity }}
       />
       
-      {/* Floating particles effect */}
+      {/* Floating particles effect - reduced for performance */}
       {isMounted && (
         <div className="absolute inset-0 overflow-hidden">
-          {Array.from({ length: 20 }).map((_, i) => (
+          {Array.from({ length: 10 }).map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-primary/30 rounded-full"
+              className="absolute w-1.5 h-1.5 bg-primary/20 rounded-full"
               initial={{
                 x: Math.random() * windowSize.width,
                 y: Math.random() * windowSize.height,
@@ -103,7 +117,7 @@ export function Hero() {
                 x: [null, Math.random() * windowSize.width],
               }}
               transition={{
-                duration: Math.random() * 10 + 10,
+                duration: Math.random() * 8 + 8,
                 repeat: Infinity,
                 ease: 'linear',
               }}
@@ -177,7 +191,7 @@ export function Hero() {
         >
           <MagneticButton>
             <Button asChild size="lg" className="group relative overflow-hidden text-lg px-8 py-6 bg-gradient-to-r from-primary to-accent text-white border-0 shadow-[0_0_30px_rgba(74,144,226,0.5)] hover:shadow-[0_0_50px_rgba(74,144,226,0.8)]">
-              <Link href="/contact">
+              <Link href="/contact" prefetch={true}>
                 <span className="relative z-10 flex items-center gap-3">
                   <Zap className="h-5 w-5" />
                   Start a Project
@@ -195,7 +209,7 @@ export function Hero() {
           
           <MagneticButton>
             <Button asChild size="lg" variant="outline" className="group text-lg px-8 py-6 bg-white/10 backdrop-blur-xl border-2 border-white/30 text-white hover:bg-white/20 hover:border-white/50">
-              <Link href="/work">
+              <Link href="/work" prefetch={true}>
                 View Our Work
                 <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-2 transition-transform" />
               </Link>
@@ -218,6 +232,7 @@ export function Hero() {
           </div>
         </motion.div>
       </motion.div>
+      </LazyMotion>
     </section>
   );
 }

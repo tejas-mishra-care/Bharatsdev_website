@@ -110,7 +110,7 @@ export function MoreProof() {
                                 
                                 <div className="p-6 pt-0 relative z-10">
                                     <Button asChild variant="link" className="p-0 font-semibold group/link">
-                                        <Link href={`/work/${project.id}`}>
+                                        <Link href={`/work/${project.id}`} prefetch={true}>
                                             View Project
                                             <ArrowRight className="h-4 w-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
                                         </Link>

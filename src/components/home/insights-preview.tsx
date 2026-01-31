@@ -54,7 +54,7 @@ export function InsightsPreview() {
                         <Card className="group overflow-hidden h-full border-2 hover:border-primary/50 transition-all duration-500 relative">
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             
-                        <Link href={`/insights/${featuredInsight.slug}`}>
+                        <Link href={`/insights/${featuredInsight.slug}`} prefetch={true}>
                             {featuredInsight.image && (
                                     <div className="aspect-video overflow-hidden relative">
                                         <motion.div
@@ -95,7 +95,7 @@ export function InsightsPreview() {
                                 <Card className="group flex flex-col sm:flex-row overflow-hidden border-2 hover:border-primary/50 transition-all duration-500 relative">
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     
-                                    <Link href={`/insights/${insight.slug}`} className="flex flex-col sm:flex-row w-full relative z-10">
+                                    <Link href={`/insights/${insight.slug}`} prefetch={true} className="flex flex-col sm:flex-row w-full relative z-10">
                                     {insight.image && (
                                         <div className="sm:w-1/3 aspect-video sm:aspect-square overflow-hidden">
                                                 <motion.div
@@ -132,7 +132,7 @@ export function InsightsPreview() {
                     transition={{ duration: 0.6, delay: 0.7 }}
                 >
                     <Button asChild size="lg" variant="outline" className="group">
-                        <Link href="/insights">
+                        <Link href="/insights" prefetch={true}>
                             Read More Insights
                             <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Link>

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const technologies = [
   { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
@@ -22,7 +23,7 @@ const technologies = [
 
 export function TechStackShowcase() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section className="py-20 px-4 bg-background relative overflow-hidden">
@@ -82,12 +83,12 @@ export function TechStackShowcase() {
           <p className="text-muted-foreground mb-4">
             Performance-first architecture • Scalable from day one • Enterprise-grade security
           </p>
-          <a href="/technologies" className="text-primary font-semibold hover:underline inline-flex items-center gap-2">
+          <Link href="/technologies" prefetch={true} className="text-primary font-semibold hover:underline inline-flex items-center gap-2">
             Explore Our Tech Stack
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
