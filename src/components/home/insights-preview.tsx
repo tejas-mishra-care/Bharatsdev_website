@@ -54,32 +54,32 @@ export function InsightsPreview() {
                         <Card className="group overflow-hidden h-full border-2 hover:border-primary/50 transition-all duration-500 relative">
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             
-                            <Link href={`/insights/${featuredInsight.slug}`}>
-                                {featuredInsight.image && (
+                        <Link href={`/insights/${featuredInsight.slug}`}>
+                            {featuredInsight.image && (
                                     <div className="aspect-video overflow-hidden relative">
                                         <motion.div
                                             whileHover={{ scale: 1.1 }}
                                             transition={{ duration: 0.5 }}
                                             className="relative w-full h-full"
                                         >
-                                            <Image
-                                                src={featuredInsight.image.imageUrl}
-                                                alt={featuredInsight.image.description}
-                                                width={800}
-                                                height={450}
+                                     <Image
+                                        src={featuredInsight.image.imageUrl}
+                                        alt={featuredInsight.image.description}
+                                        width={800}
+                                        height={450}
                                                 className="w-full h-full object-cover"
-                                            />
+                                    />
                                             <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                         </motion.div>
-                                    </div>
-                                )}
+                                </div>
+                            )}
                                 <CardContent className="p-6 space-y-3 relative z-10">
-                                    <p className="text-sm text-primary font-semibold">{featuredInsight.readTime}</p>
-                                    <h3 className="text-2xl text-foreground group-hover:text-primary transition-colors">{featuredInsight.title}</h3>
+                                <p className="text-sm text-primary font-semibold">{featuredInsight.readTime}</p>
+                                <h3 className="text-2xl text-foreground group-hover:text-primary transition-colors">{featuredInsight.title}</h3>
                                     <p className="text-muted-foreground leading-relaxed">{featuredInsight.excerpt}</p>
-                                </CardContent>
-                            </Link>
-                        </Card>
+                            </CardContent>
+                        </Link>
+                    </Card>
                     </motion.div>
 
                     {/* Other Articles */}
@@ -96,30 +96,30 @@ export function InsightsPreview() {
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     
                                     <Link href={`/insights/${insight.slug}`} className="flex flex-col sm:flex-row w-full relative z-10">
-                                        {insight.image && (
-                                            <div className="sm:w-1/3 aspect-video sm:aspect-square overflow-hidden">
+                                    {insight.image && (
+                                        <div className="sm:w-1/3 aspect-video sm:aspect-square overflow-hidden">
                                                 <motion.div
                                                     whileHover={{ scale: 1.1 }}
                                                     transition={{ duration: 0.5 }}
                                                     className="relative w-full h-full"
                                                 >
-                                                    <Image
-                                                        src={insight.image.imageUrl}
-                                                        alt={insight.image.description}
-                                                        width={400}
-                                                        height={400}
+                                            <Image
+                                                src={insight.image.imageUrl}
+                                                alt={insight.image.description}
+                                                width={400}
+                                                height={400}
                                                         className="w-full h-full object-cover"
-                                                    />
+                                            />
                                                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                                 </motion.div>
-                                            </div>
-                                        )}
-                                        <CardContent className="p-6 space-y-2 flex flex-col justify-center sm:w-2/3">
-                                            <p className="text-sm text-primary font-semibold">{insight.readTime}</p>
-                                            <h4 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">{insight.title}</h4>
-                                        </CardContent>
-                                    </Link>
-                                </Card>
+                                        </div>
+                                    )}
+                                    <CardContent className="p-6 space-y-2 flex flex-col justify-center sm:w-2/3">
+                                        <p className="text-sm text-primary font-semibold">{insight.readTime}</p>
+                                        <h4 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">{insight.title}</h4>
+                                    </CardContent>
+                                </Link>
+                            </Card>
                             </motion.div>
                         ))}
                     </div>

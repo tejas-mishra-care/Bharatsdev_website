@@ -48,10 +48,10 @@ export function SolutionsGrid() {
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-foreground text-balance">We Build the Systems That Drive Growth</h2>
-                    <p className="large text-muted-foreground mt-4 mb-12 max-w-2xl mx-auto text-balance">
-                        From strategy to launch, we deliver complete digital solutions.
-                    </p>
+                <h2 className="text-foreground text-balance">We Build the Systems That Drive Growth</h2>
+                <p className="large text-muted-foreground mt-4 mb-12 max-w-2xl mx-auto text-balance">
+                    From strategy to launch, we deliver complete digital solutions.
+                </p>
                 </motion.div>
 
                 <motion.div
@@ -77,19 +77,19 @@ export function SolutionsGrid() {
                                         whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
                                         transition={{ duration: 0.5 }}
                                     >
-                                        <service.icon className="w-16 h-16 text-primary" />
+                                    <service.icon className="w-16 h-16 text-primary" />
                                     </motion.div>
                                     <CardTitle className="text-2xl text-foreground group-hover:text-primary transition-colors">
                                         {service.title}
                                     </CardTitle>
-                                </CardHeader>
+                            </CardHeader>
                                 
                                 <CardContent className="flex-grow space-y-4 relative z-10">
-                                    <p className="text-base text-muted-foreground leading-relaxed">{service.description}</p>
-                                    
-                                    <div className="space-y-2 pt-2">
-                                        <p className="font-semibold text-foreground">What's Included:</p>
-                                        <ul className="space-y-2">
+                                <p className="text-base text-muted-foreground leading-relaxed">{service.description}</p>
+                                
+                                <div className="space-y-2 pt-2">
+                                    <p className="font-semibold text-foreground">What's Included:</p>
+                                    <ul className="space-y-2">
                                             {service.includes.map((item, idx) => (
                                                 <motion.li
                                                     key={item}
@@ -101,20 +101,20 @@ export function SolutionsGrid() {
                                                     <Check className="h-4 w-4 text-green-500 group-hover/item:scale-125 transition-transform" />
                                                     <span className="group-hover/item:text-foreground transition-colors">{item}</span>
                                                 </motion.li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                        ))}
+                                    </ul>
+                                </div>
 
-                                    <div className="pt-4">
+                                <div className="pt-4">
                                         <Button asChild variant="link" className="p-0 h-auto text-primary font-semibold text-base group/link">
-                                            <Link href={service.href}>
+                                        <Link href={service.href}>
                                                 Explore {service.title}
                                                 <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
-                                            </Link>
-                                        </Button>
-                                    </div>
-                                </CardContent>
-                            </Card>
+                                        </Link>
+                                    </Button>
+                                </div>
+                            </CardContent>
+                        </Card>
                         </motion.div>
                     ))}
                 </motion.div>

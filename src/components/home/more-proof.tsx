@@ -49,10 +49,10 @@ export function MoreProof() {
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-foreground text-balance">Built for Impact</h2>
-                    <p className="large text-muted-foreground mt-4 mb-12 max-w-2xl mx-auto text-balance">
-                        A selection of our recent work.
-                    </p>
+                <h2 className="text-foreground text-balance">Built for Impact</h2>
+                <p className="large text-muted-foreground mt-4 mb-12 max-w-2xl mx-auto text-balance">
+                    A selection of our recent work.
+                </p>
                 </motion.div>
 
                 <motion.div
@@ -72,24 +72,24 @@ export function MoreProof() {
                             <Card className="text-left overflow-hidden group h-full flex flex-col border-2 hover:border-primary/50 transition-all duration-500 relative">
                                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 
-                                {project.image && (
+                           {project.image && (
                                     <div className="aspect-video overflow-hidden relative">
                                         <motion.div
                                             whileHover={{ scale: 1.1 }}
                                             transition={{ duration: 0.5 }}
                                             className="relative w-full h-full"
                                         >
-                                            <Image
-                                                src={project.image.imageUrl}
-                                                alt={project.image.description}
-                                                width={600}
-                                                height={400}
+                                     <Image
+                                        src={project.image.imageUrl}
+                                        alt={project.image.description}
+                                        width={600}
+                                        height={400}
                                                 className="w-full h-full object-cover"
-                                            />
+                                    />
                                             <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                         </motion.div>
-                                    </div>
-                                )}
+                                </div>
+                           )}
                                 
                                 <CardContent className="p-6 space-y-3 flex-grow relative z-10">
                                     <Badge variant="outline" className="group-hover:border-primary group-hover:text-primary transition-colors">
@@ -99,14 +99,14 @@ export function MoreProof() {
                                         {project.title}
                                     </h3>
                                     <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
-                                    <div className="flex flex-wrap gap-2 pt-2">
-                                        {project.techStack?.split(', ').map(tech => (
+                                <div className="flex flex-wrap gap-2 pt-2">
+                                    {project.techStack?.split(', ').map(tech => (
                                             <Badge key={tech} variant="secondary" className="group-hover/badge:bg-primary/10 group-hover/badge:text-primary transition-colors">
                                                 {tech}
                                             </Badge>
-                                        ))}
-                                    </div>
-                                </CardContent>
+                                    ))}
+                                </div>
+                           </CardContent>
                                 
                                 <div className="p-6 pt-0 relative z-10">
                                     <Button asChild variant="link" className="p-0 font-semibold group/link">
@@ -114,9 +114,9 @@ export function MoreProof() {
                                             View Project
                                             <ArrowRight className="h-4 w-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
                                         </Link>
-                                    </Button>
-                                </div>
-                            </Card>
+                                </Button>
+                            </div>
+                        </Card>
                         </motion.div>
                     ))}
                 </motion.div>

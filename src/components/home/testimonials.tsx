@@ -78,25 +78,25 @@ export function Testimonials() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Carousel
-            plugins={[plugin.current]}
-            className="w-full"
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-          >
-            <CarouselContent>
-              {[...testimonials, ...testimonials].map((testimonial, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                      <div className="p-1 h-full">
+        <Carousel
+          plugins={[plugin.current]}
+          className="w-full"
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+        >
+          <CarouselContent>
+            {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <div className="p-1 h-full">
                           <Card className="p-8 text-left bg-secondary/50 border-2 hover:border-primary/50 h-full flex flex-col justify-between group transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 relative overflow-hidden">
                               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                               
                               <CardContent className="p-0 flex-grow relative z-10">
                                   <Quote className="h-8 w-8 text-primary/30 mb-4 group-hover:text-primary/50 transition-colors" />
                                   <p className="text-lg text-foreground mb-6 leading-relaxed">&quot;{testimonial.quote}&quot;</p>
-                              </CardContent>
+                            </CardContent>
                               
                               <div className="flex items-center gap-4 mt-auto relative z-10">
                                   <motion.div
@@ -104,25 +104,25 @@ export function Testimonials() {
                                     transition={{ duration: 0.2 }}
                                   >
                                     <Avatar className="h-14 w-14 border-2 border-primary group-hover:border-accent transition-colors shadow-lg">
-                                        <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                                    <AvatarImage src={testimonial.image} alt={testimonial.name} />
                                         <AvatarFallback className="bg-primary text-primary-foreground">
                                           {testimonial.name.charAt(0)}
                                         </AvatarFallback>
-                                    </Avatar>
+                                </Avatar>
                                   </motion.div>
-                                  <div>
+                                <div>
                                       <p className="font-bold text-foreground group-hover:text-primary transition-colors">
                                         {testimonial.name}
                                       </p>
-                                      <p className="text-sm text-muted-foreground">{testimonial.title}</p>
-                                  </div>
-                              </div>
-                          </Card>
-                      </div>
-                  </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
+                                    <p className="text-sm text-muted-foreground">{testimonial.title}</p>
+                                </div>
+                            </div>
+                        </Card>
+                    </div>
+                </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
         </motion.div>
       </div>
     </section>

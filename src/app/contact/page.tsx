@@ -62,7 +62,7 @@ export default function ContactPage() {
                         <h3 className="text-xl font-bold text-foreground mb-4">What Happens Next?</h3>
                         <ol className="list-decimal list-inside space-y-3 text-muted-foreground">
                             <li>We&apos;ll review your inquiry within 24 hours.</li>
-                            <li>If it&apos;s a fit, Shristi will schedule a discovery call.</li>
+                            <li>If it&apos;s a fit, our team will schedule a discovery call.</li>
                             <li>On the call, you&apos;ll speak directly with Tejas.</li>
                             <li>We&apos;ll follow up with a detailed proposal &amp; timeline.</li>
                         </ol>

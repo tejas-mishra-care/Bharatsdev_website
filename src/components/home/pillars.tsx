@@ -47,9 +47,9 @@ export function Pillars() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-foreground text-balance">
-            Built for Speed. Engineered for Quality.
-          </h2>
+        <h2 className="text-foreground text-balance">
+          Built for Speed. Engineered for Quality.
+        </h2>
           <p className="large text-muted-foreground mt-4 mb-12 max-w-2xl mx-auto text-balance">
             Our lean-ops model is your competitive advantage.
           </p>
@@ -80,17 +80,17 @@ export function Pillars() {
                       whileHover={{ rotate: [0, -5, 5, -5, 0], scale: 1.1 }}
                       transition={{ duration: 0.5 }}
                     >
-                      <Icon className="h-12 w-12 text-primary" />
+                    <Icon className="h-12 w-12 text-primary" />
                     </motion.div>
-                  </CardHeader>
+                </CardHeader>
                   
                   <CardContent className="space-y-2 relative z-10">
                     <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                       {pillar.title}
                     </CardTitle>
-                    <p className="text-muted-foreground text-base">{pillar.description}</p>
-                  </CardContent>
-                </Card>
+                  <p className="text-muted-foreground text-base">{pillar.description}</p>
+                </CardContent>
+              </Card>
               </motion.div>
             )
           })}

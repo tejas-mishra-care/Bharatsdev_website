@@ -73,69 +73,69 @@ export function HeroCaseStudy() {
               variants={itemVariants}
               className="relative aspect-video rounded-lg overflow-hidden group/image"
             >
-              {ultratechCaseStudy && (
+            {ultratechCaseStudy && (
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.5 }}
                   className="relative w-full h-full"
                 >
-                  <Image
-                    src={ultratechCaseStudy.imageUrl}
-                    alt={ultratechCaseStudy.description}
-                    fill
+              <Image
+                src={ultratechCaseStudy.imageUrl}
+                alt={ultratechCaseStudy.description}
+                fill
                     className="object-cover rounded-lg"
-                    data-ai-hint={ultratechCaseStudy.imageHint}
-                  />
+                data-ai-hint={ultratechCaseStudy.imageHint}
+              />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-300" />
                 </motion.div>
-              )}
+            )}
             </motion.div>
             
             <motion.div variants={itemVariants} className="space-y-6 relative z-10">
-              <div className="flex flex-wrap gap-x-6 gap-y-3">
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
                   <motion.div
                     className="flex items-center gap-2 font-semibold text-foreground text-lg"
                     whileHover={{ scale: 1.05, x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
-                      <Briefcase className="w-6 h-6 text-primary" /> Client: UltraTech
+                    <Briefcase className="w-6 h-6 text-primary" /> Client: UltraTech
                   </motion.div>
                   <motion.div
                     className="flex items-center gap-2 font-semibold text-foreground text-lg"
                     whileHover={{ scale: 1.05, x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
-                      <Clock className="w-6 h-6 text-primary" /> Timeline: 48 Hours
+                    <Clock className="w-6 h-6 text-primary" /> Timeline: 48 Hours
                   </motion.div>
                   <motion.div
                     className="flex items-center gap-2 font-semibold text-foreground text-lg"
                     whileHover={{ scale: 1.05, x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
-                      <Layers className="w-6 h-6 text-primary" /> Type: Enterprise Portal
+                    <Layers className="w-6 h-6 text-primary" /> Type: Enterprise Portal
                   </motion.div>
-              </div>
-              
-              <div className='space-y-4 text-muted-foreground'>
-                <h3 className="text-xl font-bold text-foreground">The Challenge:</h3>
+            </div>
+            
+            <div className='space-y-4 text-muted-foreground'>
+              <h3 className="text-xl font-bold text-foreground">The Challenge:</h3>
                 <p className="leading-relaxed">UltraTech, India's largest cement manufacturer, needed a mission-critical certification portal for its vast dealer network—with an impossible 48-hour deadline.</p>
-              </div>
+            </div>
               
-              <div className='space-y-4 text-muted-foreground'>
-                <h3 className="text-xl font-bold text-foreground">The Solution:</h3>
+             <div className='space-y-4 text-muted-foreground'>
+              <h3 className="text-xl font-bold text-foreground">The Solution:</h3>
                 <p className="leading-relaxed">Our lean-ops model and direct CTO involvement allowed us to architect and deploy a secure, scalable solution with parallel backend and frontend development, eliminating all communication bottlenecks.</p>
-              </div>
+            </div>
               
-              <div className="pt-4">
+            <div className="pt-4">
                 <Button asChild size="lg" className="group">
                     <Link href="/work/ultratech-shashwat">
                       Read the Full Case Study
                       <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Link>
-                </Button>
-              </div>
+              </Button>
+            </div>
             </motion.div>
-          </Card>
+        </Card>
         </motion.div>
       </div>
     </section>

@@ -124,7 +124,7 @@ Private - All rights reserved
 
 BharatsDev Digital Solutions
 - Founder & CEO: Tejas Mishra
-- Head of Project Management: Shristi Mishra
+- Head of Project Management: Our Team
 
 ## 📞 Contact
 
