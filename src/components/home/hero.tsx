@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { MagneticButton } from '@/components/ui/magnetic-button';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion, LazyMotion, domAnimation } from 'framer-motion';
 import { ArrowRight, Sparkles, Zap } from 'lucide-react';
 import { ParticleSystem } from './particle-system';
 import { useState, useEffect } from 'react';
@@ -51,7 +51,7 @@ const buttonVariants = {
 };
 
 export function Hero() {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = typeof window !== 'undefined' ? useReducedMotion() : false;
   const { scrollY } = useScroll();
   const y = shouldReduceMotion ? useTransform(scrollY, () => 0) : useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = shouldReduceMotion ? useTransform(scrollY, () => 1) : useTransform(scrollY, [0, 300], [1, 0]);
