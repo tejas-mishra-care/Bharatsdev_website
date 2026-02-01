@@ -102,7 +102,7 @@ export default function WebEcommercePage() {
         
         <motion.div
           ref={heroRef}
-          className="container mx-auto px-4 relative z-10"
+          className="container mx-auto relative z-10"
           initial={{ opacity: 0, y: 30 }}
           animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
@@ -137,7 +137,7 @@ export default function WebEcommercePage() {
 
       {/* What We Build */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -163,11 +163,11 @@ export default function WebEcommercePage() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -8, scale: 1.02 }}
                 >
-                  <Card className="h-full border-2 hover:border-primary/50 transition-all duration-500 group relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <Card className="h-full rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 group relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     <CardHeader className="relative z-10">
-                      <div className="p-3 bg-primary/10 rounded-lg w-fit border-2 border-primary/20 group-hover:border-primary transition-colors mb-4">
+                      <div className="p-3 bg-primary/10 rounded-2xl w-fit border border-primary/20 group-hover:border-primary transition-colors mb-4">
                         <Icon className="h-8 w-8 text-primary" />
                       </div>
                       <CardTitle className="text-2xl text-foreground group-hover:text-primary transition-colors">
@@ -178,7 +178,7 @@ export default function WebEcommercePage() {
                     <CardContent className="relative z-10">
                       <div className="flex flex-wrap gap-2">
                         {solution.tech.map((tech) => (
-                          <Badge key={tech} variant="secondary" className="group-hover/badge:bg-primary/10 group-hover/badge:text-primary transition-colors">
+                          <Badge key={tech} variant="secondary" className="border border-border/60 bg-background/40 text-foreground/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
                             {tech}
                           </Badge>
                         ))}
@@ -196,7 +196,7 @@ export default function WebEcommercePage() {
       <section className="py-20 bg-secondary/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -218,7 +218,7 @@ export default function WebEcommercePage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="flex items-center gap-3 p-4 bg-background rounded-lg border hover:border-primary/50 transition-colors"
+                className="flex items-center gap-3 p-4 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-colors"
               >
                 <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">{feature}</span>
@@ -230,7 +230,7 @@ export default function WebEcommercePage() {
 
       {/* Conversion Optimization */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -255,7 +255,7 @@ export default function WebEcommercePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="p-4 bg-secondary rounded-lg border-2 hover:border-primary/50 transition-colors"
+                className="p-4 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-colors"
               >
                 <div className="flex items-center gap-3">
                   <Search className="h-5 w-5 text-primary" />
@@ -269,7 +269,7 @@ export default function WebEcommercePage() {
 
       {/* Average Results */}
       <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -293,7 +293,7 @@ export default function WebEcommercePage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
               >
-                <Card className="text-center p-6 border-2 hover:border-primary/50 transition-all duration-500 h-full">
+                <Card className="text-center p-6 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 h-full">
                   <div className="text-4xl font-bold gradient-text mb-2">
                     {result.metric}
                   </div>
@@ -309,7 +309,7 @@ export default function WebEcommercePage() {
 
       {/* Pricing */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-2xl">
+        <div className="container mx-auto max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -318,7 +318,7 @@ export default function WebEcommercePage() {
             className="text-center"
           >
             <h2 className="text-foreground mb-4">Transparent Pricing</h2>
-            <Card className="p-8 md:p-12 border-2 border-primary/20 hover:border-primary/50 transition-all duration-500">
+            <Card className="p-8 md:p-12 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 shadow-2xl shadow-primary/5">
               <div className="space-y-6">
                 <div>
                   <p className="text-lg font-semibold text-foreground mb-2">Corporate Website</p>
@@ -343,7 +343,7 @@ export default function WebEcommercePage() {
 
       {/* FAQ */}
       <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -363,7 +363,7 @@ export default function WebEcommercePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
-                <AccordionItem value={`item-${index}`} className="bg-background p-4 rounded-lg border-2 hover:border-primary/50 transition-colors">
+                <AccordionItem value={`item-${index}`} className="rounded-2xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-colors">
                   <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
                     {faq.question}
                   </AccordionTrigger>
@@ -381,7 +381,7 @@ export default function WebEcommercePage() {
       <section className="py-20 bg-gradient-cta text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-accent/90" />
         
-        <div className="container mx-auto text-center px-4 relative z-10">
+        <div className="container mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

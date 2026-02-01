@@ -34,7 +34,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+  try {
+    const stored = localStorage.getItem('theme');
+    const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = stored === 'dark' || stored === 'light' ? stored : (systemDark ? 'dark' : 'light');
+    const root = document.documentElement;
+    if (theme === 'dark') root.classList.add('dark');
+    else root.classList.remove('dark');
+  } catch (_) {}
+})();`,
+          }}
+        />
+      </head>
       <body
         className={cn('min-h-screen bg-background font-body antialiased flex flex-col', inter.variable)}
       >

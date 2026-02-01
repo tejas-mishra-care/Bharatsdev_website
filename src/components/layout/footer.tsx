@@ -52,7 +52,7 @@ export function Footer() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <footer className="bg-foreground text-gray-300 relative overflow-hidden">
+    <footer className="bg-secondary text-foreground/80 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
       
       <motion.div
@@ -70,10 +70,10 @@ export function Footer() {
             >
               <Link href="/" prefetch={true} className="flex items-center gap-3 mb-4">
                 <Logo className="h-10 w-10" />
-                <span className="text-xl font-bold text-white">Bharats<span className="text-primary">Dev</span></span>
+                <span className="text-xl font-bold text-foreground">Bharats<span className="text-primary">Dev</span></span>
               </Link>
             </motion.div>
-            <p className="max-w-md mb-6 text-gray-400 text-sm leading-relaxed">
+            <p className="max-w-md mb-6 text-muted-foreground text-sm leading-relaxed">
               Your complete digital growth engine. We build high-performance, finished digital assets.
             </p>
             <div className="flex space-x-3">
@@ -95,7 +95,7 @@ export function Footer() {
                     <Link
                         href={social.href}
                         aria-label={social.label}
-                        className="bg-gray-700/50 backdrop-blur-sm text-white h-10 w-10 flex items-center justify-center rounded-full hover:bg-primary border border-gray-600 hover:border-primary transition-all duration-300"
+                        className="bg-background/50 backdrop-blur-sm text-foreground h-10 w-10 flex items-center justify-center rounded-full hover:bg-primary hover:text-primary-foreground border border-border/60 hover:border-primary transition-all duration-300"
                     >
                       <Icon className="h-5 w-5" />
                     </Link>
@@ -106,7 +106,7 @@ export function Footer() {
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h3 className="font-semibold mb-4 text-white uppercase tracking-wider text-sm">Services</h3>
+            <h3 className="font-semibold mb-4 text-foreground uppercase tracking-wider text-sm">Services</h3>
             <ul className="space-y-3">
               {servicesLinks.map((link, index) => (
                 <motion.li
@@ -118,7 +118,7 @@ export function Footer() {
                   <Link
                       href={link.href}
                       prefetch={true}
-                      className="text-gray-400 hover:text-white transition-colors text-base group flex items-center gap-2"
+                      className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2"
                   >
                     <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
                   </Link>
@@ -128,7 +128,7 @@ export function Footer() {
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h3 className="font-semibold mb-4 text-white uppercase tracking-wider text-sm">Company</h3>
+            <h3 className="font-semibold mb-4 text-foreground uppercase tracking-wider text-sm">Company</h3>
             <ul className="space-y-3">
               {companyLinks.map((link, index) => (
                 <motion.li
@@ -140,7 +140,7 @@ export function Footer() {
                   <Link
                       href={link.href}
                       prefetch={true}
-                      className="text-gray-400 hover:text-white transition-colors text-base group flex items-center gap-2"
+                      className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2"
                   >
                     <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
                   </Link>
@@ -150,14 +150,14 @@ export function Footer() {
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h3 className="font-semibold mb-4 text-white uppercase tracking-wider text-sm">Contact</h3>
+            <h3 className="font-semibold mb-4 text-foreground uppercase tracking-wider text-sm">Contact</h3>
              <ul className="space-y-3">
                 <motion.li
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                     transition={{ delay: 0.2, duration: 0.4 }}
                 >
-                  <a href="mailto:hello@bharatsdev.com" className="text-gray-400 hover:text-white transition-colors text-base group flex items-center gap-2">
+                  <a href="mailto:hello@bharatsdev.com" className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2">
                     <span className="group-hover:translate-x-1 transition-transform">hello@bharatsdev.com</span>
                   </a>
                 </motion.li>
@@ -166,7 +166,7 @@ export function Footer() {
                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                     transition={{ delay: 0.25, duration: 0.4 }}
                 >
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-base group flex items-center gap-2">
+                  <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2">
                     <span className="group-hover:translate-x-1 transition-transform">+91 [phone number]</span>
                   </a>
                 </motion.li>
@@ -174,7 +174,7 @@ export function Footer() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                     transition={{ delay: 0.3, duration: 0.4 }}
-                    className="text-gray-500 text-base"
+                    className="text-muted-foreground text-base"
                 >
                   Chhatrapati Sambhajinagar, India. Serving globally.
                 </motion.li>
@@ -183,12 +183,12 @@ export function Footer() {
         </div>
         
         <motion.div
-            className="mt-16 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center text-sm"
+            className="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center text-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <p className="text-gray-500 mb-4 md:mb-0">
+          <p className="text-muted-foreground mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} BharatsDev. All rights reserved.
           </p>
           <div className="flex space-x-6">
@@ -200,7 +200,7 @@ export function Footer() {
                     transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
                     whileHover={{ scale: 1.05 }}
                 >
-                  <Link href={link.href} className="text-gray-500 hover:text-white transition-colors">
+                  <Link href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
                       {link.label}
                   </Link>
                 </motion.div>

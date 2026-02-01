@@ -165,7 +165,7 @@ export default function AppDevelopmentPage() {
         
         <motion.div
           ref={heroRef}
-          className="container mx-auto px-4 relative z-10"
+          className="container mx-auto relative z-10"
           initial={{ opacity: 0, y: 30 }}
           animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
@@ -200,7 +200,7 @@ export default function AppDevelopmentPage() {
 
       {/* What We Build */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -224,8 +224,8 @@ export default function AppDevelopmentPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -8, scale: 1.02 }}
               >
-                <Card className="h-full border-2 hover:border-primary/50 transition-all duration-500 group relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Card className="h-full border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 group relative overflow-hidden rounded-3xl">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   <CardHeader className="relative z-10">
                     <CardTitle className="text-2xl text-foreground group-hover:text-primary transition-colors">
@@ -236,7 +236,7 @@ export default function AppDevelopmentPage() {
                     <p className="text-muted-foreground">{platform.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {platform.tech.map((tech) => (
-                        <Badge key={tech} variant="secondary" className="group-hover/badge:bg-primary/10 group-hover/badge:text-primary transition-colors">
+                        <Badge key={tech} variant="secondary" className="border border-border/60 bg-background/40 text-foreground/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
                           {tech}
                         </Badge>
                       ))}
@@ -253,7 +253,7 @@ export default function AppDevelopmentPage() {
       <section className="py-20 bg-secondary/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -279,10 +279,11 @@ export default function AppDevelopmentPage() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
                 >
-                  <Card className="h-full border-2 hover:border-primary/50 transition-all duration-500 group">
+                  <Card className="h-full rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <CardHeader>
                       <div className="flex items-center gap-4 mb-4">
-                        <div className="p-3 bg-primary/10 rounded-lg border-2 border-primary/20 group-hover:border-primary transition-colors">
+                        <div className="p-3 bg-primary/10 rounded-2xl border border-primary/20 group-hover:border-primary transition-colors">
                           <Icon className="h-6 w-6 text-primary" />
                         </div>
                         <div>
@@ -315,7 +316,7 @@ export default function AppDevelopmentPage() {
 
       {/* Specialized App Types */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -339,7 +340,7 @@ export default function AppDevelopmentPage() {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <Card className="p-4 text-center border-2 hover:border-primary/50 transition-all duration-300 cursor-pointer">
+                <Card className="p-4 text-center rounded-2xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-300 cursor-pointer">
                   <p className="text-sm font-medium text-foreground">{type}</p>
                 </Card>
               </motion.div>
@@ -350,7 +351,7 @@ export default function AppDevelopmentPage() {
 
       {/* Tech Integrations */}
       <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -372,7 +373,7 @@ export default function AppDevelopmentPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="flex items-center gap-3 p-4 bg-background rounded-lg border hover:border-primary/50 transition-colors"
+                className="flex items-center gap-3 p-4 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-colors"
               >
                 <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">{integration}</span>
@@ -384,7 +385,7 @@ export default function AppDevelopmentPage() {
 
       {/* Pricing */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-2xl">
+        <div className="container mx-auto max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -393,7 +394,7 @@ export default function AppDevelopmentPage() {
             className="text-center"
           >
             <h2 className="text-foreground mb-4">Transparent Pricing</h2>
-            <Card className="p-8 md:p-12 border-2 border-primary/20 hover:border-primary/50 transition-all duration-500">
+            <Card className="p-8 md:p-12 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 shadow-2xl shadow-primary/5">
               <p className="large text-foreground/90 mb-6 text-balance">
                 We price based on scope, not hours. Every project receives a fixed-price proposal after our discovery call.
               </p>
@@ -410,7 +411,7 @@ export default function AppDevelopmentPage() {
 
       {/* FAQ */}
       <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -430,7 +431,7 @@ export default function AppDevelopmentPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
-                <AccordionItem value={`item-${index}`} className="bg-background p-4 rounded-lg border-2 hover:border-primary/50 transition-colors">
+                <AccordionItem value={`item-${index}`} className="rounded-2xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-colors">
                   <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
                     {faq.question}
                   </AccordionTrigger>

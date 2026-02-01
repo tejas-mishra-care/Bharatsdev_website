@@ -6,10 +6,11 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView, type Easing } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
+
+const EASE_OUT: Easing = [0.22, 1, 0.36, 1];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,7 +30,7 @@ const itemVariants = {
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
+      ease: EASE_OUT,
     },
   },
 };
@@ -40,7 +41,7 @@ export function MoreProof() {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <section className="py-20 px-4 bg-secondary/30 relative overflow-hidden">
+        <section className="py-20 bg-secondary/30 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
             
             <div className="container mx-auto text-center relative z-10">
@@ -69,8 +70,8 @@ export function MoreProof() {
                             whileHover={{ y: -10, scale: 1.02 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <Card className="text-left overflow-hidden group h-full flex flex-col border-2 hover:border-primary/50 transition-all duration-500 relative">
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <Card className="text-left overflow-hidden group h-full flex flex-col border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/50 transition-all duration-500 relative rounded-3xl">
+                                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 
                            {project.image && (
                                     <div className="aspect-video overflow-hidden relative">
@@ -84,9 +85,10 @@ export function MoreProof() {
                                         alt={project.image.description}
                                         width={600}
                                         height={400}
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                                 className="w-full h-full object-cover"
                                     />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-foreground/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                         </motion.div>
                                 </div>
                            )}
@@ -101,7 +103,7 @@ export function MoreProof() {
                                     <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                                 <div className="flex flex-wrap gap-2 pt-2">
                                     {project.techStack?.split(', ').map(tech => (
-                                            <Badge key={tech} variant="secondary" className="group-hover/badge:bg-primary/10 group-hover/badge:text-primary transition-colors">
+                                            <Badge key={tech} variant="secondary" className="border border-border/60 bg-background/40 text-foreground/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
                                                 {tech}
                                             </Badge>
                                     ))}

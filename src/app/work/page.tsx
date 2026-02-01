@@ -34,8 +34,8 @@ const ProjectCard = ({ project, index }: { project: typeof otherProjects[0]; ind
             whileHover={{ y: -8, scale: 1.02 }}
         >
             <Link href={`/work/${project.id}`} className="group block h-full">
-                <Card className="text-left overflow-hidden h-full flex flex-col border-2 hover:border-primary/50 transition-all duration-500 relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Card className="text-left overflow-hidden h-full flex flex-col border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 relative rounded-3xl">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     {project.image && (
                         <div className="aspect-video overflow-hidden relative">
@@ -49,15 +49,16 @@ const ProjectCard = ({ project, index }: { project: typeof otherProjects[0]; ind
                                     alt={project.image.description}
                                     width={600}
                                     height={400}
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                     className="w-full h-full object-cover"
                                     data-ai-hint={project.image.imageHint}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-foreground/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             </motion.div>
                         </div>
                     )}
                     <CardContent className="p-6 space-y-3 flex-grow relative z-10">
-                        <Badge variant="secondary" className="mb-2 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                        <Badge variant="secondary" className="mb-2 border border-border/60 bg-background/40 text-foreground/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
                             {project.category}
                         </Badge>
                         <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
@@ -66,7 +67,7 @@ const ProjectCard = ({ project, index }: { project: typeof otherProjects[0]; ind
                         <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                          <div className="flex flex-wrap gap-2 pt-2">
                             {project.techStack?.split(', ').map(tech => (
-                                <Badge key={tech} variant="outline" className="group-hover/badge:border-primary/50 group-hover/badge:text-primary transition-colors">
+                                <Badge key={tech} variant="outline" className="border-border/60 group-hover:border-primary/40 group-hover:text-primary transition-colors">
                                     {tech}
                                 </Badge>
                             ))}
@@ -106,7 +107,7 @@ export default function WorkPage() {
         
         <motion.div
             ref={heroRef}
-            className="container mx-auto px-4 relative z-10"
+            className="container mx-auto relative z-10"
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
@@ -122,15 +123,15 @@ export default function WorkPage() {
       <section className="py-20 md:py-24 bg-background relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh opacity-30" />
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto relative z-10">
             <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6 }}
             >
-                <Card className="grid md:grid-cols-2 items-center overflow-hidden border-2 border-primary/50 shadow-2xl hover:border-primary hover:shadow-[0_0_40px_hsl(var(--primary)/0.3)] transition-all duration-500 group relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Card className="grid md:grid-cols-2 items-center overflow-hidden border border-primary/30 bg-card/60 backdrop-blur-2xl shadow-glow hover:shadow-glow-lg hover:border-primary/50 transition-all duration-500 group relative rounded-3xl">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     <motion.div
                         className="relative aspect-[4/3] md:aspect-auto md:h-full"
@@ -142,11 +143,12 @@ export default function WorkPage() {
                                 src={featuredProject.image.imageUrl}
                                 alt={featuredProject.image.description}
                                 fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
                                 className="object-cover"
                                 data-ai-hint={featuredProject.image.imageHint}
                             />
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </motion.div>
                     <div className="p-8 md:p-12 lg:p-16 relative z-10">
                         <p className="text-primary font-semibold uppercase tracking-wider mb-2">Featured Project</p>
@@ -178,7 +180,7 @@ export default function WorkPage() {
       <section className="py-20 bg-secondary/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto relative z-10">
           <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -187,7 +189,7 @@ export default function WorkPage() {
           >
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-12">
-                  <TabsList className="h-auto bg-background/50 backdrop-blur-sm border-2">
+                  <TabsList className="h-auto bg-background/40 backdrop-blur-xl border border-border/60 rounded-full p-1">
                       {uniqueCategories.map((category) => (
                           <TabsTrigger
                               key={category}
@@ -203,7 +205,7 @@ export default function WorkPage() {
                     <select 
                       value={sortBy} 
                       onChange={(e) => setSortBy(e.target.value)}
-                      className="px-3 py-1.5 rounded-lg border-2 border-border bg-background text-sm focus:border-primary focus:outline-none"
+                      className="px-3 py-1.5 rounded-full border border-border/60 bg-background/60 backdrop-blur-xl text-sm focus:border-primary focus:outline-none"
                     >
                       <option value="Latest">Latest</option>
                       <option value="Popular">Most Popular</option>

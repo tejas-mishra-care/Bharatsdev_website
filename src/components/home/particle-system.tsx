@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 
 interface Particle {
   x: number;
@@ -15,6 +14,8 @@ export function ParticleSystem() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationFrameRef = useRef<number>();
+  const runningRef = useRef(true);
+  const lastFrameTimeRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -24,10 +25,12 @@ export function ParticleSystem() {
     if (!ctx) return;
 
     const resizeCanvas = () => {
-      if (typeof window !== 'undefined') {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
+      if (typeof window === 'undefined') return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resizeCanvas();
     if (typeof window !== 'undefined') {
@@ -35,11 +38,11 @@ export function ParticleSystem() {
     }
 
     // Initialize particles - reduced count for performance
-    const particleCount = 30;
+    const particleCount = 24;
     const initParticles = () => {
       particlesRef.current = Array.from({ length: particleCount }).map(() => ({
-        x: Math.random() * (canvas.width || 1920),
-        y: Math.random() * (canvas.height || 1080),
+        x: Math.random() * (canvas.clientWidth || 1920),
+        y: Math.random() * (canvas.clientHeight || 1080),
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
         size: Math.random() * 1.5 + 0.5,
@@ -47,8 +50,24 @@ export function ParticleSystem() {
     };
     initParticles();
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        runningRef.current = entry.isIntersecting;
+      },
+      { root: null, threshold: 0 }
+    );
+    io.observe(canvas);
+
+    const animate = (t: number) => {
+      animationFrameRef.current = requestAnimationFrame(animate);
+
+      if (!runningRef.current) return;
+
+      // Cap FPS (~30) to reduce CPU on scroll
+      if (t - lastFrameTimeRef.current < 33) return;
+      lastFrameTimeRef.current = t;
+
+      ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
       
       particlesRef.current.forEach((particle, i) => {
         // Update position
@@ -56,13 +75,15 @@ export function ParticleSystem() {
         particle.y += particle.vy;
 
         // Bounce off edges
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        if (particle.x < 0 || particle.x > w) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > h) particle.vy *= -1;
 
         // Draw particle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(74, 144, 226, ${0.3 + Math.random() * 0.3})`;
+        ctx.fillStyle = 'rgba(74, 144, 226, 0.42)';
         ctx.fill();
 
         // Draw connections
@@ -71,26 +92,25 @@ export function ParticleSystem() {
           const dy = particle.y - other.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 100) {
+          if (distance < 90) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `rgba(74, 144, 226, ${0.08 * (1 - distance / 100)})`;
+            ctx.strokeStyle = `rgba(74, 144, 226, ${0.08 * (1 - distance / 90)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         });
       });
-
-      animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
       if (typeof window !== 'undefined') {
         window.removeEventListener('resize', resizeCanvas);
       }
+      io.disconnect();
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }

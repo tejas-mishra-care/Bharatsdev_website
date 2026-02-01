@@ -51,6 +51,12 @@
     --ring: 217 89% 61%;
 
     --radius: 0.75rem;
+
+    --hero-bg-from: 0 0% 100%;
+    --hero-bg-via: 220 14% 96%;
+    --hero-bg-to: 214 32% 91%;
+    --hero-spot-1: 217 89% 61%;
+    --hero-spot-2: 188 94% 43%;
   }
  
   .dark {
@@ -81,6 +87,12 @@
     --border: 215 50% 25%;
     --input: 215 50% 25%;
     --ring: 217 89% 61%;
+
+    --hero-bg-from: 215 100% 8%;
+    --hero-bg-via: 215 50% 22%;
+    --hero-bg-to: 222 47% 11%;
+    --hero-spot-1: 217 89% 61%;
+    --hero-spot-2: 188 94% 43%;
   }
 }
  
@@ -172,9 +184,9 @@
     
     .gradient-hero {
         background: 
-            linear-gradient(135deg, hsl(215, 100%, 8%) 0%, hsl(215, 50%, 22%) 30%, hsl(217, 89%, 61%) 100%),
-            radial-gradient(circle at 20% 50%, hsl(217, 89%, 61%, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 80%, hsl(188, 94%, 43%, 0.1) 0%, transparent 50%);
+            linear-gradient(135deg, hsl(var(--hero-bg-from)) 0%, hsl(var(--hero-bg-via)) 35%, hsl(var(--hero-bg-to)) 100%),
+            radial-gradient(circle at 20% 45%, hsl(var(--hero-spot-1) / 0.18) 0%, transparent 55%),
+            radial-gradient(circle at 80% 80%, hsl(var(--hero-spot-2) / 0.14) 0%, transparent 55%);
         background-size: 100% 100%, 100% 100%, 100% 100%;
     }
     
@@ -193,10 +205,10 @@
     
     .gradient-mesh {
         background: 
-            radial-gradient(at 0% 0%, hsl(217, 89%, 61%, 0.15) 0px, transparent 50%),
-            radial-gradient(at 100% 0%, hsl(217, 91%, 60%, 0.15) 0px, transparent 50%),
-            radial-gradient(at 100% 100%, hsl(188, 94%, 43%, 0.1) 0px, transparent 50%),
-            radial-gradient(at 0% 100%, hsl(217, 89%, 61%, 0.1) 0px, transparent 50%);
+            radial-gradient(at 0% 0%, hsl(var(--primary) / 0.15) 0px, transparent 50%),
+            radial-gradient(at 100% 0%, hsl(var(--accent) / 0.15) 0px, transparent 50%),
+            radial-gradient(at 100% 100%, hsl(var(--hero-spot-2) / 0.12) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, hsl(var(--hero-spot-1) / 0.12) 0px, transparent 50%);
         animation: gradient-shift 15s ease infinite;
     }
     
@@ -326,6 +338,15 @@
     }
     100% {
       background-position: 1000px 0;
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
     }
   }
   

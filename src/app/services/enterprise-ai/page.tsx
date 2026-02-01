@@ -210,7 +210,7 @@ export default function EnterpriseAIPage() {
         
         <motion.div
           ref={heroRef}
-          className="container mx-auto px-4 relative z-10"
+          className="container mx-auto relative z-10"
           initial={{ opacity: 0, y: 30 }}
           animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
@@ -245,7 +245,7 @@ export default function EnterpriseAIPage() {
 
       {/* AI Capabilities */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -271,11 +271,11 @@ export default function EnterpriseAIPage() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -8, scale: 1.02 }}
                 >
-                  <Card className="h-full border-2 hover:border-primary/50 transition-all duration-500 group relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <Card className="h-full rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 group relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     <CardHeader className="relative z-10">
-                      <div className="p-3 bg-primary/10 rounded-lg w-fit border-2 border-primary/20 group-hover:border-primary transition-colors mb-4">
+                      <div className="p-3 bg-primary/10 rounded-2xl w-fit border border-primary/20 group-hover:border-primary transition-colors mb-4">
                         <Icon className="h-8 w-8 text-primary" />
                       </div>
                       <CardTitle className="text-2xl text-foreground group-hover:text-primary transition-colors">
@@ -288,7 +288,7 @@ export default function EnterpriseAIPage() {
                         <p className="text-sm font-semibold text-foreground mb-2">Technologies:</p>
                         <div className="flex flex-wrap gap-2">
                           {capability.tech.map((tech) => (
-                            <Badge key={tech} variant="secondary" className="group-hover/badge:bg-primary/10 group-hover/badge:text-primary transition-colors">
+                            <Badge key={tech} variant="secondary" className="border border-border/60 bg-background/40 text-foreground/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
                               {tech}
                             </Badge>
                           ))}
@@ -318,7 +318,7 @@ export default function EnterpriseAIPage() {
       <section className="py-20 bg-secondary/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -342,7 +342,7 @@ export default function EnterpriseAIPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
               >
-                <Card className="h-full border-2 hover:border-primary/50 transition-all duration-500 p-6">
+                <Card className="h-full p-6 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500">
                   <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
                     <TrendingUp className="h-5 w-5 text-primary" />
                     {solution.industry}
@@ -364,15 +364,15 @@ export default function EnterpriseAIPage() {
 
       {/* Case Study Highlight */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Card className="border-2 border-primary/50 p-8 md:p-12 relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <Card className="rounded-3xl border border-primary/30 bg-card/60 backdrop-blur-2xl p-8 md:p-12 relative overflow-hidden group shadow-glow hover:shadow-glow-lg hover:border-primary/50 transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="relative z-10">
                 <Badge className="mb-4">Case Study Highlight</Badge>
@@ -383,15 +383,15 @@ export default function EnterpriseAIPage() {
                   Solution: AI-powered recommendation engine
                 </p>
                 <div className="grid md:grid-cols-3 gap-4 mb-6">
-                  <div className="text-center p-4 bg-secondary rounded-lg">
+                  <div className="text-center p-4 rounded-2xl border border-border/60 bg-background/40 backdrop-blur-xl">
                     <div className="text-3xl font-bold gradient-text">240%</div>
                     <div className="text-sm text-muted-foreground">Conversion Increase</div>
                   </div>
-                  <div className="text-center p-4 bg-secondary rounded-lg">
+                  <div className="text-center p-4 rounded-2xl border border-border/60 bg-background/40 backdrop-blur-xl">
                     <div className="text-3xl font-bold gradient-text">35%</div>
                     <div className="text-sm text-muted-foreground">AOV Increase</div>
                   </div>
-                  <div className="text-center p-4 bg-secondary rounded-lg">
+                  <div className="text-center p-4 rounded-2xl border border-border/60 bg-background/40 backdrop-blur-xl">
                     <div className="text-3xl font-bold gradient-text">4.2x</div>
                     <div className="text-sm text-muted-foreground">ROI (6 months)</div>
                   </div>
@@ -409,7 +409,7 @@ export default function EnterpriseAIPage() {
 
       {/* Development Process */}
       <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -433,7 +433,7 @@ export default function EnterpriseAIPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative"
               >
-                <Card className="border-2 hover:border-primary/50 transition-all duration-500 p-6">
+                <Card className="p-6 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg">
                       {index + 1}
@@ -464,7 +464,7 @@ export default function EnterpriseAIPage() {
 
       {/* Pricing */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-2xl">
+        <div className="container mx-auto max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -473,7 +473,7 @@ export default function EnterpriseAIPage() {
             className="text-center"
           >
             <h2 className="text-foreground mb-4">Transparent Pricing</h2>
-            <Card className="p-8 md:p-12 border-2 border-primary/20 hover:border-primary/50 transition-all duration-500">
+            <Card className="p-8 md:p-12 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 shadow-2xl shadow-primary/5">
               <div className="space-y-6">
                 <div>
                   <p className="text-lg font-semibold text-foreground mb-2">AI Chatbot</p>
@@ -498,7 +498,7 @@ export default function EnterpriseAIPage() {
 
       {/* FAQ */}
       <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -518,7 +518,7 @@ export default function EnterpriseAIPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
-                <AccordionItem value={`item-${index}`} className="bg-background p-4 rounded-lg border-2 hover:border-primary/50 transition-colors">
+                <AccordionItem value={`item-${index}`} className="rounded-2xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-colors">
                   <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
                     {faq.question}
                   </AccordionTrigger>

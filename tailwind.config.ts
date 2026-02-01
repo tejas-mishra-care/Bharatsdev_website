@@ -10,9 +10,13 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "1rem",
+      padding: {
+        DEFAULT: '1rem',
+        sm: '1.25rem',
+        lg: '2rem',
+      },
       screens: {
-        "2xl": "1280px",
+        "2xl": "1440px",
       },
     },
     extend: {
@@ -44,6 +48,17 @@ export default {
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        'sky-blue': '#4A90E2',
+        'electric-blue': '#2563EB',
+        'bright-cyan': '#06B6D4',
+        'vibrant-orange': '#F97316',
+        'success-green': '#10B981',
+        'deep-navy': '#0A1628',
+        'dark-blue': '#1E3A5F',
+        'ghost-white': '#F9FAFB',
+        'cool-gray': '#E2E8F0',
+        'medium-gray': '#64748B',
+        'charcoal': '#111827',
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
@@ -133,10 +148,6 @@ export default {
           '50%': { 
             boxShadow: '0 0 40px hsl(var(--primary) / 0.6)',
           },
-        },
-        'shimmer': {
-          '0%': { backgroundPosition: '-1000px 0' },
-          '100%': { backgroundPosition: '1000px 0' },
         },
       },
       animation: {

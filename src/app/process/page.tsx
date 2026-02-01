@@ -273,7 +273,7 @@ export default function ProcessPage() {
         
         <motion.div
           ref={heroRef}
-          className="container mx-auto px-4 relative z-10"
+          className="container mx-auto relative z-10"
           initial={{ opacity: 0, y: 30 }}
           animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
@@ -292,7 +292,7 @@ export default function ProcessPage() {
 
       {/* Process Phases */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <div className="space-y-8 max-w-6xl mx-auto">
             {phases.map((phase, index) => {
               const Icon = phase.icon;
@@ -344,7 +344,7 @@ export default function ProcessPage() {
                               What We Do:
                             </h4>
                             <ul className="space-y-2">
-                              {phase.whatWeDo.map((item, idx) => (
+                              {(phase.whatWeDo ?? []).map((item, idx) => (
                                 <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
                                   <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                                   <span>{item}</span>
@@ -359,7 +359,7 @@ export default function ProcessPage() {
                               Deliverables:
                             </h4>
                             <ul className="space-y-2">
-                              {phase.deliverables.map((item, idx) => (
+                              {(phase.deliverables ?? []).map((item, idx) => (
                                 <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
                                   <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                                   <span>{item}</span>
@@ -465,7 +465,7 @@ export default function ProcessPage() {
 
       {/* Tools & Communication */}
       <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -504,7 +504,7 @@ export default function ProcessPage() {
 
       {/* What Makes Us Different */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -550,7 +550,7 @@ export default function ProcessPage() {
       <section className="py-20 bg-gradient-cta text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-accent/90" />
         
-        <div className="container mx-auto text-center px-4 relative z-10">
+        <div className="container mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -7,6 +7,7 @@ export const Logo = ({ className }: { className?: string }) => (
     alt="BharatsDev Logo"
     width={48}
     height={48}
+    sizes="40px"
     className={cn('h-10 w-10', className)}
     priority
   />

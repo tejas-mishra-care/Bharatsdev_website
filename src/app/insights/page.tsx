@@ -39,7 +39,7 @@ export default function InsightsPage() {
         
         <motion.div
           ref={heroRef}
-          className="container mx-auto px-4 relative z-10"
+          className="container mx-auto relative z-10"
           initial={{ opacity: 0, y: 30 }}
           animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
@@ -55,7 +55,7 @@ export default function InsightsPage() {
 
       {/* Featured Article */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -63,8 +63,8 @@ export default function InsightsPage() {
             transition={{ duration: 0.6 }}
           >
             <Link href={`/insights/${featuredInsight.slug}`}>
-              <Card className="grid md:grid-cols-2 items-center overflow-hidden border-2 border-primary/50 shadow-2xl group hover:border-primary hover:shadow-[0_0_40px_hsl(var(--primary)/0.3)] transition-all duration-500 relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Card className="grid md:grid-cols-2 items-center overflow-hidden border border-primary/30 bg-card/60 backdrop-blur-2xl shadow-glow hover:shadow-glow-lg group hover:border-primary/50 transition-all duration-500 relative rounded-3xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <div className="relative aspect-video md:aspect-auto md:h-full">
                   {featuredInsight.image && (
@@ -77,14 +77,15 @@ export default function InsightsPage() {
                         src={featuredInsight.image.imageUrl}
                         alt={featuredInsight.image.description}
                         fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </motion.div>
                   )}
                 </div>
                 <div className="p-8 md:p-12 lg:p-16 relative z-10">
-                  <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+                  <Badge className="mb-4 bg-primary/10 text-primary border border-primary/20">
                     Featured Insight
                   </Badge>
                   <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance group-hover:text-primary transition-colors">
@@ -115,7 +116,7 @@ export default function InsightsPage() {
 
       {/* Search and Categories */}
       <section className="py-12 bg-secondary/30">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <div className="max-w-4xl mx-auto space-y-6">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -124,21 +125,23 @@ export default function InsightsPage() {
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 h-12 text-lg"
+                className="pl-12 h-12 text-lg bg-background/60 backdrop-blur-xl border-border/60"
               />
             </div>
             <div className="flex flex-wrap justify-center gap-3">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category)}
-                  className="transition-all"
-                >
-                  {category}
-                </Button>
-              ))}
+              <div className="inline-flex flex-wrap justify-center gap-2 rounded-full border border-border/60 bg-background/40 backdrop-blur-xl p-2">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setSelectedCategory(category)}
+                    className="transition-all rounded-full"
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -146,7 +149,7 @@ export default function InsightsPage() {
 
       {/* Article Grid */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -171,8 +174,8 @@ export default function InsightsPage() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -8, scale: 1.02 }}
                 >
-                  <Card className="group overflow-hidden flex flex-col h-full border-2 hover:border-primary/50 transition-all duration-500 relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <Card className="group overflow-hidden flex flex-col h-full border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 relative rounded-3xl">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     <Link href={`/insights/${insight.slug}`} className="flex flex-col h-full">
                       {insight.image && (
@@ -187,9 +190,10 @@ export default function InsightsPage() {
                               alt={insight.image.description}
                               width={600}
                               height={400}
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                               className="w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-foreground/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                           </motion.div>
                         </div>
                       )}
@@ -227,7 +231,7 @@ export default function InsightsPage() {
 
       {/* Newsletter */}
       <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4 max-w-2xl">
+        <div className="container mx-auto max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -235,7 +239,7 @@ export default function InsightsPage() {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <Card className="p-8 md:p-12 border-2 border-primary/50">
+            <Card className="p-8 md:p-12 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl">
               <h2 className="text-2xl font-bold text-foreground mb-4">Get Weekly Insights</h2>
               <p className="text-muted-foreground mb-6">
                 Delivered to your inbox every Friday
@@ -244,7 +248,7 @@ export default function InsightsPage() {
                 <Input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1"
+                  className="flex-1 bg-background/60 backdrop-blur-xl border-border/60"
                 />
                 <Button className="group">
                   Subscribe

@@ -38,7 +38,7 @@ export default function ToolsPage() {
   return (
     <div className="bg-background text-foreground">
       <section className="py-20 md:py-32 text-center bg-secondary">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto">
            <p className="font-semibold text-primary uppercase tracking-wider mb-4">BHARATSDEV AI</p>
           <h1 className="text-balance">
             AI-Powered Growth Tools
@@ -50,7 +50,7 @@ export default function ToolsPage() {
       </section>
 
       <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <AuthGuard>
             <Tabs defaultValue="branding" className="w-full">
               <TabsList className="grid w-full grid-cols-2 bg-muted h-16 rounded-xl p-2.5">

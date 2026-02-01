@@ -26,7 +26,7 @@ export function TechStackShowcase() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-20 px-4 bg-background relative overflow-hidden">
+    <section className="py-20 bg-background relative overflow-hidden">
       <div className="absolute inset-0 gradient-mesh opacity-30" />
       
       <div className="container mx-auto relative z-10">
@@ -60,13 +60,13 @@ export function TechStackShowcase() {
               whileHover={{ scale: 1.2, y: -5 }}
               className="group relative"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-secondary rounded-xl p-3 border-2 border-transparent hover:border-primary/50 transition-all duration-300 flex items-center justify-center">
-                <div className="text-2xl md:text-3xl font-bold text-primary opacity-60 group-hover:opacity-100 transition-opacity">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl p-3 border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-300 flex items-center justify-center shadow-sm group-hover:shadow-glow">
+                <div className="text-2xl md:text-3xl font-extrabold text-primary opacity-60 group-hover:opacity-100 transition-opacity">
                   {tech.name[0]}
                 </div>
               </div>
               <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-xs font-semibold text-foreground whitespace-nowrap bg-background px-2 py-1 rounded border">
+                <span className="text-xs font-semibold text-foreground whitespace-nowrap bg-background/70 backdrop-blur-xl px-2 py-1 rounded-full border border-border/60">
                   {tech.name}
                 </span>
               </div>

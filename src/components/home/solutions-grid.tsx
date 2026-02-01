@@ -7,9 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { ArrowRight, Check } from "lucide-react";
 import React from 'react';
 import { Badge } from "../ui/badge";
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView, type Easing } from 'framer-motion';
 import { useRef } from 'react';
+
+const EASE_OUT: Easing = [0.22, 1, 0.36, 1];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,7 +30,7 @@ const itemVariants = {
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
+      ease: EASE_OUT,
     },
   },
 };
@@ -39,7 +40,7 @@ export function SolutionsGrid() {
     const isInView = useInView(ref, { once: true, margin: "-50px" });
 
     return (
-        <section className="py-20 px-4 bg-secondary/30 relative overflow-hidden">
+        <section className="py-20 bg-secondary/30 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
             
             <div className="container mx-auto text-center relative z-10">

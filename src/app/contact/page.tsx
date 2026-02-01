@@ -39,7 +39,7 @@ export default function ContactPage() {
       <section className="py-20 md:py-32 text-center bg-secondary/50 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto relative z-10">
           <h1 className="text-balance">
             Let&apos;s Build Something Great
           </h1>
@@ -49,11 +49,12 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
+      <section className="py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 gradient-mesh opacity-15" />
+        <div className="container mx-auto">
             <div className="grid lg:grid-cols-3 gap-12">
                 <div className="lg:col-span-2">
-                     <Card className="p-8 md:p-12 shadow-xl border">
+                     <Card className="p-8 md:p-12 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl shadow-2xl shadow-primary/5">
                         <ContactForm />
                      </Card>
                 </div>
@@ -93,13 +94,14 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-secondary/50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-foreground">More Ways to Reach Us</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
-            <Card className="p-8">
+            <Card className="p-8 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500">
               <Mail className="h-10 w-10 text-primary mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-foreground mb-2">Email Us</h3>
               <p className="text-muted-foreground mb-4">For general inquiries.</p>
@@ -107,7 +109,7 @@ export default function ContactPage() {
                 <a href="mailto:contact@bharatsdev.com">contact@bharatsdev.com</a>
               </Button>
             </Card>
-            <Card className="p-8">
+            <Card className="p-8 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500">
               <Phone className="h-10 w-10 text-primary mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-foreground mb-2">Call/WhatsApp</h3>
               <p className="text-muted-foreground mb-4">Sales: +91 70771 30651<br />Support: +91 92095 12356</p>
@@ -120,7 +122,7 @@ export default function ContactPage() {
                 </Button>
               </div>
             </Card>
-            <Card className="p-8">
+            <Card className="p-8 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500">
               <Linkedin className="h-10 w-10 text-primary mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-foreground mb-2">Connect on LinkedIn</h3>
               <p className="text-muted-foreground mb-4">Follow our journey.</p>
@@ -132,12 +134,13 @@ export default function ContactPage() {
         </div>
       </section>
       
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
+      <section className="py-20 bg-background relative overflow-hidden">
+        <div className="absolute inset-0 gradient-mesh opacity-15" />
+        <div className="container mx-auto max-w-4xl">
           <h2 className="text-center mb-12 text-foreground">Frequently Asked Questions</h2>
           <Accordion type="single" collapsible className="w-full space-y-4">
             {contactFaqs.map((faq, index) => (
-              <AccordionItem value={`item-${index}`} key={index} className="bg-secondary p-4 rounded-lg shadow-sm border">
+              <AccordionItem value={`item-${index}`} key={index} className="rounded-2xl border border-border/60 bg-card/60 backdrop-blur-2xl shadow-sm">
                 <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
@@ -150,8 +153,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-       <section className="py-16 text-center bg-secondary">
-        <div className="container mx-auto px-4 space-y-4 text-center">
+       <section className="py-16 text-center bg-secondary/50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <div className="container mx-auto space-y-4 text-center">
             <h3 className="text-2xl font-bold text-foreground">Our Office</h3>
             <p className="text-muted-foreground max-w-xl mx-auto text-balance mb-4">
                 BharatsDev Digital Solutions<br />

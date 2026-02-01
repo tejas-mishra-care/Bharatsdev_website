@@ -2,28 +2,37 @@
 
 import { trustLogos } from '@/lib/data';
 import Image from 'next/image';
-import { Zap, Target, Users } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { Clock, Headset, Star, Zap } from 'lucide-react';
+import { motion, useInView, useReducedMotion, type Easing } from 'framer-motion';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-const proofPoints = [
-    {
-        icon: Zap,
-        stat: "48-Hour Delivery",
-        description: "for enterprise-grade systems"
-    },
-    {
-        icon: Target,
-        stat: "100% Project-Based",
-        description: "Zero retainers, just finished assets"
-    },
-    {
-        icon: Users,
-        stat: "Direct Founder Access",
-        description: "Founder/CTO on every project call"
-    }
-]
+const EASE_OUT: Easing = [0.22, 1, 0.36, 1];
+
+const stats = [
+  {
+    icon: Zap,
+    value: 50,
+    suffix: '+',
+    label: 'Projects Delivered',
+  },
+  {
+    icon: Clock,
+    value: 48,
+    suffix: 'hrs',
+    label: 'Avg. Delivery Time',
+  },
+  {
+    icon: Star,
+    value: 100,
+    suffix: '%',
+    label: 'Client Satisfaction',
+  },
+  {
+    icon: Headset,
+    valueText: '24/7',
+    label: 'Support Available',
+  },
+];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -43,7 +52,7 @@ const itemVariants = {
     scale: 1,
     transition: {
       duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
+      ease: EASE_OUT,
     },
   },
 };
@@ -68,48 +77,78 @@ const logoVariants = {
   },
 };
 
+function AnimatedNumber({ to, start }: { to: number; start: boolean }) {
+  const reduceMotion = useReducedMotion();
+  const [value, setValue] = useState(() => (reduceMotion ? to : 0));
+
+  useEffect(() => {
+    if (!start) return;
+    if (reduceMotion) {
+      setValue(to);
+      return;
+    }
+    const durationMs = 900;
+    const startTs = performance.now();
+    let raf = 0;
+
+    const tick = (ts: number) => {
+      const progress = Math.min(1, (ts - startTs) / durationMs);
+      setValue(Math.round(to * progress));
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [reduceMotion, start, to]);
+
+  return <>{value}</>;
+}
+
 export function TrustBar() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const track = useMemo(() => [...trustLogos, ...trustLogos], []);
 
   return (
     <section className="bg-secondary/50 py-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto relative z-10">
         <motion.div
           ref={ref}
-          className="grid md:grid-cols-3 gap-12 text-center items-start"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-            {proofPoints.map((point, index) => {
-              const Icon = point.icon;
-              return (
-                <motion.div
-                  key={point.stat}
-                  variants={itemVariants}
-                  whileHover={{ y: -5, scale: 1.05 }}
-                  className="flex flex-col items-center gap-2"
-                >
-                    <motion.div
-                      className="bg-background p-4 rounded-full border-2 border-primary/20 shadow-lg relative overflow-hidden group"
-                      whileHover={{ borderColor: 'hsl(var(--primary))', boxShadow: '0 0 20px hsl(var(--primary)/0.3)' }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <Icon className="h-8 w-8 text-primary relative z-10" />
-                    </motion.div>
-                    <motion.p
-                      className="text-2xl md:text-3xl font-bold text-foreground mt-2 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      {point.stat}
-                    </motion.p>
-                    <p className="text-muted-foreground">{point.description}</p>
-                </motion.div>
-              );
-            })}
+          {stats.map((s) => {
+            const Icon = s.icon;
+            return (
+              <motion.div
+                key={s.label}
+                variants={itemVariants}
+                whileHover={{ y: -4, scale: 1.02 }}
+                className="rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 p-6 text-center"
+              >
+                <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-xl bg-primary/10 border border-primary/20">
+                  <Icon className="h-6 w-6 text-primary" />
+                </div>
+                <div className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground">
+                  {'valueText' in s ? (
+                    s.valueText
+                  ) : (
+                    <>
+                      <AnimatedNumber to={s.value} start={isInView} />
+                      <span className="text-primary">{s.suffix}</span>
+                    </>
+                  )}
+                </div>
+                <div className="mt-2 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                  {s.label}
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
         
         <motion.div
@@ -129,31 +168,37 @@ export function TrustBar() {
             TRUSTED BY INDUSTRY LEADERS & INNOVATORS
           </p>
         </motion.div>
-        
-        <motion.div
-          className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+
+        <div
+          className="relative overflow-hidden"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
+            maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
+          }}
         >
-          {trustLogos.map((logo, index) => (
-            <motion.div
-              key={logo.id}
-              custom={index}
-              variants={logoVariants}
-              whileHover="hover"
-              className="relative h-10 w-36 grayscale transition-all duration-300 cursor-pointer"
-            >
-              <Image
-                src={logo.imageUrl}
-                alt={logo.description}
-                fill
-                className="object-contain"
-                data-ai-hint={logo.imageHint}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+          <div className="flex w-max gap-10 items-center py-2 hover:[animation-play-state:paused]" style={{ animation: 'marquee 40s linear infinite' }}>
+            {track.map((logo, index) => (
+              <motion.div
+                key={`${logo.id}-${index}`}
+                custom={index}
+                variants={logoVariants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                whileHover="hover"
+                className="relative h-10 w-36 grayscale transition-all duration-300 cursor-pointer"
+              >
+                <Image
+                  src={logo.imageUrl}
+                  alt={logo.description}
+                  fill
+                  sizes="144px"
+                  className="object-contain"
+                  data-ai-hint={logo.imageHint}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

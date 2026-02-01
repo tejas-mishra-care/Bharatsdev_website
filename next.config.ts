@@ -3,6 +3,8 @@ import type {NextConfig} from 'next';
 const nextConfig: NextConfig = {
   allowedDevOrigins: [
     'https://6000-firebase-studio-1762961558987.cluster-a6zx3cwnb5hnuwbgyxmofxpkfe.cloudworkstations.dev',
+    'http://127.0.0.1:8173',
+    'http://localhost:8173',
   ],
   images: {
     formats: ['image/avif', 'image/webp'],

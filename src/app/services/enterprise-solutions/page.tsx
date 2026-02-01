@@ -51,8 +51,9 @@ export default function EnterpriseSolutionsPage() {
   return (
     <div className="bg-background text-foreground">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 text-center md:text-left bg-secondary">
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-32 text-center md:text-left bg-secondary/50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <div className="container mx-auto relative z-10">
           <div className="max-w-3xl">
             <h1 className="text-balance">
                 Custom Enterprise Solutions
@@ -71,56 +72,65 @@ export default function EnterpriseSolutionsPage() {
 
       {/* The Problem You're Solving */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
+        <div className="container mx-auto max-w-4xl text-center">
             <h2 className="text-foreground">Your Business Runs on Systems. Are Yours Holding You Back?</h2>
-             <div className="border-l-4 border-primary bg-secondary p-6 md:p-8 rounded-lg text-left mt-8">
+             <Card className="mt-8 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl text-left">
+              <CardContent className="p-6 md:p-8">
                 <p className="large text-foreground/90 text-balance">
                 Off-the-shelf software forces you into a box, legacy systems create data silos, and disconnected tools kill productivity. Your business is unique; your software should be too. <strong className="font-semibold text-foreground">We don't sell software. We engineer operational advantages.</strong>
                 </p>
-            </div>
+              </CardContent>
+            </Card>
         </div>
       </section>
       
       {/* Our Approach */}
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-secondary/50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <div className="container mx-auto relative z-10">
             <div className="text-center mb-16">
                 <h2 className="text-foreground">Our Approach: Mission-Critical Engineering</h2>
                 <p className="large max-w-2xl mx-auto mt-4 text-balance">We build systems designed for reliability, scalability, and impact.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
-                <div className="space-y-4">
+                <Card className="rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl">
+                  <CardContent className="p-8 space-y-4">
                     <Database className="h-12 w-12 text-primary mx-auto" />
                     <h3 className="text-2xl font-bold text-foreground">1. Workflow Architecture</h3>
-                    <p className="max-w-sm mx-auto">We map your entire operational workflow to design a system that eliminates bottlenecks and enhances productivity at every step.</p>
-                </div>
-                <div className="space-y-4">
+                    <p className="max-w-sm mx-auto text-muted-foreground">We map your entire operational workflow to design a system that eliminates bottlenecks and enhances productivity at every step.</p>
+                  </CardContent>
+                </Card>
+                <Card className="rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl">
+                  <CardContent className="p-8 space-y-4">
                     <Bot className="h-12 w-12 text-primary mx-auto" />
                     <h3 className="text-2xl font-bold text-foreground">2. Scalable & Secure Build</h3>
-                    <p className="max-w-sm mx-auto">Our solutions are built on modern, scalable architecture, ensuring they can grow with your business and are secure from day one.</p>
-                </div>
-                <div className="space-y-4">
+                    <p className="max-w-sm mx-auto text-muted-foreground">Our solutions are built on modern, scalable architecture, ensuring they can grow with your business and are secure from day one.</p>
+                  </CardContent>
+                </Card>
+                <Card className="rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl">
+                  <CardContent className="p-8 space-y-4">
                     <Blocks className="h-12 w-12 text-primary mx-auto" />
                     <h3 className="text-2xl font-bold text-foreground">3. Seamless Integration</h3>
-                    <p className="max-w-sm mx-auto">We ensure your new system integrates perfectly with your existing tools, creating a unified data ecosystem across your entire organization.</p>
-                </div>
+                    <p className="max-w-sm mx-auto text-muted-foreground">We ensure your new system integrates perfectly with your existing tools, creating a unified data ecosystem across your entire organization.</p>
+                  </CardContent>
+                </Card>
             </div>
         </div>
       </section>
 
       {/* What's Included */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <h2 className="text-center mb-12 text-foreground">What&apos;s Included in Enterprise Solutions</h2>
           <div className="space-y-6">
             {includedItems.map((item) => (
-              <Card key={item.title}>
+              <Card key={item.title} className="rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl">
                 <CardHeader>
                   <CardTitle className="text-2xl text-foreground">{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p>{item.description}</p>
-                  <div className="bg-secondary p-4 rounded-lg border-l-4 border-primary/50">
+                  <div className="bg-background/40 backdrop-blur-xl p-4 rounded-2xl border border-border/60">
                     <p className="font-semibold text-foreground">Why It Matters:</p>
                     <p className="text-sm">{item.whyItMatters}</p>
                   </div>
@@ -132,25 +142,28 @@ export default function EnterpriseSolutionsPage() {
       </section>
 
        {/* Pricing Model */}
-       <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4 max-w-2xl text-center">
+       <section className="py-20 bg-secondary/50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <div className="container mx-auto max-w-2xl text-center relative z-10">
             <h2 className="text-foreground mb-4">Transparent Pricing</h2>
-             <div className="bg-background p-8 rounded-2xl shadow-lg border">
+             <Card className="p-8 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl shadow-2xl shadow-primary/5">
+              <CardContent className="p-0">
                 <p className="large text-foreground/90 mb-4 text-balance">
                 We price based on scope, not hours. Every project receives a fixed-price proposal after our discovery call. This ensures you have complete budget clarity from day one.
                 </p>
                 <p className="text-2xl font-bold text-primary">Custom Enterprise Solutions typically start at ₹3,00,000.</p>
-            </div>
+              </CardContent>
+            </Card>
         </div>
        </section>
 
       {/* FAQ */}
       <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto max-w-4xl">
           <h2 className="text-center mb-12 text-foreground">Frequently Asked Questions</h2>
           <Accordion type="single" collapsible className="w-full space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem value={`item-${index}`} key={index} className="bg-secondary p-4 rounded-lg shadow-sm border">
+              <AccordionItem value={`item-${index}`} key={index} className="rounded-2xl border border-border/60 bg-card/60 backdrop-blur-2xl shadow-sm">
                 <AccordionTrigger className="text-lg text-left font-semibold text-foreground hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
@@ -164,17 +177,22 @@ export default function EnterpriseSolutionsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto text-center px-4">
-          <h2 className="text-foreground text-balance mb-6">
-            Ready to Build Your Operational Advantage?
-          </h2>
-          <p className="large max-w-2xl mx-auto mb-8 text-balance">
-            Let's discuss how a custom-engineered solution can solve your most complex operational challenges.
-          </p>
-          <Button asChild size="lg">
-            <Link href="/contact">Book Your Discovery Call</Link>
-          </Button>
+      <section className="py-20 bg-secondary/50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <div className="container mx-auto text-center px-4 relative z-10">
+          <Card className="mx-auto max-w-3xl p-8 md:p-12 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl shadow-2xl shadow-primary/5">
+            <CardContent className="p-0">
+              <h2 className="text-foreground text-balance mb-6">
+                Ready to Build Your Operational Advantage?
+              </h2>
+              <p className="large max-w-2xl mx-auto mb-8 text-balance">
+                Let's discuss how a custom-engineered solution can solve your most complex operational challenges.
+              </p>
+              <Button asChild size="lg">
+                <Link href="/contact">Book Your Discovery Call</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </section>
     </div>

@@ -5,10 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { modelPillars } from "@/lib/data";
 import Link from "next/link";
 import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView, type Easing } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
+
+const EASE_OUT: Easing = [0.22, 1, 0.36, 1];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -28,7 +29,7 @@ const itemVariants = {
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
+      ease: EASE_OUT,
     },
   },
 };
@@ -38,7 +39,7 @@ export function Pillars() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-20 px-4 bg-background relative overflow-hidden">
+    <section className="py-20 bg-background relative overflow-hidden">
       <div className="absolute inset-0 gradient-mesh opacity-30" />
       
       <div className="container mx-auto text-center relative z-10">

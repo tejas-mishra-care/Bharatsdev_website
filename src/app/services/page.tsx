@@ -5,9 +5,10 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/componen
 import { coreServices, howWeWork } from '@/lib/data';
 import Link from 'next/link';
 import { Check, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView, type Easing } from 'framer-motion';
 import { useRef } from 'react';
+
+const EASE_OUT: Easing = [0.22, 1, 0.36, 1];
 
 export default function ServicesPage() {
   const heroRef = useRef(null);
@@ -20,7 +21,7 @@ export default function ServicesPage() {
         
         <motion.div
             ref={heroRef}
-            className="container mx-auto px-4 relative z-10"
+            className="container mx-auto relative z-10"
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
@@ -39,7 +40,7 @@ export default function ServicesPage() {
       <section className="py-20 bg-background relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh opacity-30" />
         
-        <div className="container mx-auto px-4 max-w-4xl text-center relative z-10">
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -48,13 +49,17 @@ export default function ServicesPage() {
             >
                 <h2 className="text-foreground">Our Service Philosophy</h2>
                 <motion.div
-                    className="border-l-4 border-primary bg-secondary/50 p-6 md:p-8 rounded-lg text-left mt-8 shadow-xl hover:shadow-2xl transition-all duration-500"
-                    whileHover={{ scale: 1.02, borderColor: 'hsl(var(--accent))' }}
+                    className="mt-8"
+                    whileHover={{ scale: 1.01 }}
                     transition={{ duration: 0.3 }}
                 >
-                    <p className="large text-foreground/90 text-balance">
-                    We don&apos;t offer "services." We deliver <strong className="font-semibold text-foreground">complete, finished digital assets</strong>. Every engagement is scoped, architected, built, tested, and handed over—with full documentation and training. No retainers. No ongoing dependencies. Just exceptional work that you own completely.
-                    </p>
+                  <Card className="p-6 md:p-8 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl text-left shadow-2xl shadow-primary/5">
+                    <CardContent className="p-0">
+                      <p className="large text-foreground/90 text-balance">
+                        We don&apos;t offer "services." We deliver <strong className="font-semibold text-foreground">complete, finished digital assets</strong>. Every engagement is scoped, architected, built, tested, and handed over—with full documentation and training. No retainers. No ongoing dependencies. Just exceptional work that you own completely.
+                      </p>
+                    </CardContent>
+                  </Card>
                 </motion.div>
             </motion.div>
         </div>
@@ -63,7 +68,7 @@ export default function ServicesPage() {
        <section className="py-20 bg-secondary/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto relative z-10">
             <motion.div
                 className="text-center mb-16"
                 initial={{ opacity: 0, y: 30 }}
@@ -84,12 +89,12 @@ export default function ServicesPage() {
                         transition={{ duration: 0.6, delay: index * 0.1 }}
                         whileHover={{ y: -8, scale: 1.02 }}
                     >
-                        <Card className="flex flex-col h-full border-2 hover:border-primary/50 transition-all duration-500 group relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <Card className="flex flex-col h-full border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 group relative overflow-hidden rounded-3xl">
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             
                             <CardHeader className="flex-row items-center gap-4 relative z-10">
                                 <motion.div
-                                    className="p-3 bg-background rounded-lg border-2 border-primary/20 group-hover:border-primary group-hover:shadow-lg transition-all duration-300"
+                                    className="p-3 bg-background/60 backdrop-blur-xl rounded-2xl border border-primary/20 group-hover:border-primary group-hover:shadow-lg transition-all duration-300"
                                     whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
                                     transition={{ duration: 0.5 }}
                                 >
@@ -137,7 +142,7 @@ export default function ServicesPage() {
        <section className="py-20 bg-background relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh opacity-30" />
         
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto relative z-10">
           <motion.h2
               className="text-center mb-12 text-foreground"
               initial={{ opacity: 0, y: 30 }}
@@ -153,7 +158,7 @@ export default function ServicesPage() {
                 initial={{ scaleY: 0 }}
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 1, ease: EASE_OUT }}
             />
             <div className="space-y-12">
               {howWeWork.map((step, index) => (
@@ -175,7 +180,7 @@ export default function ServicesPage() {
                     </div>
                   </motion.div>
                   <div className={`w-full pl-8 md:pl-12`}>
-                    <Card className={`p-4 md:p-6 border-2 hover:border-primary/50 transition-all duration-500 group`}>
+                    <Card className="p-4 md:p-6 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 group">
                       <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                           {step.title}
                       </h3>
@@ -195,7 +200,7 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         
         <motion.div
-            className="container mx-auto text-center px-4 relative z-10"
+            className="container mx-auto text-center relative z-10"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

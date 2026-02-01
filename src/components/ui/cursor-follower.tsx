@@ -6,8 +6,22 @@ import { motion } from 'framer-motion';
 export function CursorFollower() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(pointer: fine)');
+    const updateEnabled = () => setEnabled(mq.matches);
+    updateEnabled();
+    mq.addEventListener('change', updateEnabled);
+
+    return () => {
+      mq.removeEventListener('change', updateEnabled);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
     // Throttle mouse updates for performance
     let rafId: number;
     const updateMousePosition = (e: MouseEvent) => {
@@ -36,7 +50,9 @@ export function CursorFollower() {
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
     <>

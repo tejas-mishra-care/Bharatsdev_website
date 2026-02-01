@@ -21,7 +21,7 @@ export function InsightsPreview() {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <section className="py-20 px-4 bg-background relative overflow-hidden">
+        <section className="py-20 bg-background relative overflow-hidden">
             <div className="absolute inset-0 gradient-mesh opacity-30" />
             
             <div className="container mx-auto relative z-10">
@@ -51,9 +51,9 @@ export function InsightsPreview() {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         whileHover={{ y: -5, scale: 1.01 }}
                     >
-                        <Card className="group overflow-hidden h-full border-2 hover:border-primary/50 transition-all duration-500 relative">
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            
+                        <Card className="group overflow-hidden h-full border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 relative rounded-3xl">
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                             
                         <Link href={`/insights/${featuredInsight.slug}`} prefetch={true}>
                             {featuredInsight.image && (
                                     <div className="aspect-video overflow-hidden relative">
@@ -67,9 +67,10 @@ export function InsightsPreview() {
                                         alt={featuredInsight.image.description}
                                         width={800}
                                         height={450}
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
                                                 className="w-full h-full object-cover"
                                     />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                         </motion.div>
                                 </div>
                             )}
@@ -92,9 +93,9 @@ export function InsightsPreview() {
                                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                                 whileHover={{ y: -5, scale: 1.01 }}
                             >
-                                <Card className="group flex flex-col sm:flex-row overflow-hidden border-2 hover:border-primary/50 transition-all duration-500 relative">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                    
+                                <Card className="group flex flex-col sm:flex-row overflow-hidden border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 relative rounded-3xl">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                     
                                     <Link href={`/insights/${insight.slug}`} prefetch={true} className="flex flex-col sm:flex-row w-full relative z-10">
                                     {insight.image && (
                                         <div className="sm:w-1/3 aspect-video sm:aspect-square overflow-hidden">
@@ -108,9 +109,10 @@ export function InsightsPreview() {
                                                 alt={insight.image.description}
                                                 width={400}
                                                 height={400}
+                                                sizes="(max-width: 640px) 100vw, 33vw"
                                                         className="w-full h-full object-cover"
                                             />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                                 </motion.div>
                                         </div>
                                     )}
