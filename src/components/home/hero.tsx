@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform, useReducedMotion, LazyMotion, domAnimation, type Easing } from 'framer-motion';
 import { ArrowRight, Zap } from 'lucide-react';
 import { ParticleSystem } from './particle-system';
+import { HeroScene } from './HeroScene';
 import { useState, useEffect } from 'react';
 
 const EASE_OUT: Easing = [0.22, 1, 0.36, 1];
@@ -74,6 +75,9 @@ export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
       <LazyMotion features={domAnimation}>
+        <div className="absolute inset-0 z-0">
+          <HeroScene className="h-full w-full" />
+        </div>
         {enableAmbientMotion && <ParticleSystem />}
 
         <motion.div className="absolute inset-0 gradient-mesh opacity-60" style={{ y, willChange: 'transform' }} />
