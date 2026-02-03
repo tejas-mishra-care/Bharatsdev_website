@@ -84,7 +84,7 @@ export function HeroScene({
             loading="lazy"
             tabIndex={-1}
             onLoad={() => setLoaded(true)}
-            className="h-full w-full pointer-events-none"
+            className="h-full w-full"
           />
         ) : null}
       </div>
@@ -92,7 +92,7 @@ export function HeroScene({
       <div
         className={cn(
           'absolute inset-0 transition-opacity duration-300',
-          loaded ? 'opacity-0' : 'opacity-100'
+          loaded ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
         )}
       >
         {posterSrc ? (

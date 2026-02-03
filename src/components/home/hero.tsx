@@ -81,9 +81,12 @@ export function Hero() {
         </div>
         {enableAmbientMotion && <ParticleSystem />}
 
-        <motion.div className="absolute inset-0 gradient-mesh opacity-60" style={{ y, willChange: 'transform' }} />
         <motion.div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(217,89%,61%,0.18),transparent_70%)]"
+          className="absolute inset-0 gradient-mesh opacity-60 pointer-events-none"
+          style={{ y, willChange: 'transform' }}
+        />
+        <motion.div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(217,89%,61%,0.18),transparent_70%)] pointer-events-none"
           style={{ opacity, willChange: 'opacity' }}
         />
 
