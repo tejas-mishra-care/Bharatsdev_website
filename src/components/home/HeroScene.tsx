@@ -67,7 +67,11 @@ export function HeroScene({
   }, [activated, inViewRootMargin, shouldActivateOnInView]);
 
   return (
-    <div ref={containerRef} className={cn('absolute inset-0 z-0', className)} aria-hidden="true">
+    <div
+      ref={containerRef}
+      className={cn('absolute inset-0 z-0 overflow-hidden', className)}
+      aria-hidden="true"
+    >
       <div
         className={cn(
           'absolute inset-0 transition-opacity duration-500',
