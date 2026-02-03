@@ -74,7 +74,7 @@ export function Hero() {
   const showHeroCopy = false;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden py-0">
       <LazyMotion features={domAnimation}>
         <div className="absolute inset-0 z-0">
           <HeroScene className="h-full w-full" activateOn="interaction" />
