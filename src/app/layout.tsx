@@ -4,7 +4,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
-import { CursorFollower } from '@/components/ui/cursor-follower';
+import { BackToTop } from '@/components/ui/back-to-top';
 import { cn } from '@/lib/utils';
 import { Inter } from 'next/font/google';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
@@ -35,6 +35,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/bdlogo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/bdlogo.png" />
         <script
           dangerouslySetInnerHTML={{
             __html: `(() => {
@@ -54,11 +56,11 @@ export default function RootLayout({
         className={cn('min-h-screen bg-background font-body antialiased flex flex-col', inter.variable)}
       >
         <FirebaseClientProvider>
-          <CursorFollower />
           <ScrollProgress />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <BackToTop />
           <Toaster />
         </FirebaseClientProvider>
       </body>

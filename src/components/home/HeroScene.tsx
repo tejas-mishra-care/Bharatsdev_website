@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -95,13 +96,24 @@ export function HeroScene({
         )}
       >
         {posterSrc ? (
-          <img
-            src={posterSrc}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover"
-            draggable={false}
-            loading="eager"
-          />
+          posterSrc.startsWith('http') ? (
+            <img
+              src={posterSrc}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+              draggable={false}
+              loading="eager"
+            />
+          ) : (
+            <Image
+              src={posterSrc}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+          )
         ) : (
           <>
             <div className="absolute inset-0 bg-background/20 backdrop-blur-[1px]" />
