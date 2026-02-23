@@ -19,7 +19,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Bharat's Dev - Your Complete Digital Growth Engine",
-  description: 'We build high-performance, intelligent digital systems. No retainers. Just finished, high-value assets.',
+  description: 'Building high-performance, finished digital assets. No retainers. Just finished, high-value AI and web solutions.',
+  keywords: ['enterprise ai', 'app development', 'next.js', 'bharatsdev', 'digital growth engine'],
   icons: {
     icon: '/bdlogo.png',
     shortcut: '/bdlogo.png',

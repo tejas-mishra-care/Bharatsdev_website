@@ -71,7 +71,7 @@ export function Hero() {
   }, []);
 
   const enableAmbientMotion = !shouldReduceMotion && !isMobile;
-  const showHeroCopy = false;
+  const showHeroCopy = true;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden py-0">

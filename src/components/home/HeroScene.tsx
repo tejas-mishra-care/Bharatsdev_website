@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { ChipLoader } from '@/components/ui/chip-loader';
 
 type HeroSceneProps = {
   className?: string;
@@ -120,7 +121,9 @@ export function HeroScene({
           )
         ) : (
           <>
-            <div className="absolute inset-0 bg-background/20 backdrop-blur-[1px]" />
+            <div className="absolute inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center p-8 z-20">
+              <ChipLoader className="scale-75 md:scale-100" />
+            </div>
             <div className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_50%_50%,hsl(217,89%,61%,0.14),transparent_70%)]" />
           </>
         )}

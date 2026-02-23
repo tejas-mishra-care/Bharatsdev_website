@@ -8,6 +8,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight, Rocket, Target, Zap, Users, Award, MapPin, Calendar } from 'lucide-react';
 import Link from 'next/link';
+import { BusinessCard } from '@/components/ui/business-card';
 
 const timeline = [
   { year: '2018', event: 'Founded with 3 people', milestone: 'Company Launch' },
@@ -82,7 +83,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="py-20 md:py-32 text-center bg-gradient-to-b from-secondary/50 via-background to-background relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh opacity-30" />
-        
+
         <motion.div
           ref={heroRef}
           className="container mx-auto relative z-10"
@@ -97,6 +98,53 @@ export default function AboutPage() {
             Since 2018. 500+ Projects. Zero Compromises.
           </p>
         </motion.div>
+      </section>
+
+      {/* Digital Business Card Section */}
+      <section className="py-20 bg-background relative overflow-hidden">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center flex-col-reverse lg:flex-row">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight">
+                Our Digital <span className="text-primary italic">Identity.</span>
+              </h2>
+              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                We believe in the power of direct connection. Flip our agency card to see exactly who we are and how to reach our leadership team. No layers, no friction.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                    <Zap className="w-6 h-6" />
+                  </div>
+                  <span className="font-bold text-lg">Direct Founder Access</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-vibrant-orange/10 flex items-center justify-center text-vibrant-orange">
+                    <Rocket className="w-6 h-6" />
+                  </div>
+                  <span className="font-bold text-lg">Fast-Track Execution</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, type: "spring", damping: 15 }}
+            >
+              <BusinessCard />
+              <p className="text-center text-muted-foreground text-sm mt-8 animate-pulse italic">
+                Hover to flip the card
+              </p>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* Our Story */}
@@ -125,7 +173,7 @@ export default function AboutPage() {
       {/* Timeline */}
       <section className="py-20 bg-secondary/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-        
+
         <div className="container mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -359,7 +407,7 @@ export default function AboutPage() {
                 BharatsDev Digital Solutions
               </p>
               <p className="text-muted-foreground mb-4">
-                Nagpur, Maharashtra, India
+                Chhatrapati Sambhajinagar, Maharashtra, India
               </p>
               <p className="text-muted-foreground mb-6">
                 Remote-first culture with flexible work options. Serving clients globally.
@@ -377,7 +425,7 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="py-20 bg-gradient-cta text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-accent/90" />
-        
+
         <div className="container mx-auto text-center px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

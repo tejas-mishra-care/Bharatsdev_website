@@ -22,8 +22,8 @@ const companyLinks = [
 ];
 
 const bottomLinks = [
-    { href: '#', label: 'Privacy Policy' },
-    { href: '#', label: 'Terms of Service' },
+  { href: '#', label: 'Privacy Policy' },
+  { href: '#', label: 'Terms of Service' },
 ]
 
 const containerVariants = {
@@ -54,19 +54,19 @@ export function Footer() {
   return (
     <footer className="bg-secondary text-foreground/80 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
-      
+
       <motion.div
-          ref={ref}
-          className="container mx-auto px-4 py-16 relative z-10"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+        ref={ref}
+        className="container mx-auto px-4 py-16 relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <motion.div variants={itemVariants} className="col-span-1 md:col-span-2 lg:col-span-1">
             <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <Link href="/" prefetch={true} className="flex items-center gap-3 mb-4">
                 <Logo className="h-10 w-10" />
@@ -85,17 +85,17 @@ export function Footer() {
                 const Icon = social.icon;
                 return (
                   <motion.div
-                      key={social.label}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                      transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
+                    key={social.label}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                    transition={{ delay: 0.3 + index * 0.1, duration: 0.3 }}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
                   >
                     <Link
-                        href={social.href}
-                        aria-label={social.label}
-                        className="bg-background/50 backdrop-blur-sm text-foreground h-10 w-10 flex items-center justify-center rounded-full hover:bg-primary hover:text-primary-foreground border border-border/60 hover:border-primary transition-all duration-300"
+                      href={social.href}
+                      aria-label={social.label}
+                      className="bg-background/50 backdrop-blur-sm text-foreground h-10 w-10 flex items-center justify-center rounded-full hover:bg-primary hover:text-primary-foreground border border-border/60 hover:border-primary transition-all duration-300"
                     >
                       <Icon className="h-5 w-5" />
                     </Link>
@@ -104,21 +104,21 @@ export function Footer() {
               })}
             </div>
           </motion.div>
-          
+
           <motion.div variants={itemVariants}>
             <h3 className="font-semibold mb-4 text-foreground uppercase tracking-wider text-sm">Services</h3>
             <ul className="space-y-3">
               {servicesLinks.map((link, index) => (
                 <motion.li
-                    key={link.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.2 + index * 0.05, duration: 0.4 }}
+                  key={link.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ delay: 0.2 + index * 0.05, duration: 0.4 }}
                 >
                   <Link
-                      href={link.href}
-                      prefetch={true}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2"
+                    href={link.href}
+                    prefetch={true}
+                    className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2"
                   >
                     <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
                   </Link>
@@ -126,21 +126,21 @@ export function Footer() {
               ))}
             </ul>
           </motion.div>
-          
+
           <motion.div variants={itemVariants}>
             <h3 className="font-semibold mb-4 text-foreground uppercase tracking-wider text-sm">Company</h3>
             <ul className="space-y-3">
               {companyLinks.map((link, index) => (
                 <motion.li
-                    key={link.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.2 + index * 0.05, duration: 0.4 }}
+                  key={link.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ delay: 0.2 + index * 0.05, duration: 0.4 }}
                 >
                   <Link
-                      href={link.href}
-                      prefetch={true}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2"
+                    href={link.href}
+                    prefetch={true}
+                    className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2"
                   >
                     <span className="group-hover:translate-x-1 transition-transform">{link.label}</span>
                   </Link>
@@ -148,62 +148,62 @@ export function Footer() {
               ))}
             </ul>
           </motion.div>
-          
+
           <motion.div variants={itemVariants}>
             <h3 className="font-semibold mb-4 text-foreground uppercase tracking-wider text-sm">Contact</h3>
-             <ul className="space-y-3">
-                <motion.li
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.2, duration: 0.4 }}
-                >
-                  <a href="mailto:hello@bharatsdev.com" className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2">
-                    <span className="group-hover:translate-x-1 transition-transform">hello@bharatsdev.com</span>
-                  </a>
-                </motion.li>
-                <motion.li
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.25, duration: 0.4 }}
-                >
-                  <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2">
-                    <span className="group-hover:translate-x-1 transition-transform">+91 [phone number]</span>
-                  </a>
-                </motion.li>
-                <motion.li
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.3, duration: 0.4 }}
-                    className="text-muted-foreground text-base"
-                >
-                  Chhatrapati Sambhajinagar, India. Serving globally.
-                </motion.li>
+            <ul className="space-y-3">
+              <motion.li
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+              >
+                <a href="mailto:hello@bharatsdev.com" className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2">
+                  <span className="group-hover:translate-x-1 transition-transform">hello@bharatsdev.com</span>
+                </a>
+              </motion.li>
+              <motion.li
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                transition={{ delay: 0.25, duration: 0.4 }}
+              >
+                <a href="tel:+917077130651" className="text-muted-foreground hover:text-foreground transition-colors text-base group flex items-center gap-2">
+                  <span className="group-hover:translate-x-1 transition-transform">+91 70771 30651</span>
+                </a>
+              </motion.li>
+              <motion.li
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+                className="text-muted-foreground text-base"
+              >
+                Chhatrapati Sambhajinagar, India. Serving globally.
+              </motion.li>
             </ul>
           </motion.div>
         </div>
-        
+
         <motion.div
-            className="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center text-sm"
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
+          className="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center text-sm"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
         >
           <p className="text-muted-foreground mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} BharatsDev. All rights reserved.
           </p>
           <div className="flex space-x-6">
-             {bottomLinks.map((link, index) => (
-                <motion.div
-                    key={link.label}
-                    initial={{ opacity: 0 }}
-                    animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                    transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
-                    whileHover={{ scale: 1.05 }}
-                >
-                  <Link href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
-                      {link.label}
-                  </Link>
-                </motion.div>
+            {bottomLinks.map((link, index) => (
+              <motion.div
+                key={link.label}
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <Link href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
+                  {link.label}
+                </Link>
+              </motion.div>
             ))}
           </div>
         </motion.div>

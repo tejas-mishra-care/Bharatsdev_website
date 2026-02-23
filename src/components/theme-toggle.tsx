@@ -1,76 +1,72 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 type ThemeMode = 'light' | 'dark';
-
-function getSystemTheme(): ThemeMode {
-  if (typeof window === 'undefined') return 'light';
-  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
-
-function applyTheme(theme: ThemeMode) {
-  if (typeof document === 'undefined') return;
-  document.documentElement.classList.toggle('dark', theme === 'dark');
-}
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<ThemeMode | null>(null);
 
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem('theme');
-      const nextTheme: ThemeMode = stored === 'dark' || stored === 'light' ? stored : getSystemTheme();
-      setTheme(nextTheme);
-      applyTheme(nextTheme);
-    } catch {
-      const nextTheme = getSystemTheme();
-      setTheme(nextTheme);
-      applyTheme(nextTheme);
-    }
+    const stored = window.localStorage.getItem('theme');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const initial = (stored === 'dark' || stored === 'light' ? stored : systemTheme) as ThemeMode;
+    setTheme(initial);
+    document.documentElement.classList.toggle('dark', initial === 'dark');
   }, []);
 
-  const label = useMemo(() => {
-    const next = theme ?? 'light';
-    return next === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
-  }, [theme]);
-
   const toggle = () => {
-    const next: ThemeMode = (theme ?? getSystemTheme()) === 'dark' ? 'light' : 'dark';
+    const next = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);
-    applyTheme(next);
-    try {
-      window.localStorage.setItem('theme', next);
-    } catch {
-      // ignore
-    }
+    document.documentElement.classList.toggle('dark', next === 'dark');
+    window.localStorage.setItem('theme', next);
   };
 
-  const isDark =
-    theme === 'dark' ||
-    (theme === null && typeof document !== 'undefined' && document.documentElement.classList.contains('dark'));
+  if (theme === null) return <div className="w-[60px] h-[34px]" />;
 
   return (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-label={label}
-      title={label}
-      className="relative h-7 w-14 rounded-full border border-border/60 bg-secondary shadow-sm transition-colors hover:bg-secondary/80"
-    >
-      <span className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/0 via-primary/0 to-accent/0 transition-opacity dark:from-primary/10 dark:via-primary/0 dark:to-accent/10" />
-      <span
-        className={
-          "absolute top-1/2 -translate-y-1/2 grid h-5 w-5 place-items-center rounded-full shadow transition-all " +
-          (isDark
-            ? 'left-[34px] bg-[hsl(var(--charcoal))]'
-            : 'left-1 bg-white')
-        }
-      >
-        <Sun className="h-3 w-3 text-[hsl(var(--vibrant-orange))] dark:hidden" />
-        <Moon className="h-3 w-3 text-[hsl(var(--electric-blue))] hidden dark:block" />
-      </span>
-    </button>
+    <label className="switch-container scale-75 md:scale-90 lg:scale-100">
+      <input
+        type="checkbox"
+        checked={theme === 'dark'}
+        onChange={toggle}
+        aria-label="Toggle theme"
+      />
+      <div className="switch-slider">
+        <div className="switch-sun-moon">
+          {/* Moon dots */}
+          <svg className="switch-moon-dot absolute left-[10px] top-[3px] w-[6px] h-[6px] z-[4]" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+          <svg className="switch-moon-dot absolute left-[2px] top-[10px] w-[10px] h-[10px] z-[4]" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+          <svg className="switch-moon-dot absolute left-[16px] top-[18px] w-[3px] h-[3px] z-[4]" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+
+          {/* Rays (Only visible in light mode) */}
+          <svg className="absolute left-[-8px] top-[-8px] w-[43px] h-[43px] z-[-1] fill-white opacity-10 dark:opacity-0 transition-opacity" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+          <svg className="absolute left-[-50%] top-[-50%] w-[55px] h-[55px] z-[-1] fill-white opacity-10 dark:opacity-0 transition-opacity" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+          <svg className="absolute left-[-18px] top-[-18px] w-[60px] h-[60px] z-[-1] fill-white opacity-10 dark:opacity-0 transition-opacity" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+
+          {/* Clouds */}
+          <svg className="switch-cloud-dark absolute left-[30px] top-[15px] w-10 transition-opacity dark:opacity-0" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+          <svg className="switch-cloud-dark absolute left-[44px] top-[10px] w-5 transition-opacity dark:opacity-0" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+          <svg className="switch-cloud-dark absolute left-[18px] top-[24px] w-[30px] transition-opacity dark:opacity-0" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+          <svg className="switch-cloud-light absolute left-[36px] top-[18px] w-10 transition-opacity dark:opacity-0" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+          <svg className="switch-cloud-light absolute left-[48px] top-[14px] w-5 transition-opacity dark:opacity-0" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+          <svg className="switch-cloud-light absolute left-[22px] top-[26px] w-[30px] transition-opacity dark:opacity-0" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"></circle></svg>
+        </div>
+        <div className="switch-stars">
+          <svg className="switch-star w-5 top-0.5 left-[3px] delay-[0.3s]" viewBox="0 0 20 20">
+            <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path>
+          </svg>
+          <svg className="switch-star w-[6px] top-4 left-[3px]" viewBox="0 0 20 20">
+            <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path>
+          </svg>
+          <svg className="switch-star w-3 top-5 left-[10px] delay-[0.6s]" viewBox="0 0 20 20">
+            <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path>
+          </svg>
+          <svg className="switch-star w-[18px] top-0 left-[18px] delay-[1.3s]" viewBox="0 0 20 20">
+            <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path>
+          </svg>
+        </div>
+      </div>
+    </label>
   );
 }
