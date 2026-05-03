@@ -1,8 +1,10 @@
 export const firebaseConfig = {
-  "projectId": "studio-8480364697-b8bce",
-  "appId": "1:1076449073776:web:32026b23e9c7213dbaf2b5",
-  "apiKey": "AIzaSyBr-dHLOnTHByvupyDp4faIiiJ_qZMwQ_M",
-  "authDomain": "studio-8480364697-b8bce.firebaseapp.com",
-  "measurementId": "",
-  "messagingSenderId": "1076449073776"
+  apiKey: "AIzaSyDtcfP-BZ1ZzUwPOk8uoFnNZt-WCsT84S0",
+  authDomain: "geoverseai-1.firebaseapp.com",
+  databaseURL: "https://geoverseai-1-default-rtdb.firebaseio.com",
+  projectId: "geoverseai-1",
+  storageBucket: "geoverseai-1.firebasestorage.app",
+  messagingSenderId: "96380169011",
+  appId: "1:96380169011:web:3dfca471112d6a7133ac46",
+  measurementId: "G-4BS11BN67D"
 };

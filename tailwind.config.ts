@@ -82,12 +82,16 @@ export default {
         'mesh-breathe': {
           '0%, 100%': { backgroundPosition: '0% 50%' },
           '50%': { backgroundPosition: '100% 50%' },
+        },
+        'shimmer': {
+          '100%': { transform: 'translateX(100%)' },
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'mesh-breathe': 'mesh-breathe 15s ease infinite',
+        'shimmer': 'shimmer 1.5s infinite',
       },
     },
   },

@@ -15,6 +15,7 @@ import {
   type Certificate,
 } from '@/lib/certificates';
 import { initializeFirebase } from '@/firebase';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const ROLES = [
   'Full Stack Web Development',
@@ -282,7 +283,16 @@ export default function CertificatesPage() {
               <Eye className="w-4 h-4 text-[#2563EB]" /> Preview & Send
             </h2>
 
-            {!generated ? (
+            {generating ? (
+              <div className="flex-1 flex flex-col gap-5">
+                <Skeleton className="h-[180px] w-full" />
+                <Skeleton className="h-[100px] w-full" />
+                <div className="flex gap-3">
+                  <Skeleton className="h-12 flex-1" />
+                  <Skeleton className="h-12 flex-1" />
+                </div>
+              </div>
+            ) : !generated ? (
               <div className="flex-1 flex flex-col items-center justify-center text-center py-12">
                 {sendStatus === 'error' && (
                   <div className="mb-6 w-full p-4 bg-red-500/10 border border-red-500/20 rounded-xl">

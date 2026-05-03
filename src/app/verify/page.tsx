@@ -6,6 +6,7 @@ import { ShieldCheck, ShieldX, Loader2, QrCode, ExternalLink } from 'lucide-reac
 import Link from 'next/link';
 import { getCertificate, type Certificate } from '@/lib/certificates';
 import { initializeFirebase } from '@/firebase';
+import { Skeleton } from '@/components/ui/skeleton';
 
 function VerifyContent() {
   const searchParams = useSearchParams();
@@ -95,9 +96,19 @@ function VerifyContent() {
 
         {/* Result */}
         {status === 'loading' && (
-          <div className="flex flex-col items-center gap-3 py-16 text-zinc-500">
-            <Loader2 className="w-8 h-8 animate-spin text-[#2563EB]" />
-            <p className="text-sm">Looking up certificate…</p>
+          <div className="bg-[#0A0A0A] border border-[#1A1A1A] rounded-2xl overflow-hidden mt-8">
+            <div className="border-b border-[#1A1A1A] px-6 py-5 flex items-center gap-4">
+              <Skeleton className="w-12 h-12 rounded-xl shrink-0" />
+              <div className="space-y-2 w-full max-w-[200px]">
+                <Skeleton className="h-5 w-full" />
+                <Skeleton className="h-3 w-2/3" />
+              </div>
+            </div>
+            <div className="p-6 space-y-6">
+              <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-6 w-3/4" /></div>
+              <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-5 w-1/2" /></div>
+              <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-5 w-1/3" /></div>
+            </div>
           </div>
         )}
 
