@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
 import { BackToTop } from '@/components/ui/back-to-top';
+import { CustomCursor } from '@/components/ui/custom-cursor';
 import { cn } from '@/lib/utils';
 import { Inter, Space_Grotesk } from 'next/font/google';
 
@@ -80,6 +81,7 @@ export default function RootLayout({
       <body
         className={cn('min-h-screen bg-background text-foreground font-sans antialiased flex flex-col', inter.variable, spaceGrotesk.variable)}
       >
+          <CustomCursor />
           <ScrollProgress />
           <Header />
           <main className="flex-1">{children}</main>

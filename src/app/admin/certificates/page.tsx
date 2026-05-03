@@ -279,6 +279,12 @@ export default function CertificatesPage() {
 
             {!generated ? (
               <div className="flex-1 flex flex-col items-center justify-center text-center py-12">
+                {sendStatus === 'error' && (
+                  <div className="mb-6 w-full p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                    <p className="text-red-400 text-sm font-semibold mb-1">Action Failed</p>
+                    <p className="text-red-400/80 text-xs">{sendError}</p>
+                  </div>
+                )}
                 <div className="w-16 h-16 rounded-2xl bg-[#111] border border-[#1E1E1E] flex items-center justify-center mb-4">
                   <Award className="w-8 h-8 text-zinc-700" />
                 </div>
