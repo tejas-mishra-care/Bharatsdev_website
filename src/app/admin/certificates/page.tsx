@@ -37,6 +37,7 @@ interface GeneratedCert {
   pdfBlobUrl: string;
   qrDataUrl: string;
   dbSaved: boolean;
+  dbError?: string;
 }
 
 export default function CertificatesPage() {
@@ -88,26 +89,25 @@ export default function CertificatesPage() {
         status: 'generated',
       };
 
-      // 3. Save to Firestore (gracefully handle missing config or offline hangs)
+      // 3. Save to Firestore
       let dbSaved = false;
+      let dbError = '';
       try {
         const { firestore } = initializeFirebase();
-        
-        // Promise.race to prevent infinite hang if Firestore queues the write while offline/uninitialized
         await Promise.race([
           saveCertificate(firestore, cert),
-          new Promise((_, reject) => setTimeout(() => reject(new Error('Database timeout. Please ensure Firestore is initialized.')), 2500))
+          new Promise((_, reject) => setTimeout(() => reject(new Error('TIMEOUT after 5s')), 5000))
         ]);
-        
         dbSaved = true;
       } catch (dbErr: any) {
-        console.warn('Database save skipped or timed out.', dbErr);
+        dbError = dbErr?.message || dbErr?.code || String(dbErr);
+        console.error('Firebase save failed:', dbError);
       }
 
       // 4. Create preview URL
       const pdfBlobUrl = URL.createObjectURL(pdfBlob);
 
-      setGenerated({ cert, pdfBase64, pdfBlobUrl, qrDataUrl, dbSaved });
+      setGenerated({ cert, pdfBase64, pdfBlobUrl, qrDataUrl, dbSaved, dbError });
     } catch (err: any) {
       console.error(err);
       setSendError(`Failed to generate certificate: ${err.message || String(err)}`);
@@ -138,7 +138,7 @@ export default function CertificatesPage() {
           role: generated.cert.role,
           certId: generated.cert.id,
           issuedAt: generated.cert.issuedAt,
-          pdfBase64: generated.pdfBase64,
+          // NOTE: PDF not attached here — too large for serverless. Verify link sent instead.
         }),
       });
 
@@ -345,11 +345,14 @@ export default function CertificatesPage() {
                         <span className="text-emerald-400/70 text-xs">Data successfully saved to Firestore</span>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-2 mt-1">
-                        <div className="w-4 h-4 rounded-full bg-orange-500/20 flex items-center justify-center shrink-0">
+                      <div className="flex items-start gap-2 mt-1">
+                        <div className="w-4 h-4 rounded-full bg-orange-500/20 flex items-center justify-center shrink-0 mt-0.5">
                           <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
                         </div>
-                        <span className="text-orange-400 text-xs">PDF built, but failed to save to Database. Check Firebase config.</span>
+                        <div>
+                          <span className="text-orange-400 text-xs block">DB save failed. Error:</span>
+                          <span className="text-orange-300/80 text-xs font-mono break-all">{generated.dbError || 'Unknown error'}</span>
+                        </div>
                       </div>
                     )}
                   </div>
