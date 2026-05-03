@@ -91,17 +91,30 @@ export async function generateCertificatePDF(params: {
   const SLATE = [51, 65, 85];
   const LIGHT_SLATE = [148, 163, 184];
 
+  // --- Fetch Logo ---
+  let logoDataUrl = '';
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || window.location.origin;
+    const res = await fetch(`${baseUrl}/bdlogo.png`);
+    const blob = await res.blob();
+    logoDataUrl = await new Promise<string>((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.readAsDataURL(blob);
+    });
+  } catch (e) {
+    console.warn('Failed to fetch bdlogo.png', e);
+  }
+
   // --- Background (Subtle Off-White) ---
   pdf.setFillColor(250, 251, 253);
   pdf.rect(0, 0, W, H, 'F');
 
   // --- Subtle Premium Geometric Accents ---
-  // Top Left Faint Gold
   pdf.setFillColor(254, 251, 242);
-  pdf.triangle(0, 0, 160, 0, 0, 160, 'F');
-  // Bottom Right Faint Blue
+  pdf.triangle(0, 0, 180, 0, 0, 180, 'F');
   pdf.setFillColor(240, 245, 255);
-  pdf.triangle(W, 0, W, H, W - 180, H, 'F');
+  pdf.triangle(W, 0, W, H, W - 200, H, 'F');
 
   // --- Outer Border (Onyx) ---
   pdf.setDrawColor(ONYX[0], ONYX[1], ONYX[2]);
@@ -114,57 +127,51 @@ export async function generateCertificatePDF(params: {
   pdf.line(10, 10, 36, 10); // Top
   pdf.line(10, 10, 10, 36); // Left
 
-  // --- Add Vector Logo (Geometric BD) ---
-  const logoX = W / 2;
-  const logoY = 24;
-  // Blue 'B' Pillar
-  pdf.setFillColor(BRAND_BLUE[0], BRAND_BLUE[1], BRAND_BLUE[2]);
-  pdf.rect(logoX - 10, logoY - 7, 7, 14, 'F');
-  // Gold 'D' Arc
-  pdf.setFillColor(GOLD[0], GOLD[1], GOLD[2]);
-  pdf.circle(logoX + 2, logoY, 7, 'F');
-  pdf.setFillColor(250, 251, 253); // Cutout inside the D
-  pdf.circle(logoX + 2, logoY, 3, 'F');
+  // --- Add Logo (Top Right Corner Stamp) ---
+  if (logoDataUrl) {
+    const logoSize = 35; // Nice large stamp size
+    pdf.addImage(logoDataUrl, 'PNG', W - 15 - logoSize, 15, logoSize, logoSize);
+  }
 
   // --- Header: BHARATS DEV (Two-Tone) ---
   pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(38);
-  const part1 = 'B H A R A T S ';
-  const part2 = 'D E V';
+  pdf.setFontSize(54); // Increased drastically
+  const part1 = 'BHARATS'; // Removed spacing to match standard website font
+  const part2 = 'DEV';
   const w1 = pdf.getTextWidth(part1);
   const w2 = pdf.getTextWidth(part2);
   const totalW = w1 + w2;
   const headerStartX = (W - totalW) / 2;
 
   pdf.setTextColor(ONYX[0], ONYX[1], ONYX[2]);
-  pdf.text(part1, headerStartX, 48);
+  pdf.text(part1, headerStartX, 45);
   pdf.setTextColor(BRAND_BLUE[0], BRAND_BLUE[1], BRAND_BLUE[2]);
-  pdf.text(part2, headerStartX + w1, 48);
+  pdf.text(part2, headerStartX + w1, 45);
 
   // --- Header: Tagline ---
   pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
   pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(10);
+  pdf.setFontSize(12); // Increased
   pdf.text('YOUR COMPLETE DIGITAL GROWTH ENGINE', W / 2, 58, { align: 'center' });
 
   // --- Main Content: Title ---
   pdf.setTextColor(ONYX[0], ONYX[1], ONYX[2]);
   pdf.setFont('times', 'italic');
-  pdf.setFontSize(28);
-  pdf.text('Certificate of Technical Excellence', W / 2, 75, { align: 'center' });
+  pdf.setFontSize(34); // Increased
+  pdf.text('Certificate of Professional Excellence', W / 2, 80, { align: 'center' });
 
   // --- Main Content: Granted to ---
   pdf.setTextColor(SLATE[0], SLATE[1], SLATE[2]);
   pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(12);
-  pdf.text('This official recognition is hereby granted to', W / 2, 88, { align: 'center' });
+  pdf.setFontSize(14); // Increased
+  pdf.text('This official recognition is hereby granted to', W / 2, 95, { align: 'center' });
 
   // --- Recipient Box ---
   pdf.setTextColor(ONYX[0], ONYX[1], ONYX[2]);
   pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(36);
+  pdf.setFontSize(48); // Massive emphasis
   const recipientName = name.toUpperCase();
-  pdf.text(recipientName, W / 2, 108, { align: 'center' });
+  pdf.text(recipientName, W / 2, 118, { align: 'center' });
 
   // Gold Underline for Recipient Box
   const nameWidth = pdf.getTextWidth(recipientName);
@@ -172,54 +179,54 @@ export async function generateCertificatePDF(params: {
   pdf.setLineWidth(1.5);
   const nameStartX = (W - nameWidth) / 2 - 12;
   const nameEndX = (W + nameWidth) / 2 + 12;
-  pdf.line(nameStartX, 114, nameEndX, 114);
+  pdf.line(nameStartX, 124, nameEndX, 124);
 
-  // --- Description ---
+  // --- Description (General for Tech or Non-Tech) ---
   pdf.setTextColor(SLATE[0], SLATE[1], SLATE[2]);
   pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(11);
-  const desc1 = `For the successful deployment of high-performance digital assets in the field of`;
-  const desc2 = `${role}. This project has been independently verified to meet the`;
-  const desc3 = `Shashwat Standard for architectural integrity, speed, and strategic impact.`;
-  pdf.text(desc1, W / 2, 130, { align: 'center' });
-  pdf.text(desc2, W / 2, 137, { align: 'center' });
-  pdf.text(desc3, W / 2, 144, { align: 'center' });
+  pdf.setFontSize(13); // Increased
+  const desc1 = `For outstanding performance and successful completion of the intensive program in`;
+  const desc2 = `${role}. This individual has been independently verified to meet the`;
+  const desc3 = `Shashwat Standard for strategic impact, professional integrity, and excellence.`;
+  pdf.text(desc1, W / 2, 140, { align: 'center' });
+  pdf.text(desc2, W / 2, 148, { align: 'center' });
+  pdf.text(desc3, W / 2, 156, { align: 'center' });
 
   // --- Footer: Signature (Left) ---
   pdf.setDrawColor(ONYX[0], ONYX[1], ONYX[2]);
   pdf.setLineWidth(0.6);
-  pdf.line(25, H - 42, 85, H - 42);
+  pdf.line(25, H - 38, 85, H - 38);
 
   pdf.setTextColor(ONYX[0], ONYX[1], ONYX[2]);
   pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(14);
-  pdf.text('Tejas Mishra', 25, H - 34);
+  pdf.setFontSize(16);
+  pdf.text('Tejas Mishra', 25, H - 30);
 
   pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
   pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(9);
-  pdf.text('FOUNDER & CEO | CTO', 25, H - 28);
+  pdf.setFontSize(10);
+  pdf.text('FOUNDER & CEO | CTO', 25, H - 24);
 
   // --- Footer: Metadata (Center) ---
   pdf.setTextColor(LIGHT_SLATE[0], LIGHT_SLATE[1], LIGHT_SLATE[2]);
   pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(8);
-  pdf.text(`CERTIFICATE ID: ${certId}`, W / 2, H - 38, { align: 'center' });
-  pdf.text(`DOMAIN: BHARATSDEV.COM`, W / 2, H - 33, { align: 'center' });
+  pdf.setFontSize(9);
+  pdf.text(`CERTIFICATE ID: ${certId}`, W / 2, H - 34, { align: 'center' });
+  pdf.text(`DOMAIN: BHARATSDEV.COM`, W / 2, H - 28, { align: 'center' });
   
   const formattedDate = new Date(issuedAt).toLocaleDateString('en-US', {
     month: 'short', day: '2-digit', year: 'numeric'
   }).toUpperCase();
-  pdf.text(`ISSUE DATE: ${formattedDate}`, W / 2, H - 28, { align: 'center' });
+  pdf.text(`ISSUE DATE: ${formattedDate}`, W / 2, H - 22, { align: 'center' });
 
   // --- Footer: QR Code (Right) ---
-  const qrSize = 32;
+  const qrSize = 36; // Larger QR code
   const qrX = W - 25 - qrSize;
-  const qrY = H - 58;
+  const qrY = H - 54;
   pdf.addImage(qrDataUrl, 'PNG', qrX, qrY, qrSize, qrSize);
   
   pdf.setTextColor(LIGHT_SLATE[0], LIGHT_SLATE[1], LIGHT_SLATE[2]);
-  pdf.setFontSize(7);
+  pdf.setFontSize(8);
   pdf.text('SCAN TO VERIFY', qrX + (qrSize / 2), qrY + qrSize + 5, { align: 'center' });
 
   const pdfBase64 = pdf.output('datauristring').split(',')[1];
