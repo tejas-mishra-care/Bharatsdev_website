@@ -54,8 +54,14 @@ export function Footer() {
       <div
         className="container mx-auto px-4 py-16 relative z-10"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          <motion.div variants={itemVariants} className="col-span-1 md:col-span-2 lg:col-span-1">
+        <motion.div
+          ref={ref}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          <motion.div variants={itemVariants} style={{ willChange: 'opacity, transform' }} className="col-span-1 md:col-span-2 lg:col-span-1">
             <Link href="/" prefetch={true} className="flex items-center gap-2 mb-6">
               <span className="text-2xl font-black font-heading text-white tracking-tight">Bharats<span className="text-primary">Dev</span></span>
             </Link>
@@ -74,6 +80,7 @@ export function Footer() {
                     key={social.label}
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
+                    style={{ willChange: 'transform' }}
                   >
                     <Link
                       href={social.href}
@@ -88,7 +95,7 @@ export function Footer() {
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} style={{ willChange: 'opacity, transform' }}>
             <h3 className="font-bold mb-6 text-white uppercase tracking-widest text-xs">Services</h3>
             <ul className="space-y-4">
               {servicesLinks.map((link) => (
@@ -105,7 +112,7 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} style={{ willChange: 'opacity, transform' }}>
             <h3 className="font-bold mb-6 text-white uppercase tracking-widest text-xs">Company</h3>
             <ul className="space-y-4">
               {companyLinks.map((link) => (
@@ -122,7 +129,7 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} style={{ willChange: 'opacity, transform' }}>
             <h3 className="font-bold mb-6 text-white uppercase tracking-widest text-xs">Contact</h3>
             <ul className="space-y-4">
               <li>
@@ -140,11 +147,14 @@ export function Footer() {
               </li>
             </ul>
           </motion.div>
-        </div>
+        </motion.div>
 
         <motion.div
           className="mt-16 pt-8 border-t border-[#222222] flex flex-col md:flex-row justify-between items-center text-xs text-chrome"
           variants={itemVariants}
+          style={{ willChange: 'opacity, transform' }}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
         >
           <p className="mb-4 md:mb-0 uppercase tracking-widest">
             &copy; {new Date().getFullYear()} BharatsDev. All rights reserved.

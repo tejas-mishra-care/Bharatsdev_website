@@ -7,7 +7,6 @@ import { ScrollProgress } from '@/components/ui/scroll-progress';
 import { BackToTop } from '@/components/ui/back-to-top';
 import { cn } from '@/lib/utils';
 import { Inter, Space_Grotesk } from 'next/font/google';
-import { FirebaseClientProvider } from '@/firebase/client-provider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,6 +25,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://bharatsdev.com'),
   title: "BharatsDev | High-Performance Digital Growth Engine",
   description: 'We engineer high-performance, intelligent digital systems that drive lasting impact. No retainers. We build it, we hand over the keys, and you own the asset.',
   keywords: ['BharatsDev', 'Digital Growth Engine', 'Custom Enterprise Solutions', 'App Development', 'AI Systems', 'Next.js Development', 'Software Agency'],
@@ -72,18 +72,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body
         className={cn('min-h-screen bg-background text-foreground font-sans antialiased flex flex-col', inter.variable, spaceGrotesk.variable)}
       >
-          <FirebaseClientProvider>
-            <ScrollProgress />
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <BackToTop />
-            <Toaster />
-          </FirebaseClientProvider>
+          <ScrollProgress />
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <BackToTop />
+          <Toaster />
       </body>
     </html>
   );
