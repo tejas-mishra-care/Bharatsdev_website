@@ -4,7 +4,7 @@ import { Resend } from 'resend';
 export async function POST(req: Request) {
   // Validate admin session
   const cookieHeader = req.headers.get('cookie') || '';
-  const sessionSecret = process.env.ADMIN_SESSION_SECRET || 'bharatsdev-admin-secret';
+  const sessionSecret = process.env.ADMIN_SESSION_SECRET || 'BDsec-Xk9mP2vQ8nR3hL5jY7tF2cH4eA6';
   if (!cookieHeader.includes(`admin_session=${sessionSecret}`)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

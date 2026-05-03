@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
   // Protect all /admin/* routes except the login page itself
   if (pathname.startsWith('/admin/')) {
     const session = request.cookies.get('admin_session');
-    const secret = process.env.ADMIN_SESSION_SECRET || 'bharatsdev-admin-secret';
+    const secret = process.env.ADMIN_SESSION_SECRET || 'BDsec-Xk9mP2vQ8nR3hL5jY7tF2cH4eA6';
     if (!session || session.value !== secret) {
       return NextResponse.redirect(new URL('/admin', request.url));
     }

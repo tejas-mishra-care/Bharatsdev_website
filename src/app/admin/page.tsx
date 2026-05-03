@@ -78,7 +78,7 @@ export default function AdminLoginPage() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="e.g. BD-Tejas56"
+                  placeholder="Enter your Admin ID"
                   required
                   autoFocus
                   autoComplete="username"
