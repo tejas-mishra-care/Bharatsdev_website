@@ -77,8 +77,6 @@ export default function CertificatesPage() {
         issuedAt,
       });
 
-      // 3. Save to Firestore
-      const { firestore } = initializeFirebase();
       const cert: Certificate = {
         id: certId,
         name: form.name.trim(),
@@ -87,7 +85,14 @@ export default function CertificatesPage() {
         issuedAt,
         status: 'generated',
       };
-      await saveCertificate(firestore, cert);
+
+      // 3. Save to Firestore (gracefully handle missing config)
+      try {
+        const { firestore } = initializeFirebase();
+        await saveCertificate(firestore, cert);
+      } catch (dbErr) {
+        console.warn('Database save skipped. Firebase not configured yet.', dbErr);
+      }
 
       // 4. Create preview URL
       const pdfBlobUrl = URL.createObjectURL(pdfBlob);
