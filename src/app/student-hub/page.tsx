@@ -85,13 +85,15 @@ export default function StudentHubPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.15, ...springTransition }}
-                  className={`bg-[#111113] border border-[#2A2A2E] p-8 rounded-[2rem] hover:-translate-y-2 transition-all duration-300 hover:shadow-2xl`}
+                  className="card-cut p-8 layer-2"
                 >
-                  <div className={`w-14 h-14 rounded-2xl ${role.bg} ${role.border} border flex items-center justify-center mb-6`}>
-                    <Icon className={`w-7 h-7 ${role.color}`} />
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#2563EB] to-transparent opacity-50" />
+                  
+                  <div className={`w-16 h-16 rounded-[16px] ${role.bg} ${role.border} border flex items-center justify-center mb-6`}>
+                    <Icon className={`w-8 h-8 ${role.color}`} />
                   </div>
                   <h3 className="text-2xl font-black font-heading text-white mb-4">{role.title}</h3>
-                  <p className="text-zinc-400 leading-relaxed font-sans">{role.desc}</p>
+                  <p className="text-[15px] text-zinc-400 leading-relaxed font-sans">{role.desc}</p>
                 </motion.div>
               );
             })}

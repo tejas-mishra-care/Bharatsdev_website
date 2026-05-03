@@ -58,14 +58,37 @@
 @layer components {
   /* Surface Cards Rule */
   .surface-card {
-    @apply bg-[#0A0A0A] border border-[#222222] backdrop-blur-[16px] rounded-lg relative overflow-hidden;
+    @apply bg-[#0A0A0A] border border-[#222222] backdrop-blur-[16px] rounded-[18px] relative overflow-hidden;
   }
   
   /* Inner glow effect for glassmorphism */
   .surface-card::after {
     content: '';
-    @apply absolute inset-0 rounded-lg pointer-events-none;
+    @apply absolute inset-0 rounded-[18px] pointer-events-none;
     box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.03);
+  }
+
+  /* Antigravity Design System - Cut Edge Card */
+  .card-cut {
+    @apply bg-[#0A0A0A] border-[0.5px] border-[#2A2A2E] relative overflow-hidden transition-all duration-300;
+    clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+    border-radius: 18px; /* Golden ratio fallback / smoothed corners where not clipped */
+  }
+  .card-cut:hover {
+    @apply bg-[#111113] -translate-y-1;
+  }
+  
+  /* Layer 2 Violet/Blue overlay */
+  .layer-2 {
+    @apply bg-[rgba(60,20,160,0.15)] border-[0.5px] border-[rgba(100,60,255,0.2)];
+  }
+  
+  /* Layer 3 Teal/Orange accent */
+  .layer-3-teal {
+    @apply bg-[rgba(0,180,160,0.18)] border-[0.5px] border-[rgba(0,220,200,0.2)];
+  }
+  .layer-3-orange {
+    @apply bg-[rgba(249,115,22,0.15)] border-[0.5px] border-[rgba(249,115,22,0.2)];
   }
 }
 
