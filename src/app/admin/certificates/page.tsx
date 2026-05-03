@@ -146,8 +146,17 @@ export default function CertificatesPage() {
       clearTimeout(timeout);
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Send failed');
+        // Netlify may return an HTML 500 page instead of JSON — read as text first
+        const raw = await res.text();
+        let errMsg = `Server error (${res.status})`;
+        try {
+          const data = JSON.parse(raw);
+          errMsg = data.error || errMsg;
+        } catch {
+          // Not JSON — strip HTML tags and show raw message
+          errMsg = raw.replace(/<[^>]*>/g, '').trim().slice(0, 200) || errMsg;
+        }
+        throw new Error(errMsg);
       }
 
       // Mark as sent in Firestore

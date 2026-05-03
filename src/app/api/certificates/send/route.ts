@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+
 export async function POST(req: Request) {
+  try {
   // Validate admin session
   const cookieHeader = req.headers.get('cookie') || '';
   const sessionSecret = process.env.ADMIN_SESSION_SECRET || 'BDsec-Xk9mP2vQ8nR3hL5jY7tF2cH4eA6';
@@ -8,7 +10,12 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const { name, email, role, certId, issuedAt, pdfBase64 } = await req.json();
+  const body = await req.json();
+  const { name, email, role, certId, issuedAt } = body;
+  // Only include PDF if under 3MB to avoid Netlify body size limits
+  const pdfBase64 = body.pdfBase64 && body.pdfBase64.length < 3_000_000
+    ? body.pdfBase64
+    : undefined;
 
   const resendKey = process.env.RESEND_API_KEY || 're_U2xXp7Ws_KdiBKipDwP6JTQ1xxVroLj36';
   if (!resendKey) {
@@ -77,4 +84,8 @@ export async function POST(req: Request) {
   }
 
   return NextResponse.json({ success: true, id: data?.id });
+  } catch (err: any) {
+    console.error('Unhandled route error:', err);
+    return NextResponse.json({ error: err?.message || 'Internal server error' }, { status: 500 });
+  }
 }
