@@ -13,8 +13,14 @@ export function initializeFirebase() {
     return getSdks(firebaseApp);
   }
 
-  // If already initialized, return the SDKs with the already initialized App
-  return getSdks(getApp());
+  // Force a completely fresh instance so we bypass the cached instance
+  // that was loaded before we added experimentalForceLongPolling
+  try {
+    const freshApp = initializeApp(firebaseConfig, `App-${Date.now()}`);
+    return getSdks(freshApp);
+  } catch {
+    return getSdks(getApp());
+  }
 }
 
 export function getSdks(firebaseApp: FirebaseApp) {

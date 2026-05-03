@@ -128,7 +128,8 @@ export default function CertificatesPage() {
     const timeout = setTimeout(() => controller.abort(), 25000);
 
     try {
-      const res = await fetch('/api/certificates/send', {
+      // ?v=2 forces Netlify's CDN cache to route to the newly deployed serverless function
+      const res = await fetch('/api/certificates/send?v=2', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
