@@ -27,6 +27,7 @@ const ROLES = [
   'Digital Marketing',
   'Cybersecurity',
   'Data Science',
+  'Custom...',
 ];
 
 interface GeneratedCert {
@@ -38,7 +39,7 @@ interface GeneratedCert {
 
 export default function CertificatesPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ name: '', email: '', role: ROLES[0] });
+  const [form, setForm] = useState({ name: '', email: '', role: ROLES[0], customRole: '' });
   const [generating, setGenerating] = useState(false);
   const [sending, setSending] = useState(false);
   const [generated, setGenerated] = useState<GeneratedCert | null>(null);
@@ -64,10 +65,13 @@ export default function CertificatesPage() {
       // 1. Generate QR code
       const qrDataUrl = await generateQRCode(certId);
 
+      const finalRole = form.role === 'Custom...' ? form.customRole.trim() : form.role;
+      if (!finalRole) throw new Error('Role is required');
+
       // 2. Generate PDF
       const { pdfBase64, pdfBlob } = await generateCertificatePDF({
         name: form.name.trim(),
-        role: form.role,
+        role: finalRole,
         certId,
         qrDataUrl,
         issuedAt,
@@ -79,7 +83,7 @@ export default function CertificatesPage() {
         id: certId,
         name: form.name.trim(),
         email: form.email.trim(),
-        role: form.role,
+        role: finalRole,
         issuedAt,
         status: 'generated',
       };
@@ -141,7 +145,7 @@ export default function CertificatesPage() {
     setGenerated(null);
     setSendStatus('idle');
     setSendError('');
-    setForm({ name: '', email: '', role: ROLES[0] });
+    setForm({ name: '', email: '', role: ROLES[0], customRole: '' });
   };
 
   return (
@@ -230,12 +234,23 @@ export default function CertificatesPage() {
                     {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
                   </select>
                 </div>
+                {form.role === 'Custom...' && (
+                  <div className="mt-3 relative">
+                    <input
+                      type="text"
+                      value={form.customRole}
+                      onChange={(e) => setForm((f) => ({ ...f, customRole: e.target.value }))}
+                      placeholder="Enter custom program name..."
+                      className="w-full bg-[#111] border border-[#222] rounded-lg px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#F97316] focus:ring-1 focus:ring-[#F97316]/50 transition-colors text-sm"
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Generate button */}
               <button
                 onClick={handleGenerate}
-                disabled={generating || !form.name.trim() || !form.email.trim()}
+                disabled={generating || !form.name.trim() || !form.email.trim() || (form.role === 'Custom...' && !form.customRole.trim())}
                 className="w-full flex items-center justify-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-3 rounded-xl transition-colors text-sm mt-2"
               >
                 {generating ? (
