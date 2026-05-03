@@ -36,6 +36,7 @@ interface GeneratedCert {
   pdfBase64: string;
   pdfBlobUrl: string;
   qrDataUrl: string;
+  dbSaved: boolean;
 }
 
 export default function CertificatesPage() {
@@ -88,20 +89,22 @@ export default function CertificatesPage() {
       };
 
       // 3. Save to Firestore (gracefully handle missing config)
+      let dbSaved = false;
       try {
         const { firestore } = initializeFirebase();
         await saveCertificate(firestore, cert);
-      } catch (dbErr) {
+        dbSaved = true;
+      } catch (dbErr: any) {
         console.warn('Database save skipped. Firebase not configured yet.', dbErr);
       }
 
       // 4. Create preview URL
       const pdfBlobUrl = URL.createObjectURL(pdfBlob);
 
-      setGenerated({ cert, pdfBase64, pdfBlobUrl, qrDataUrl });
-    } catch (err) {
+      setGenerated({ cert, pdfBase64, pdfBlobUrl, qrDataUrl, dbSaved });
+    } catch (err: any) {
       console.error(err);
-      setSendError('Failed to generate certificate. Check console for details.');
+      setSendError(`Failed to generate certificate: ${err.message || String(err)}`);
       setSendStatus('error');
     } finally {
       setGenerating(false);
@@ -309,9 +312,24 @@ export default function CertificatesPage() {
               <div className="flex-1 flex flex-col gap-5">
                 {/* Certificate Info Card */}
                 <div className="bg-[#0D0D0D] border border-[#1E1E1E] rounded-xl p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                    <span className="text-emerald-400 text-sm font-semibold">Certificate Generated</span>
+                  <div className="flex flex-col gap-2 mb-4 border-b border-[#1A1A1A] pb-4">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                      <span className="text-emerald-400 text-sm font-semibold">Certificate Generated Successfully</span>
+                    </div>
+                    {generated.dbSaved ? (
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400/70" />
+                        <span className="text-emerald-400/70 text-xs">Data successfully saved to Firestore</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2 mt-1">
+                        <div className="w-4 h-4 rounded-full bg-orange-500/20 flex items-center justify-center shrink-0">
+                          <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+                        </div>
+                        <span className="text-orange-400 text-xs">PDF built, but failed to save to Database. Check Firebase config.</span>
+                      </div>
+                    )}
                   </div>
                   <div className="space-y-2.5">
                     <Row label="Name" value={generated.cert.name} />
