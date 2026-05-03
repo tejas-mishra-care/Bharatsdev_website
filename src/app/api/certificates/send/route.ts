@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+// Tell Netlify this function may take up to 25 seconds (PDF attachment is large)
+export const maxDuration = 25;
+
 export async function POST(req: Request) {
   // Validate admin session
   const cookieHeader = req.headers.get('cookie') || '';

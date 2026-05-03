@@ -123,10 +123,15 @@ export default function CertificatesPage() {
     setSendStatus('idle');
     setSendError('');
 
+    // 25-second timeout — Netlify serverless functions have a hard 26s limit
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 25000);
+
     try {
       const res = await fetch('/api/certificates/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
           name: generated.cert.name,
           email: generated.cert.email,
@@ -137,19 +142,30 @@ export default function CertificatesPage() {
         }),
       });
 
+      clearTimeout(timeout);
+
       if (!res.ok) {
         const data = await res.json();
         throw new Error(data.error || 'Send failed');
       }
 
       // Mark as sent in Firestore
-      const { firestore } = initializeFirebase();
-      await markCertificateSent(firestore, generated.cert.id);
+      try {
+        const { firestore } = initializeFirebase();
+        await markCertificateSent(firestore, generated.cert.id);
+      } catch (dbErr) {
+        console.warn('Could not mark as sent in DB:', dbErr);
+      }
 
       setSendStatus('success');
       setSentList((prev) => [generated.cert.id, ...prev]);
     } catch (err: unknown) {
-      setSendError(err instanceof Error ? err.message : 'Unknown error');
+      clearTimeout(timeout);
+      if (err instanceof Error && err.name === 'AbortError') {
+        setSendError('Email timed out. The PDF may be too large for this serverless function. Try again or contact support.');
+      } else {
+        setSendError(err instanceof Error ? err.message : 'Unknown error');
+      }
       setSendStatus('error');
     } finally {
       setSending(false);
