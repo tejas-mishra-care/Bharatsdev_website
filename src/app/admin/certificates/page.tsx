@@ -88,14 +88,20 @@ export default function CertificatesPage() {
         status: 'generated',
       };
 
-      // 3. Save to Firestore (gracefully handle missing config)
+      // 3. Save to Firestore (gracefully handle missing config or offline hangs)
       let dbSaved = false;
       try {
         const { firestore } = initializeFirebase();
-        await saveCertificate(firestore, cert);
+        
+        // Promise.race to prevent infinite hang if Firestore queues the write while offline/uninitialized
+        await Promise.race([
+          saveCertificate(firestore, cert),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Database timeout. Please ensure Firestore is initialized.')), 2500))
+        ]);
+        
         dbSaved = true;
       } catch (dbErr: any) {
-        console.warn('Database save skipped. Firebase not configured yet.', dbErr);
+        console.warn('Database save skipped or timed out.', dbErr);
       }
 
       // 4. Create preview URL
