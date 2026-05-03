@@ -60,6 +60,15 @@ export default function StudentHubPage() {
             <p className="text-xl md:text-2xl text-zinc-400 font-sans text-balance mb-12">
               We are building a decentralized digital growth team on university campuses. Gain high-value agency experience, official Certificates of Excellence, and direct exposure to enterprise tech.
             </p>
+            
+            <div className="flex justify-center gap-4">
+              <a 
+                href="/admin" 
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-sm font-bold uppercase tracking-wider rounded-xl transition-all"
+              >
+                Admin Login →
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
