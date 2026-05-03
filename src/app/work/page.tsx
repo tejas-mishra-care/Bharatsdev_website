@@ -1,238 +1,138 @@
-
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { portfolio } from '@/lib/data';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState, useMemo } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useRef } from 'react';
+import Link from 'next/link';
+import { ArrowRight, Box, Brain, Calculator, Clock } from 'lucide-react';
 
-const featuredProject = portfolio.featured[0];
-const otherProjects = portfolio.all;
-
-const uniqueCategories = [
-  'All',
-  ...Array.from(new Set(otherProjects.map(p => p.category))),
-];
-
-const ProjectCard = ({ project, index }: { project: typeof otherProjects[0]; index: number }) => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-    return (
-        <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ y: -8, scale: 1.02 }}
-        >
-            <Link href={`/work/${project.id}`} className="group block h-full">
-                <Card className="text-left overflow-hidden h-full flex flex-col border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 relative rounded-3xl">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    
-                    {project.image && (
-                        <div className="aspect-video overflow-hidden relative">
-                            <motion.div
-                                whileHover={{ scale: 1.1 }}
-                                transition={{ duration: 0.5 }}
-                                className="relative w-full h-full"
-                            >
-                                <Image
-                                    src={project.image.imageUrl}
-                                    alt={project.image.description}
-                                    width={600}
-                                    height={400}
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                    className="w-full h-full object-cover"
-                                    data-ai-hint={project.image.imageHint}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-foreground/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            </motion.div>
-                        </div>
-                    )}
-                    <CardContent className="p-6 space-y-3 flex-grow relative z-10">
-                        <Badge variant="secondary" className="mb-2 border border-border/60 bg-background/40 text-foreground/80 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                            {project.category}
-                        </Badge>
-                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                            {project.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
-                         <div className="flex flex-wrap gap-2 pt-2">
-                            {project.techStack?.split(', ').map(tech => (
-                                <Badge key={tech} variant="outline" className="border-border/60 group-hover:border-primary/40 group-hover:text-primary transition-colors">
-                                    {tech}
-                                </Badge>
-                            ))}
-                        </div>
-                    </CardContent>
-                    <div className="p-6 pt-0 relative z-10">
-                        <span className="font-semibold text-primary group-hover:text-accent transition-colors flex items-center gap-2">
-                            View Case Study
-                            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                    </div>
-                </Card>
-            </Link>
-        </motion.div>
-    );
+const springTransition = {
+  type: "spring",
+  stiffness: 300,
+  damping: 25,
 };
 
+const caseStudies = [
+  {
+    title: "UltraTech Shashwat",
+    category: "Enterprise Certification Portal",
+    icon: Clock,
+    color: "from-[#2563EB]",
+    border: "group-hover:border-[#2563EB]/50",
+    shadow: "hover:shadow-[0_20px_50px_rgba(37,99,235,0.15)]",
+    description: "An industry-sponsored, enterprise-grade certification portal engineered and deployed in under 48 hours. The ultimate benchmark for speed and high-stress delivery.",
+    tech: ["Next.js", "Node.js", "Enterprise Auth", "System Design"]
+  },
+  {
+    title: "CareerCompassAI",
+    category: "AI-Powered Navigator",
+    icon: Brain,
+    color: "from-[#10B981]",
+    border: "group-hover:border-[#10B981]/50",
+    shadow: "hover:shadow-[0_20px_50px_rgba(16,185,129,0.15)]",
+    description: "A custom AI-powered tool built to navigate complex datasets, showcasing our capability in integrating intelligent systems into user-friendly platforms.",
+    tech: ["OpenAI API", "React", "Vector DB", "Tailwind CSS"]
+  },
+  {
+    title: "SieveLab & GhamelaCalc",
+    category: "Industrial Engineering Tools",
+    icon: Calculator,
+    color: "from-[#F97316]",
+    border: "group-hover:border-[#F97316]/50",
+    shadow: "hover:shadow-[0_20px_50px_rgba(249,115,22,0.15)]",
+    description: "Precision custom engineering calculators built for niche industrial applications, proving our ability to translate complex mathematical logic into seamless web applications.",
+    tech: ["Complex Math Logic", "TypeScript", "Data Visualization"]
+  }
+];
+
 export default function WorkPage() {
-  const [activeTab, setActiveTab] = useState('All');
-  const [sortBy, setSortBy] = useState('Latest');
-  const heroRef = useRef(null);
-  const heroInView = useInView(heroRef, { once: true });
-  
-  const sortedProjects = useMemo(() => {
-    const projects = activeTab === 'All' 
-      ? otherProjects 
-      : otherProjects.filter(p => p.category === activeTab);
-    
-    // Simple sort - in real app, implement actual sorting logic
-    return projects;
-  }, [activeTab]);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <div className="bg-background text-foreground">
-      <section className="py-20 md:py-32 text-center bg-secondary/50 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+    <div className="bg-[#0A0A0A] text-white min-h-screen">
+      
+      {/* Hero Section */}
+      <section className="pt-40 pb-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(37,99,235,0.15),transparent_60%)] pointer-events-none blur-[50px]" />
         
-        <motion.div
-            ref={heroRef}
-            className="container mx-auto relative z-10"
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-        >
-          <h1 className="text-balance">Proof Over Promises</h1>
-          <p className="large max-w-3xl mx-auto mt-6 text-balance">
-            We don't sell services, we deliver finished assets. Every project is a testament to our speed, quality, and technical precision.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Featured Case Study */}
-      <section className="py-20 md:py-24 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh opacity-30" />
-        
-        <div className="container mx-auto relative z-10">
-            <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
-            >
-                <Card className="grid md:grid-cols-2 items-center overflow-hidden border border-primary/30 bg-card/60 backdrop-blur-2xl shadow-glow hover:shadow-glow-lg hover:border-primary/50 transition-all duration-500 group relative rounded-3xl">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    
-                    <motion.div
-                        className="relative aspect-[4/3] md:aspect-auto md:h-full"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        {featuredProject.image && (
-                             <Image
-                                src={featuredProject.image.imageUrl}
-                                alt={featuredProject.image.description}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                                className="object-cover"
-                                data-ai-hint={featuredProject.image.imageHint}
-                            />
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </motion.div>
-                    <div className="p-8 md:p-12 lg:p-16 relative z-10">
-                        <p className="text-primary font-semibold uppercase tracking-wider mb-2">Featured Project</p>
-                        <h2 className="text-foreground mb-4 text-balance group-hover:text-primary transition-colors">
-                            {featuredProject.title}
-                        </h2>
-                        <p className="text-muted-foreground mb-6 leading-relaxed">{featuredProject.description}</p>
-                        <div className="flex flex-wrap gap-2 mb-8">
-                            <Badge className="group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                                Timeline: 48 Hours
-                            </Badge>
-                            <Badge className="group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                                Type: Enterprise Portal
-                            </Badge>
-                        </div>
-                        <Button asChild size="lg" className="group/btn">
-                            <Link href={`/work/${featuredProject.id}`}>
-                                Read Full Story
-                                <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                            </Link>
-                        </Button>
-                    </div>
-                </Card>
-            </motion.div>
+            animate={{ opacity: 1, y: 0 }}
+            transition={springTransition}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#2A2A2E] bg-[#111113] mb-8">
+              <Box className="w-4 h-4 text-white" />
+              <span className="text-white text-xs font-bold uppercase tracking-[0.2em]">The Portfolio</span>
+            </div>
+            
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black font-heading tracking-tighter text-white mb-6">
+              THE PROOF <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-300">STANDARD.</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl mx-auto font-sans text-balance">
+              We don't just talk about high-performance engineering. We ship it.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Case Study Grid */}
-      <section className="py-20 bg-secondary/30 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-        
-        <div className="container mx-auto relative z-10">
-          <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-          >
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-12">
-                  <TabsList className="h-auto bg-background/40 backdrop-blur-xl border border-border/60 rounded-full p-1">
-                      {uniqueCategories.map((category) => (
-                          <TabsTrigger
-                              key={category}
-                              value={category}
-                              className="text-sm md:text-base px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
-                          >
-                              {category}
-                          </TabsTrigger>
-                      ))}
-                  </TabsList>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground">Sort by:</span>
-                    <select 
-                      value={sortBy} 
-                      onChange={(e) => setSortBy(e.target.value)}
-                      className="px-3 py-1.5 rounded-full border border-border/60 bg-background/60 backdrop-blur-xl text-sm focus:border-primary focus:outline-none"
-                    >
-                      <option value="Latest">Latest</option>
-                      <option value="Popular">Most Popular</option>
-                      <option value="Industry">Industry</option>
-                    </select>
-                  </div>
-              </div>
-              
-              <TabsContent value="All" className="mt-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                      {sortedProjects.map((project, index) => (
-                          <ProjectCard key={project.id} project={project} index={index} />
-                      ))}
-                  </div>
-              </TabsContent>
-
-              {uniqueCategories.filter(c => c !== 'All').map(category => (
-                   <TabsContent key={category} value={category} className="mt-0">
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                          {otherProjects.filter(p => p.category === category).map((project, index) => (
-                              <ProjectCard key={project.id} project={project} index={index} />
-                          ))}
+      {/* Case Studies Grid */}
+      <section className="py-24 relative z-10 border-t border-[#2A2A2E] bg-[#050505]">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div ref={ref} className="space-y-16">
+            {caseStudies.map((project, index) => {
+              const Icon = project.icon;
+              return (
+                <motion.div
+                  key={index}
+                  className={`group relative bg-[#111113] border border-[#2A2A2E] rounded-[2rem] p-10 md:p-16 overflow-hidden transition-all duration-700 ${project.border} ${project.shadow}`}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ delay: index * 0.1, ...springTransition }}
+                >
+                  <div className={`absolute top-0 right-0 w-full h-full bg-gradient-to-bl ${project.color}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
+                  
+                  <div className="grid lg:grid-cols-2 gap-12 items-center relative z-10">
+                    <div className="space-y-8">
+                      <div className="flex items-center gap-4">
+                        <div className={`p-4 bg-black rounded-xl border border-[#2A2A2E] group-hover:border-white/20 transition-colors`}>
+                          <Icon className="w-8 h-8 text-white" />
+                        </div>
+                        <span className="text-xs font-bold uppercase tracking-widest text-zinc-500">
+                          {project.category}
+                        </span>
                       </div>
-                  </TabsContent>
-              ))}
-            </Tabs>
-          </motion.div>
+                      
+                      <h2 className="text-4xl md:text-5xl font-black font-heading text-white">
+                        {project.title}
+                      </h2>
+                      
+                      <p className="text-zinc-400 text-lg md:text-xl leading-relaxed">
+                        {project.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-3">
+                        {project.tech.map((t, i) => (
+                          <span key={i} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-white backdrop-blur-md">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-[#2A2A2E] group-hover:border-white/20 transition-colors flex items-center justify-center">
+                       {/* Placeholder for actual image */}
+                       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px]" />
+                       <span className="text-[#2A2A2E] font-black font-heading text-4xl uppercase tracking-widest absolute">UI / UX</span>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
     </div>

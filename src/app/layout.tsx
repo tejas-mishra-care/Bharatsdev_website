@@ -6,13 +6,21 @@ import { Toaster } from '@/components/ui/toaster';
 import { ScrollProgress } from '@/components/ui/scroll-progress';
 import { BackToTop } from '@/components/ui/back-to-top';
 import { cn } from '@/lib/utils';
-import { Inter } from 'next/font/google';
+import { Inter, Space_Grotesk } from 'next/font/google';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+  preload: true,
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space',
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
   preload: true,
 });
@@ -34,27 +42,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/bdlogo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/bdlogo.png" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(() => {
-  try {
-    const stored = localStorage.getItem('theme');
-    const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = stored === 'dark' || stored === 'light' ? stored : (systemDark ? 'dark' : 'light');
-    const root = document.documentElement;
-    if (theme === 'dark') root.classList.add('dark');
-    else root.classList.remove('dark');
-  } catch (_) {}
-})();`,
-          }}
-        />
       </head>
       <body
-        className={cn('min-h-screen bg-background font-body antialiased flex flex-col', inter.variable)}
+        className={cn('min-h-screen bg-background text-foreground font-sans antialiased flex flex-col', inter.variable, spaceGrotesk.variable)}
       >
         <FirebaseClientProvider>
           <ScrollProgress />

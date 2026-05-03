@@ -41,8 +41,10 @@ export function MoreProof() {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <section className="py-20 bg-secondary/30 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+        <section className="py-32 bg-[#050505] border-t border-[#2A2A2E] relative overflow-hidden">
+            {/* Cinematic Gradient Background */}
+            <div className="absolute -top-[200px] left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.15),transparent_70%)] opacity-60 blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#2563EB]/20 to-transparent" />
             
             <div className="container mx-auto text-center relative z-10">
                 <motion.div
@@ -70,8 +72,8 @@ export function MoreProof() {
                             whileHover={{ y: -10, scale: 1.02 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <Card className="text-left overflow-hidden group h-full flex flex-col border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/50 transition-all duration-500 relative rounded-3xl">
-                                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <Card className="bg-[#111113] text-left overflow-hidden group h-full flex flex-col border border-[#2A2A2E] hover:border-[#2563EB]/50 transition-all duration-500 relative rounded-2xl shadow-xl hover:shadow-[0_20px_40px_rgba(37,99,235,0.1)] hover:-translate-y-2">
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#2563EB]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 
                            {project.image && (
                                     <div className="aspect-video overflow-hidden relative">

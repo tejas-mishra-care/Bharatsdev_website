@@ -21,7 +21,7 @@ export function InsightsPreview() {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <section className="py-20 bg-background relative overflow-hidden">
+        <section className="py-24 bg-black border-t border-[#222222] relative overflow-hidden">
             <div className="absolute inset-0 gradient-mesh opacity-30" />
             
             <div className="container mx-auto relative z-10">
@@ -51,7 +51,7 @@ export function InsightsPreview() {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         whileHover={{ y: -5, scale: 1.01 }}
                     >
-                        <Card className="group overflow-hidden h-full border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 relative rounded-3xl">
+                        <Card className="surface-card group overflow-hidden h-full hover:border-primary transition-all duration-500 relative rounded-md border-0 bg-transparent shadow-none">
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                              
                         <Link href={`/insights/${featuredInsight.slug}`} prefetch={true}>
@@ -93,7 +93,7 @@ export function InsightsPreview() {
                                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                                 whileHover={{ y: -5, scale: 1.01 }}
                             >
-                                <Card className="group flex flex-col sm:flex-row overflow-hidden border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 relative rounded-3xl">
+                                <Card className="surface-card group flex flex-col sm:flex-row overflow-hidden hover:border-primary transition-all duration-500 relative rounded-md border-0 bg-transparent shadow-none">
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                      
                                     <Link href={`/insights/${insight.slug}`} prefetch={true} className="flex flex-col sm:flex-row w-full relative z-10">

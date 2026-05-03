@@ -1,289 +1,90 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { insights } from '@/lib/data';
-import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { ArrowRight, Search, Clock, Calendar, BookOpen } from 'lucide-react';
+import { ArrowRight, BookOpen } from 'lucide-react';
+import Link from 'next/link';
 
-const categories = ['All Articles', 'Web Dev', 'Mobile', 'AI/ML', 'Design', 'Case Studies', 'Tutorials', 'Industry Trends'];
-
-const featuredInsight = insights.find(i => i.isFeatured);
-const otherInsights = insights.filter(i => !i.isFeatured);
+const springTransition = { type: "spring", stiffness: 300, damping: 25 };
 
 export default function InsightsPage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All Articles');
-  const heroRef = useRef(null);
-  const heroInView = useInView(heroRef, { once: true });
-
-  const filteredInsights = otherInsights.filter(insight => {
-    const matchesSearch = insight.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         insight.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSearch;
-  });
-
-  if (!featuredInsight) return null;
+  const articles = [
+    {
+      id: "48-hour-build",
+      title: "The 48-Hour Enterprise Build: How We Engineered UltraTech Shashwat.",
+      category: "Engineering",
+      date: "May 2026",
+      readTime: "8 min read",
+      color: "hover:border-[#2563EB]/50"
+    },
+    {
+      id: "retainer-model-dead",
+      title: "Why the Agency Retainer Model is Dead (And What Replaces It).",
+      category: "Business Strategy",
+      date: "April 2026",
+      readTime: "5 min read",
+      color: "hover:border-[#F97316]/50"
+    },
+    {
+      id: "agentic-workflows",
+      title: "Agentic Workflows: How AI is Changing Custom Enterprise Solutions.",
+      category: "Artificial Intelligence",
+      date: "April 2026",
+      readTime: "10 min read",
+      color: "hover:border-[#10B981]/50"
+    }
+  ];
 
   return (
-    <div className="bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="py-20 md:py-32 text-center bg-gradient-to-b from-secondary/50 via-background to-background relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh opacity-30" />
-        
-        <motion.div
-          ref={heroRef}
-          className="container mx-auto relative z-10"
-          initial={{ opacity: 0, y: 30 }}
-          animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h1 className="text-balance mb-6">
-            Insights & Tutorials
-          </h1>
-          <p className="large mt-6 text-balance text-xl max-w-3xl mx-auto">
-            Technical deep-dives. Industry trends. Real talk.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Featured Article */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Link href={`/insights/${featuredInsight.slug}`}>
-              <Card className="grid md:grid-cols-2 items-center overflow-hidden border border-primary/30 bg-card/60 backdrop-blur-2xl shadow-glow hover:shadow-glow-lg group hover:border-primary/50 transition-all duration-500 relative rounded-3xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="relative aspect-video md:aspect-auto md:h-full">
-                  {featuredInsight.image && (
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.5 }}
-                      className="relative w-full h-full"
-                    >
-                      <Image
-                        src={featuredInsight.image.imageUrl}
-                        alt={featuredInsight.image.description}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </motion.div>
-                  )}
-                </div>
-                <div className="p-8 md:p-12 lg:p-16 relative z-10">
-                  <Badge className="mb-4 bg-primary/10 text-primary border border-primary/20">
-                    Featured Insight
-                  </Badge>
-                  <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance group-hover:text-primary transition-colors">
-                    {featuredInsight.title}
-                  </h2>
-                  <p className="text-muted-foreground mb-6 text-lg leading-relaxed">{featuredInsight.excerpt}</p>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      <span>{featuredInsight.date}</span>
-                    </div>
-                    <span>&bull;</span>
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4" />
-                      <span>{featuredInsight.readTime}</span>
-                    </div>
-                  </div>
-                  <div className="mt-6 flex items-center gap-2 text-primary font-semibold group-hover:gap-4 transition-all">
-                    Read Article
-                    <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform" />
-                  </div>
-                </div>
-              </Card>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Search and Categories */}
-      <section className="py-12 bg-secondary/30">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto space-y-6">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search articles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 h-12 text-lg bg-background/60 backdrop-blur-xl border-border/60"
-              />
+    <div className="bg-[#050505] text-white min-h-screen">
+      <section className="pt-40 pb-24 relative overflow-hidden border-b border-[#2A2A2E]">
+        <div className="container mx-auto px-4 relative z-10 max-w-5xl">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={springTransition}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 mb-8">
+              <BookOpen className="w-4 h-4 text-white" />
+              <span className="text-white text-xs font-bold uppercase tracking-[0.2em]">CTO Journal</span>
             </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              <div className="inline-flex flex-wrap justify-center gap-2 rounded-full border border-border/60 bg-background/40 backdrop-blur-xl p-2">
-                {categories.map((category) => (
-                  <Button
-                    key={category}
-                    variant={selectedCategory === category ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setSelectedCategory(category)}
-                    className="transition-all rounded-full"
-                  >
-                    {category}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Article Grid */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-foreground mb-4">All Insights</h2>
-            <p className="text-muted-foreground">
-              {filteredInsights.length} article{filteredInsights.length !== 1 ? 's' : ''} found
+            <h1 className="text-5xl md:text-8xl font-black font-heading tracking-tighter text-white mb-6">
+              INSIGHTS.
+            </h1>
+            <p className="text-xl text-zinc-400 font-sans max-w-2xl">
+              High-signal engineering logs, business strategy, and architectural breakdowns. No fluff.
             </p>
           </motion.div>
-          
-          {filteredInsights.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredInsights.map((insight, index) => (
-                <motion.div
-                  key={insight.slug}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                >
-                  <Card className="group overflow-hidden flex flex-col h-full border border-border/60 bg-card/60 backdrop-blur-2xl hover:border-primary/40 transition-all duration-500 relative rounded-3xl">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    
-                    <Link href={`/insights/${insight.slug}`} className="flex flex-col h-full">
-                      {insight.image && (
-                        <div className="aspect-video overflow-hidden relative">
-                          <motion.div
-                            whileHover={{ scale: 1.1 }}
-                            transition={{ duration: 0.5 }}
-                            className="relative w-full h-full"
-                          >
-                            <Image
-                              src={insight.image.imageUrl}
-                              alt={insight.image.description}
-                              width={600}
-                              height={400}
-                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                              className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-foreground/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          </motion.div>
-                        </div>
-                      )}
-                      <CardContent className="p-6 space-y-3 flex-grow relative z-10">
-                        <div className="flex items-center gap-3 text-sm">
-                          <div className="flex items-center gap-1 text-primary">
-                            <Clock className="h-4 w-4" />
-                            <span className="font-semibold">{insight.readTime}</span>
-                          </div>
-                          <span className="text-muted-foreground">&bull;</span>
-                          <span className="text-muted-foreground">{insight.date}</span>
-                        </div>
-                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                          {insight.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground line-clamp-3">{insight.excerpt}</p>
-                        <div className="flex items-center gap-2 text-primary font-semibold text-sm pt-2 group-hover:gap-4 transition-all">
-                          Read More
-                          <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform" />
-                        </div>
-                      </CardContent>
-                    </Link>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">No articles found. Try a different search.</p>
-            </div>
-          )}
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto max-w-2xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <Card className="p-8 md:p-12 rounded-3xl border border-border/60 bg-card/60 backdrop-blur-2xl">
-              <h2 className="text-2xl font-bold text-foreground mb-4">Get Weekly Insights</h2>
-              <p className="text-muted-foreground mb-6">
-                Delivered to your inbox every Friday
-              </p>
-              <div className="flex gap-3">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 bg-background/60 backdrop-blur-xl border-border/60"
-                />
-                <Button className="group">
-                  Subscribe
-                  <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </div>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 bg-gradient-cta text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-accent/90" />
-        
-        <div className="container mx-auto text-center px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-white text-balance mb-6 text-3xl md:text-4xl">
-              Ready to Build Your Growth Engine?
-            </h2>
-            <p className="text-white/90 max-w-2xl mx-auto mb-8 text-lg">
-              Let's discuss how we can help transform your business.
-            </p>
-            <Button asChild size="lg" variant="secondary" className="group">
-              <Link href="/contact">
-                Book a Strategy Call
-                <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+      <section className="py-24 bg-[#0A0A0A]">
+        <div className="container mx-auto px-4 max-w-5xl space-y-6">
+          {articles.map((article, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, ...springTransition }}
+            >
+              <Link href={`/insights/${article.id}`} className="block">
+                <div className={`bg-[#111113] border border-[#2A2A2E] rounded-2xl p-8 md:p-12 transition-all duration-300 group ${article.color}`}>
+                  <div className="flex flex-wrap items-center gap-4 text-sm font-bold uppercase tracking-widest text-zinc-500 mb-6">
+                    <span className="text-white">{article.category}</span>
+                    <span>•</span>
+                    <span>{article.date}</span>
+                    <span>•</span>
+                    <span>{article.readTime}</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-between gap-8">
+                    <h2 className="text-3xl md:text-4xl font-black font-heading text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-zinc-500 transition-all duration-300">
+                      {article.title}
+                    </h2>
+                    <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white group-hover:text-black transition-colors">
+                      <ArrowRight className="w-5 h-5" />
+                    </div>
+                  </div>
+                </div>
               </Link>
-            </Button>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </section>
     </div>

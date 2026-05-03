@@ -110,7 +110,7 @@ export function TrustBar() {
   const track = useMemo(() => [...trustLogos, ...trustLogos], []);
 
   return (
-    <section className="bg-secondary/50 py-16 relative overflow-hidden">
+    <section className="bg-black border-t border-[#222222] py-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
       
       <div className="container mx-auto relative z-10">
@@ -128,7 +128,7 @@ export function TrustBar() {
                 key={s.label}
                 variants={itemVariants}
                 whileHover={{ y: -4, scale: 1.02 }}
-                className="rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 p-6 text-center"
+                className="surface-card p-6 text-center"
               >
                 <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-xl bg-primary/10 border border-primary/20">
                   <Icon className="h-6 w-6 text-primary" />

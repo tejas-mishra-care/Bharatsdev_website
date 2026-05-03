@@ -17,8 +17,8 @@ export default function Home() {
       <Hero />
       <TrustBar />
       <HeroCaseStudy />
-      <Pillars />
       <SolutionsGrid />
+      <Pillars />
       <TechStackShowcase />
       <MoreProof />
       <Testimonials />

@@ -1,114 +1,129 @@
 'use client';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { modelPillars } from "@/lib/data";
-import Link from "next/link";
 import React from 'react';
-import { motion, useInView, type Easing } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { FileText, Zap, Box } from 'lucide-react';
 
-const EASE_OUT: Easing = [0.22, 1, 0.36, 1];
+const springTransition = {
+  type: "spring",
+  stiffness: 400,
+  damping: 30,
+};
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: EASE_OUT,
-    },
+    transition: springTransition,
   },
 };
+
+const processSteps = [
+  {
+    icon: FileText,
+    title: "Scope & Strategy",
+    description: "We don't start coding blindly. We define the exact problem, outline the technical blueprint, and lock in the timeline."
+  },
+  {
+    icon: Zap,
+    title: "High-Speed Engineering",
+    description: "Execution begins immediately. We deploy a lean, elite team to build the asset with zero bloated overhead and constant transparency."
+  },
+  {
+    icon: Box,
+    title: "Final Asset Handover",
+    description: "We deliver a finished, production-ready product. No open-ended retainers. You receive the keys, the code, and full ownership."
+  }
+];
 
 export function Pillars() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-20 bg-background relative overflow-hidden">
-      <div className="absolute inset-0 gradient-mesh opacity-30" />
+    <section className="py-32 bg-[#121214] relative overflow-hidden border-t border-[#2A2A2E]">
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#F97316]/50 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.08),transparent_60%)] pointer-events-none" />
       
-      <div className="container mx-auto text-center relative z-10">
+      <div className="container mx-auto text-center relative z-10 px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          transition={springTransition}
+          className="mb-16"
         >
-        <h2 className="text-foreground text-balance">
-          Built for Speed. Engineered for Quality.
-        </h2>
-          <p className="large text-muted-foreground mt-4 mb-12 max-w-2xl mx-auto text-balance">
-            Our lean-ops model is your competitive advantage.
+          <motion.div
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-sm border border-[#222222] bg-[#0A0A0A] mb-6"
+            whileHover={{ scale: 1.02 }}
+          >
+            <span className="text-chrome text-xs font-semibold uppercase tracking-widest">
+              The BharatsDev Way
+            </span>
+          </motion.div>
+          <h2 className="text-4xl md:text-5xl font-black font-heading tracking-tight text-white text-balance">
+            One-Time Project Delivery
+          </h2>
+          <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto text-balance font-sans">
+            We don't do retainers. We build, we hand over the keys, you own it.
           </p>
         </motion.div>
         
         <motion.div
           ref={ref}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {modelPillars.map((pillar, index) => {
-            const Icon = pillar.icon;
+          {processSteps.map((step, index) => {
+            const Icon = step.icon;
             return (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ y: -10, scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+                className="relative"
               >
-                <Card className="text-center p-4 md:p-6 h-full relative overflow-hidden group border-2 hover:border-primary/50 transition-all duration-500">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Connecting Line (desktop only) */}
+                {index < processSteps.length - 1 && (
+                  <div className="hidden md:block absolute top-1/2 left-full w-full h-[2px] bg-gradient-to-r from-[#F97316]/30 to-transparent z-0 -translate-y-1/2 -ml-4" />
+                )}
+
+                <motion.div
+                  className="bg-[#18181B] border border-[#2A2A2E] text-left p-10 h-full relative z-10 group overflow-hidden rounded-[2rem] transition-all duration-500 hover:border-[#F97316]/50 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(249,115,22,0.1)]"
+                  transition={springTransition}
+                >
+                  <div className="absolute -right-4 -bottom-8 text-[180px] font-black text-white/[0.02] group-hover:text-[#F97316]/10 transition-colors duration-500 font-heading pointer-events-none z-0 leading-none">
+                    {index + 1}
+                  </div>
+
+                  <div className="flex items-center justify-between mb-8 relative z-10">
+                    <div className="bg-black border border-[#2A2A2E] p-4 rounded-xl group-hover:border-[#F97316]/50 group-hover:bg-[#F97316]/10 transition-colors duration-300">
+                      <Icon className="h-8 w-8 text-[#F97316]" />
+                    </div>
+                  </div>
                   
-                  <CardHeader className="items-center relative z-10">
-                    <motion.div
-                      className="bg-secondary rounded-lg p-4 w-fit border-2 border-primary/20 group-hover:border-primary group-hover:shadow-lg transition-all duration-300"
-                      whileHover={{ rotate: [0, -5, 5, -5, 0], scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                    <Icon className="h-12 w-12 text-primary" />
-                    </motion.div>
-                </CardHeader>
-                  
-                  <CardContent className="space-y-2 relative z-10">
-                    <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                      {pillar.title}
-                    </CardTitle>
-                  <p className="text-muted-foreground text-base">{pillar.description}</p>
-                </CardContent>
-              </Card>
+                  <h3 className="text-3xl font-bold font-heading text-white mb-4 relative z-10">
+                    {step.title}
+                  </h3>
+                  <p className="text-muted-foreground text-base leading-relaxed font-sans">
+                    {step.description}
+                  </p>
+                </motion.div>
               </motion.div>
             )
           })}
-        </motion.div>
-        
-        <motion.div
-          className="mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <Button asChild size="lg" className="group">
-            <Link href="/about">
-              Learn About Our Approach
-              <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
         </motion.div>
       </div>
     </section>

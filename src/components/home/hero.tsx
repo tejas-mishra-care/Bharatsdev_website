@@ -1,208 +1,147 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { MagneticButton } from '@/components/ui/magnetic-button';
 import Link from 'next/link';
-import { motion, useScroll, useTransform, useReducedMotion, LazyMotion, domAnimation, type Easing } from 'framer-motion';
-import { ArrowRight, Zap } from 'lucide-react';
-import { ParticleSystem } from './particle-system';
-import { HeroScene } from './HeroScene';
-import { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, Terminal } from 'lucide-react';
+import { useRef } from 'react';
 
-const EASE_OUT: Easing = [0.22, 1, 0.36, 1];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
+const springTransition = {
+  type: "spring",
+  stiffness: 400,
+  damping: 30,
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: EASE_OUT,
-    },
+    transition: springTransition,
   },
-};
-
-const buttonVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: EASE_OUT,
-    },
-  },
-  hover: {
-    scale: 1.05,
-    transition: {
-      duration: 0.2,
-    },
-  },
-  tap: { scale: 0.95 },
 };
 
 export function Hero() {
-  const shouldReduceMotion = useReducedMotion();
-  const { scrollY } = useScroll();
-  const y = shouldReduceMotion ? useTransform(scrollY, () => 0) : useTransform(scrollY, [0, 500], [0, 80]);
-  const opacity = shouldReduceMotion ? useTransform(scrollY, () => 1) : useTransform(scrollY, [0, 300], [1, 0]);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const enableAmbientMotion = !shouldReduceMotion && !isMobile;
-  const showHeroCopy = true;
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden py-0">
-      <LazyMotion features={domAnimation}>
-        <div className="absolute inset-0 z-0">
-          <HeroScene className="h-full w-full" activateOn="interaction" />
-        </div>
-        {enableAmbientMotion && <ParticleSystem />}
-
-        <motion.div
-          className="absolute inset-0 gradient-mesh opacity-60 pointer-events-none"
-          style={{ y, willChange: 'transform' }}
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center bg-[#050505] overflow-hidden pt-20 border-b border-[#2A2A2E]">
+      
+      {/* Dynamic Geometric Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Massive Glowing Orb */}
+        <motion.div 
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.15),transparent_60%)] rounded-full blur-[80px]"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(217,89%,61%,0.18),transparent_70%)] pointer-events-none"
-          style={{ opacity, willChange: 'opacity' }}
+        
+        {/* Secondary Orange Orb */}
+        <motion.div 
+          className="absolute top-1/3 left-1/3 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.1),transparent_60%)] rounded-full blur-[100px]"
+          animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {showHeroCopy ? (
+        {/* Rotating Dashed Ring */}
+        <motion.div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full border border-dashed border-[#2563EB]/20 opacity-50"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full border border-dashed border-[#F97316]/10 opacity-30"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+        />
+        
+        {/* Floating Geometric Parallax Shapes */}
+        <motion.div style={{ y: y1 }} className="absolute top-[20%] left-[10%] w-24 h-24 border-4 border-[#2563EB]/30 rounded-xl rotate-12 backdrop-blur-sm" />
+        <motion.div style={{ y: y2 }} className="absolute bottom-[20%] right-[15%] w-32 h-32 rounded-full border border-[#F97316]/40 backdrop-blur-md" />
+        
+        {/* Architect Grid overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:64px_64px]" />
+      </div>
+
+      <motion.div style={{ opacity }} className="container mx-auto text-center relative z-10 px-4">
+        
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+            },
+          }}
+          className="flex flex-col items-center"
+        >
+          {/* Micro-copy badge */}
           <motion.div
-            className="container mx-auto text-center relative z-10"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+            variants={itemVariants}
+            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-[#2563EB]/40 bg-[#2563EB]/10 backdrop-blur-xl mb-10 shadow-[0_0_30px_rgba(37,99,235,0.2)]"
+            whileHover={{ scale: 1.05 }}
           >
-            <motion.div
-              variants={itemVariants}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/20 backdrop-blur-xl border-2 border-primary/30 mb-8 shadow-lg"
-              whileHover={enableAmbientMotion ? { scale: 1.03, boxShadow: '0 0 30px hsl(217,89%,61%,0.5)' } : undefined}
-            >
-              <Zap className="h-5 w-5 text-primary" />
-              <p className="font-bold text-primary uppercase tracking-wider text-sm">Your Complete Digital Growth Engine</p>
+            <div className="w-2 h-2 rounded-full bg-[#F97316] animate-pulse" />
+            <span className="text-white text-xs font-bold uppercase tracking-[0.2em]">
+              Your Complete Digital Growth Engine
+            </span>
+          </motion.div>
+
+          {/* Heading */}
+          <motion.h1
+            variants={itemVariants}
+            className="text-balance mb-8 text-6xl sm:text-7xl md:text-8xl lg:text-[140px] font-black font-heading tracking-tighter leading-[0.9]"
+          >
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70">ARCHITECT</span><br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#F97316] relative">
+              THE FUTURE
+              {/* Glowing underscore */}
+              <div className="absolute -bottom-4 left-0 w-full h-[6px] bg-[#F97316] rounded-full blur-[2px] opacity-70" />
+            </span>
+          </motion.h1>
+
+          {/* Subheading */}
+          <motion.p
+            variants={itemVariants}
+            className="max-w-3xl mx-auto mb-12 text-balance text-xl md:text-2xl text-zinc-400 leading-relaxed font-sans font-medium"
+          >
+            Finished assets. No retainers. Elite execution built for speed and scale. 
+            Delivering highly complex enterprise tools in under 48 hours.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto relative z-20">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={springTransition}>
+              <Button asChild size="lg" className="h-16 px-10 bg-[#2563EB] text-white hover:bg-[#1D4ED8] font-bold rounded-xl shadow-[0_0_40px_rgba(37,99,235,0.4)] border-2 border-[#2563EB]/50 transition-all text-lg">
+                <Link href="/contact" className="flex items-center gap-3">
+                  Start a Project <ArrowRight className="h-5 w-5" />
+                </Link>
+              </Button>
             </motion.div>
-
-            <motion.h1
-              variants={itemVariants}
-              className="text-balance mb-8 text-5xl sm:text-6xl md:text-8xl font-black leading-tight"
-              style={{
-                textShadow: '0 0 60px rgba(74, 144, 226, 0.22)',
-                filter: 'drop-shadow(0 10px 40px rgba(0, 0, 0, 0.12))',
-              }}
-            >
-              <motion.span
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-                className="text-foreground dark:text-white"
-              >
-                We Don't Build Websites.
-              </motion.span>
-              <br />
-              <motion.span
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="block mt-2 text-gradient"
-              >
-                We Architect Digital Ecosystems.
-              </motion.span>
-            </motion.h1>
-
-            <motion.p
-              variants={itemVariants}
-              className="max-w-3xl mx-auto mt-6 mb-12 text-balance text-xl md:text-2xl font-medium leading-relaxed text-foreground/80 dark:text-white/80"
-              style={{ textShadow: '0 2px 12px rgba(0, 0, 0, 0.18)' }}
-            >
-              Finished assets. No retainers. No overhead. Direct access to our Founder/CTO on every project.
-            </motion.p>
-
-            <motion.div variants={buttonVariants} className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-              <MagneticButton>
-                <Button
-                  asChild
-                  size="lg"
-                  className="group relative overflow-hidden text-lg px-8 py-6 w-full sm:w-auto bg-gradient-to-r from-primary to-accent text-white border-0 shadow-[0_0_30px_rgba(74,144,226,0.5)] hover:shadow-[0_0_50px_rgba(74,144,226,0.8)]"
-                >
-                  <Link href="/contact" prefetch={true}>
-                    <span className="relative z-10 flex items-center justify-center gap-3">
-                      <Zap className="h-5 w-5" />
-                      Start a Project
-                      <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform" />
-                    </span>
-                    <motion.span
-                      className="absolute inset-0 bg-gradient-to-r from-accent to-primary"
-                      initial={{ x: '-100%' }}
-                      whileHover={{ x: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </Button>
-              </MagneticButton>
-
-              <MagneticButton>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="group text-lg px-8 py-6 w-full sm:w-auto bg-background/30 backdrop-blur-xl border-2 border-border/60 text-foreground hover:bg-background/50 hover:border-border/80 dark:bg-white/10 dark:border-white/30 dark:text-white dark:hover:bg-white/20 dark:hover:border-white/50"
-                >
-                  <Link href="/work" prefetch={true}>
-                    View Our Work
-                    <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-2 transition-transform" />
-                  </Link>
-                </Button>
-              </MagneticButton>
+            
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={springTransition}>
+              <Button asChild size="lg" variant="outline" className="h-16 px-10 bg-white/5 backdrop-blur-xl text-white hover:bg-white/10 font-bold border-2 border-[#2A2A2E] hover:border-white/20 rounded-xl transition-all text-lg">
+                <Link href="/work">
+                  View the Standard
+                </Link>
+              </Button>
             </motion.div>
           </motion.div>
-        ) : null}
-
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
-          animate={enableAmbientMotion ? { y: [0, 10, 0] } : undefined}
-          transition={enableAmbientMotion ? { duration: 2, repeat: Infinity } : undefined}
-        >
-          <button
-            type="button"
-            aria-label="Scroll to next section"
-            onClick={() => {
-              if (typeof window === 'undefined') return;
-              window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-            }}
-            className="w-6 h-10 border-2 rounded-full flex items-start justify-center p-2 border-foreground/30 dark:border-white/50"
-          >
-            <motion.div
-              className="w-1 h-3 rounded-full bg-foreground/70 dark:bg-white"
-              animate={enableAmbientMotion ? { y: [0, 12, 0] } : undefined}
-              transition={enableAmbientMotion ? { duration: 2, repeat: Infinity } : undefined}
-            />
-          </button>
         </motion.div>
-      </LazyMotion>
+      </motion.div>
+
+      {/* Fade out to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0A0A0A] to-transparent pointer-events-none z-20" />
     </section>
   );
 }

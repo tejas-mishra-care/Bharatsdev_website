@@ -8,7 +8,7 @@ export const navLinks = [
   { href: '/work', label: 'Work' },
   { href: '/technologies', label: 'Technologies' },
   { href: '/process', label: 'Process' },
-  { href: '/about', label: 'About' },
+  { href: '/student-hub', label: 'Student Hub' },
   { href: '/insights', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ];
