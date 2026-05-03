@@ -139,7 +139,7 @@ export default function CertificatesPage() {
           role: generated.cert.role,
           certId: generated.cert.id,
           issuedAt: generated.cert.issuedAt,
-          pdfBase64: generated.pdfBase64,
+          // PDF is too large for Netlify's 6MB body limit — user downloads from verify page
         }),
       });
 
