@@ -136,7 +136,7 @@ export async function generateCertificatePDF(params: {
   // --- Header: BHARATS DEV (Two-Tone) ---
   pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(54); // Increased drastically
-  const part1 = 'BHARATS'; // Removed spacing to match standard website font
+  const part1 = 'BHARATS '; // Added trailing space
   const part2 = 'DEV';
   const w1 = pdf.getTextWidth(part1);
   const w2 = pdf.getTextWidth(part2);
@@ -211,13 +211,17 @@ export async function generateCertificatePDF(params: {
   pdf.setTextColor(LIGHT_SLATE[0], LIGHT_SLATE[1], LIGHT_SLATE[2]);
   pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(9);
-  pdf.text(`CERTIFICATE ID: ${certId}`, W / 2, H - 34, { align: 'center' });
-  pdf.text(`DOMAIN: BHARATSDEV.COM`, W / 2, H - 28, { align: 'center' });
+  pdf.text(`CERTIFICATE ID: ${certId}`, W / 2, H - 36, { align: 'center' });
   
   const formattedDate = new Date(issuedAt).toLocaleDateString('en-US', {
     month: 'short', day: '2-digit', year: 'numeric'
   }).toUpperCase();
-  pdf.text(`ISSUE DATE: ${formattedDate}`, W / 2, H - 22, { align: 'center' });
+  pdf.text(`ISSUE DATE: ${formattedDate}`, W / 2, H - 30, { align: 'center' });
+
+  // Larger "bharatsdev.com" domain
+  pdf.setTextColor(BRAND_BLUE[0], BRAND_BLUE[1], BRAND_BLUE[2]);
+  pdf.setFontSize(14);
+  pdf.text(`bharatsdev.com`, W / 2, H - 20, { align: 'center' });
 
   // --- Footer: QR Code (Right) ---
   const qrSize = 36; // Larger QR code
