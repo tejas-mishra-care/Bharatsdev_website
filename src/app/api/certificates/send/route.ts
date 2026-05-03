@@ -11,14 +11,15 @@ export async function POST(req: Request) {
 
   const { name, email, role, certId, issuedAt, pdfBase64 } = await req.json();
 
-  if (!process.env.RESEND_API_KEY) {
+  const resendKey = process.env.RESEND_API_KEY || 're_U2xXp7Ws_KdiBKipDwP6JTQ1xxVroLj36';
+  if (!resendKey) {
     return NextResponse.json(
       { error: 'RESEND_API_KEY not configured. Please add it to your environment variables.' },
       { status: 500 }
     );
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const resend = new Resend(resendKey);
 
   const formattedDate = new Date(issuedAt).toLocaleDateString('en-IN', {
     day: 'numeric', month: 'long', year: 'numeric',
