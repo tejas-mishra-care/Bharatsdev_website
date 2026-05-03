@@ -87,37 +87,65 @@ export async function generateCertificatePDF(params: {
   // Colors
   const ONYX = [10, 10, 10];
   const GOLD = [212, 175, 55];
+  const BRAND_BLUE = [37, 99, 235];
   const SLATE = [51, 65, 85];
   const LIGHT_SLATE = [148, 163, 184];
 
-  // --- Background (White) ---
-  pdf.setFillColor(255, 255, 255);
+  // --- Background (Subtle Off-White) ---
+  pdf.setFillColor(250, 251, 253);
   pdf.rect(0, 0, W, H, 'F');
 
+  // --- Subtle Premium Geometric Accents ---
+  // Top Left Faint Gold
+  pdf.setFillColor(254, 251, 242);
+  pdf.triangle(0, 0, 160, 0, 0, 160, 'F');
+  // Bottom Right Faint Blue
+  pdf.setFillColor(240, 245, 255);
+  pdf.triangle(W, 0, W, H, W - 180, H, 'F');
+
   // --- Outer Border (Onyx) ---
-  // Equivalent to 20px solid var(--onyx)
   pdf.setDrawColor(ONYX[0], ONYX[1], ONYX[2]);
   pdf.setLineWidth(5.5);
   pdf.rect(2.75, 2.75, W - 5.5, H - 5.5);
 
-  // --- Subtle Corner Accent (Gold) ---
+  // --- Corner Accent (Gold) ---
   pdf.setDrawColor(GOLD[0], GOLD[1], GOLD[2]);
   pdf.setLineWidth(1.5);
   pdf.line(10, 10, 36, 10); // Top
   pdf.line(10, 10, 10, 36); // Left
 
-  // --- Header: BHARATSDEV ---
-  pdf.setTextColor(ONYX[0], ONYX[1], ONYX[2]);
+  // --- Add Vector Logo (Geometric BD) ---
+  const logoX = W / 2;
+  const logoY = 24;
+  // Blue 'B' Pillar
+  pdf.setFillColor(BRAND_BLUE[0], BRAND_BLUE[1], BRAND_BLUE[2]);
+  pdf.rect(logoX - 10, logoY - 7, 7, 14, 'F');
+  // Gold 'D' Arc
+  pdf.setFillColor(GOLD[0], GOLD[1], GOLD[2]);
+  pdf.circle(logoX + 2, logoY, 7, 'F');
+  pdf.setFillColor(250, 251, 253); // Cutout inside the D
+  pdf.circle(logoX + 2, logoY, 3, 'F');
+
+  // --- Header: BHARATS DEV (Two-Tone) ---
   pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(42);
-  // Simulating the 15px letter spacing from HTML
-  pdf.text('B H A R A T S D E V', W / 2, 40, { align: 'center' });
+  pdf.setFontSize(38);
+  const part1 = 'B H A R A T S ';
+  const part2 = 'D E V';
+  const w1 = pdf.getTextWidth(part1);
+  const w2 = pdf.getTextWidth(part2);
+  const totalW = w1 + w2;
+  const startX = (W - totalW) / 2;
+
+  pdf.setTextColor(ONYX[0], ONYX[1], ONYX[2]);
+  pdf.text(part1, startX, 48);
+  pdf.setTextColor(BRAND_BLUE[0], BRAND_BLUE[1], BRAND_BLUE[2]);
+  pdf.text(part2, startX + w1, 48);
 
   // --- Header: Tagline ---
   pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
   pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(10);
-  pdf.text('YOUR COMPLETE DIGITAL GROWTH ENGINE', W / 2, 48, { align: 'center' });
+  pdf.text('YOUR COMPLETE DIGITAL GROWTH ENGINE', W / 2, 58, { align: 'center' });
 
   // --- Main Content: Title ---
   pdf.setTextColor(ONYX[0], ONYX[1], ONYX[2]);
