@@ -2,9 +2,9 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { ShieldCheck, ShieldX, Loader2, QrCode, ExternalLink } from 'lucide-react';
+import { ShieldCheck, ShieldX, Loader2, Download } from 'lucide-react';
 import Link from 'next/link';
-import { getCertificate, type Certificate } from '@/lib/certificates';
+import { getCertificate, generateQRCode, generateCertificatePDF, type Certificate } from '@/lib/certificates';
 import { initializeFirebase } from '@/firebase';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -143,6 +143,11 @@ function VerifyContent() {
               />
             </div>
 
+            {/* Download Button */}
+            <div className="border-t border-emerald-500/20 px-6 py-4">
+              <DownloadCertButton cert={cert} />
+            </div>
+
             {/* Footer */}
             <div className="border-t border-[#1A1A1A] px-6 py-4 flex items-center justify-between">
               <span className="text-zinc-600 text-xs">Issued by BharatsDev · bharatsdev.com</span>
@@ -182,6 +187,48 @@ function VerifyContent() {
         )}
       </main>
     </div>
+  );
+}
+
+function DownloadCertButton({ cert }: { cert: Certificate }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleDownload = async () => {
+    setLoading(true);
+    try {
+      const qrDataUrl = await generateQRCode(cert.id);
+      const { pdfBlob } = await generateCertificatePDF({
+        name: cert.name,
+        role: cert.role,
+        certId: cert.id,
+        qrDataUrl,
+        issuedAt: cert.issuedAt,
+      });
+      const url = URL.createObjectURL(pdfBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `BharatsDev-Certificate-${cert.id}.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      console.error('Download failed', e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleDownload}
+      disabled={loading}
+      className="w-full flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-black font-bold py-3 rounded-xl transition-colors text-sm"
+    >
+      {loading ? (
+        <><Loader2 className="w-4 h-4 animate-spin" /> Generating PDF…</>
+      ) : (
+        <><Download className="w-4 h-4" /> Download Certificate</>
+      )}
+    </button>
   );
 }
 

@@ -27,7 +27,10 @@ export async function POST(req: Request) {
   const { data, error } = await resend.emails.send({
     from: 'BharatsDev <certificates@bharatsdev.com>',
     to: [email],
-    subject: `Your BharatsDev Certificate — ${role}`,
+    subject: `🏆 Your BharatsDev Certificate is Attached — ${role}`,
+    attachments: pdfBase64
+      ? [{ filename: `BharatsDev-Certificate-${certId}.pdf`, content: pdfBase64 }]
+      : undefined,
     html: `
 <!DOCTYPE html>
 <html>
@@ -43,8 +46,8 @@ export async function POST(req: Request) {
       <div style="width:60px;height:60px;background:rgba(37,99,235,0.1);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:24px;">
         <span style="font-size:28px;">🏆</span>
       </div>
-      <h2 style="font-size:22px;font-weight:700;color:#fff;margin:0 0 8px;">Congratulations, ${name}!</h2>
-      <p style="color:#888;margin:0 0 24px;font-size:15px;">Your certificate has been issued.</p>
+      <h2 style="font-size:22px;font-weight:700;color:#fff;margin:0 0 8px;">Congratulations, ${name}! 🎉</h2>
+      <p style="color:#888;margin:0 0 24px;font-size:15px;">Your certificate of achievement has been officially issued by BharatsDev. <strong style="color:#fff;">Your certificate PDF is attached below</strong> — save it and share it proudly!</p>
       <div style="background:#111;border:1px solid #222;border-radius:8px;padding:20px;margin-bottom:24px;text-align:left;">
         <p style="margin:0 0 8px;color:#888;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Certificate Details</p>
         <p style="margin:0 0 6px;color:#fff;font-size:15px;"><strong>Program:</strong> ${role}</p>
@@ -53,12 +56,10 @@ export async function POST(req: Request) {
       </div>
       <a href="${process.env.NEXT_PUBLIC_APP_URL || 'https://bharatsdev.com'}/verify?id=${certId}" 
          style="display:inline-block;background:#2563EB;color:#fff;text-decoration:none;padding:14px 28px;border-radius:8px;font-weight:700;font-size:15px;">
-        Verify Certificate Online →
+        Verify &amp; Download Online →
       </a>
       <p style="color:#555;font-size:13px;margin:24px 0 0;">
-        Your certificate PDF is attached to this email.<br/>
-        Scan the QR code on the certificate to verify it instantly.
-      </p>
+        📎 <strong style="color:#888;">Get your certificate attached below.</strong> You can also scan the QR code on the certificate to verify it online at any time.</p>
     </div>
     <p style="text-align:center;color:#444;font-size:12px;margin-top:24px;">
       © ${new Date().getFullYear()} BharatsDev. All rights reserved.<br/>

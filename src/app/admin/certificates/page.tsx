@@ -139,7 +139,7 @@ export default function CertificatesPage() {
           role: generated.cert.role,
           certId: generated.cert.id,
           issuedAt: generated.cert.issuedAt,
-          // NOTE: PDF not attached here — too large for serverless. Verify link sent instead.
+          pdfBase64: generated.pdfBase64,
         }),
       });
 
