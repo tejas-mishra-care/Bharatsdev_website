@@ -7,6 +7,7 @@ import { ScrollProgress } from '@/components/ui/scroll-progress';
 import { BackToTop } from '@/components/ui/back-to-top';
 import { cn } from '@/lib/utils';
 import { Inter, Space_Grotesk } from 'next/font/google';
+import { FirebaseClientProvider } from '@/firebase/client-provider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -75,12 +76,14 @@ export default function RootLayout({
       <body
         className={cn('min-h-screen bg-background text-foreground font-sans antialiased flex flex-col', inter.variable, spaceGrotesk.variable)}
       >
-          <ScrollProgress />
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <BackToTop />
-          <Toaster />
+          <FirebaseClientProvider>
+            <ScrollProgress />
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <BackToTop />
+            <Toaster />
+          </FirebaseClientProvider>
       </body>
     </html>
   );
