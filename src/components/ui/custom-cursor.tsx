@@ -13,7 +13,10 @@ export function CustomCursor() {
   const smoothX = useSpring(cursorX, springConfig);
   const smoothY = useSpring(cursorY, springConfig);
 
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX - 16);
       cursorY.set(e.clientY - 16);
@@ -34,7 +37,7 @@ export function CustomCursor() {
     };
   }, [cursorX, cursorY, isVisible]);
 
-  if (typeof window === 'undefined') return null;
+  if (!mounted) return null;
 
   return (
     <motion.div
