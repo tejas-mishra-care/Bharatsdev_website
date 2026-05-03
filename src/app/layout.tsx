@@ -71,10 +71,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/bdlogo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/bdlogo.png" />
-      </head>
+
       <body
         className={cn('min-h-screen bg-background text-foreground font-sans antialiased flex flex-col', inter.variable, spaceGrotesk.variable)}
       >
