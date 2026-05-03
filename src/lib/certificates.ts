@@ -193,28 +193,36 @@ export async function generateCertificatePDF(params: {
   pdf.text(desc3, W / 2, 156, { align: 'center' });
 
   // --- Footer: Signature (Left) ---
-  // Signature squiggle (hand-drawn CEO style) above name line
+  // Fetch and stamp the real PNG signature above the name
+  try {
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : (process.env.NEXT_PUBLIC_APP_URL || 'https://bharatsdev.com');
+    const sigRes = await fetch(`${baseUrl}/signature.png`);
+    const sigBlob = await sigRes.blob();
+    const sigDataUrl = await new Promise<string>((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.readAsDataURL(sigBlob);
+    });
+    // Stamp signature image above the name — wide & short like a real signature
+    pdf.addImage(sigDataUrl, 'PNG', 22, H - 56, 55, 18);
+  } catch (e) {
+    console.warn('Failed to load signature', e);
+  }
+
+  // Separator line below signature
   pdf.setDrawColor(ONYX[0], ONYX[1], ONYX[2]);
-  pdf.setLineWidth(0.8);
-  // Cursive-style signature strokes for "Tejas"
-  pdf.lines([[6,-4],[4,-2],[3,3]], 25, H - 48, [1, 1], null, false);
-  pdf.lines([[5,0],[5,-3],[4,2],[6,-1]], 38, H - 52, [1, 1], null, false);
-  pdf.lines([[8,-2],[6,4],[4,-3]], 53, H - 49, [1, 1], null, false);
-  // Underline flourish
-  pdf.setLineWidth(0.6);
-  pdf.line(25, H - 42, 75, H - 42);
-  pdf.setLineWidth(0.3);
-  pdf.line(27, H - 40, 68, H - 40); // double underline flourish
+  pdf.setLineWidth(0.5);
+  pdf.line(22, H - 36, 82, H - 36);
 
   pdf.setTextColor(ONYX[0], ONYX[1], ONYX[2]);
   pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(16);
-  pdf.text('Tejas Mishra', 25, H - 30);
+  pdf.text('Tejas Mishra', 25, H - 28);
 
   pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
   pdf.setFont('helvetica', 'bold');
   pdf.setFontSize(10);
-  pdf.text('FOUNDER & CEO | CTO', 25, H - 24);
+  pdf.text('FOUNDER & CEO | CTO', 25, H - 22);
 
   // --- Footer: Metadata (Center) ---
   pdf.setTextColor(LIGHT_SLATE[0], LIGHT_SLATE[1], LIGHT_SLATE[2]);
