@@ -20,31 +20,31 @@ const testimonials = [
         quote: "Tejas's ability to manage and deliver a complex project under an extreme deadline is remarkable. He is a true technical partner.",
         name: "Dr. Prashant Awsarmal",
         title: "MIT",
-        image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBtYW58ZW58MHx8fHwxNzYzMTY5OTY4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+        image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBtYW58ZW58MHx8fHwxNzYzMTY5OTY4fDA&ixlib=rb-4.1.0&q=80&w=150&h=150&fit=crop"
     },
     {
         quote: "The quality of work and the speed of delivery were exceptional. BharatsDev is our go-to for critical digital infrastructure.",
         name: "Rajesh Kumar",
         title: "CTO, UltraTech Cement",
-        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYzNDk1MjUwfDA&ixlib=rb-4.1.0&q=80&w=1080"
+        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxpbmRpYW4lMjBtYW58ZW58MHx8fHwxNzYzNDk1MjUwfDA&ixlib=rb-4.1.0&q=80&w=150&h=150&fit=crop"
     },
     {
         quote: "They transformed our idea into a fully-functional AI platform in weeks, not months. The strategic insights alone were worth the investment.",
         name: "Priya Sharma",
         title: "Founder, CareerCompassAI",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbnxlbnwwfHx8fDE3NjMxOTg3ODB8MA&ixlib=rb-4.1.0&q=80&w=1080"
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbnxlbnwwfHx8fDE3NjMxOTg3ODB8MA&ixlib=rb-4.1.0&q=80&w=150&h=150&fit=crop"
     },
     {
         quote: "The best agency we've ever worked with. The project was delivered on time, on budget, and exceeded our expectations.",
         name: "Amit Patel",
         title: "CEO, Startup Inc.",
-        image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYWxlJTIwcHJvZmVzc2lvbmFsfGVufDB8fHx8MTc2NTI0NDYwNnww&ixlib=rb-4.1.0&q=80&w=1080"
+        image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYWxlJTIwcHJvZmVzc2lvbmFsfGVufDB8fHx8MTc2NTI0NDYwNnww&ixlib=rb-4.1.0&q=80&w=150&h=150&fit=crop"
     },
      {
         quote: "A true engineering mindset. They solved problems we didn't even know we had. Highly recommended.",
         name: "Anjali Rao",
         title: "Head of Product, TechCorp",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjUyNDQ2MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjUyNDQ2MDZ8MA&ixlib=rb-4.1.0&q=80&w=150&h=150&fit=crop"
     }
 ];
 

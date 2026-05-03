@@ -51,12 +51,8 @@ export function Footer() {
 
   return (
     <footer className="bg-black text-chrome border-t border-[#222222] relative overflow-hidden">
-      <motion.div
-        ref={ref}
+      <div
         className="container mx-auto px-4 py-16 relative z-10"
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <motion.div variants={itemVariants} className="col-span-1 md:col-span-2 lg:col-span-1">
@@ -161,7 +157,7 @@ export function Footer() {
             ))}
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </footer>
   );
 }

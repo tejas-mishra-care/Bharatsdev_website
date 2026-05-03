@@ -97,9 +97,8 @@ export function Hero() {
             </span>
           </motion.div>
 
-          {/* Heading */}
-          <motion.h1
-            variants={itemVariants}
+          {/* Heading (Static for instant LCP) */}
+          <h1
             className="text-balance mb-8 text-6xl sm:text-7xl md:text-8xl lg:text-[140px] font-black font-heading tracking-tighter leading-[0.9]"
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70">ARCHITECT</span><br />
@@ -108,7 +107,7 @@ export function Hero() {
               {/* Glowing underscore */}
               <div className="absolute -bottom-4 left-0 w-full h-[6px] bg-[#F97316] rounded-full blur-[2px] opacity-70" />
             </span>
-          </motion.h1>
+          </h1>
 
           {/* Subheading */}
           <motion.p
