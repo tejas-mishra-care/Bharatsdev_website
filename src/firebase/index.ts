@@ -3,7 +3,7 @@
 import { firebaseConfig } from '@/firebase/config';
 import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore'
+import { initializeFirestore, getFirestore, CACHE_SIZE_UNLIMITED } from 'firebase/firestore';
 
 // NOTE: We are hosted on Netlify (not Firebase App Hosting), so we always
 // initialize with the explicit firebaseConfig object.
@@ -18,10 +18,21 @@ export function initializeFirebase() {
 }
 
 export function getSdks(firebaseApp: FirebaseApp) {
+  // initializeFirestore with experimentalForceLongPolling disables offline
+  // persistence so writes fail immediately instead of queuing silently forever.
+  let firestore;
+  try {
+    firestore = initializeFirestore(firebaseApp, {
+      experimentalForceLongPolling: true,
+    });
+  } catch {
+    // Already initialized — getFirestore returns the existing instance
+    firestore = getFirestore(firebaseApp);
+  }
   return {
     firebaseApp,
     auth: getAuth(firebaseApp),
-    firestore: getFirestore(firebaseApp)
+    firestore,
   };
 }
 

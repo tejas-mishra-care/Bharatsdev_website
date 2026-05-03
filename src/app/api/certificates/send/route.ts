@@ -32,12 +32,6 @@ export async function POST(req: Request) {
     from: 'BharatsDev <certificates@bharatsdev.com>',
     to: [email],
     subject: `Your BharatsDev Certificate — ${role}`,
-    attachments: [
-      {
-        filename: `BharatsDev-Certificate-${certId}.pdf`,
-        content: pdfBase64,
-      },
-    ],
     html: `
 <!DOCTYPE html>
 <html>
