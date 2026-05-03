@@ -93,6 +93,12 @@ export default {
         'mesh-breathe': 'mesh-breathe 15s ease infinite',
         'shimmer': 'shimmer 1.5s infinite',
       },
+      transitionTimingFunction: {
+        'apple': 'cubic-bezier(0.25, 1, 0.5, 1)',
+        'apple-in-out': 'cubic-bezier(0.86, 0, 0.07, 1)',
+        'quintic': 'cubic-bezier(0.23, 1, 0.32, 1)',
+        'spring': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      },
     },
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],

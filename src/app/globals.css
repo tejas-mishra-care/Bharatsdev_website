@@ -98,6 +98,42 @@
   }
   
   /* CSS Mesh Gradient */
+  .mesh-gradient {
+    background-color: #000000;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(339,49%,30%,0.2) 0, transparent 50%);
+  }
+
+  /* Apple Squircle emulation */
+  .squircle {
+    border-radius: 24px;
+    /* This creates a more 'continuous' curvature visually than standard border-radius */
+    clip-path: polygon(
+      0% 24px, 
+      0% calc(100% - 24px), 
+      2% calc(100% - 12px), 
+      8% calc(100% - 4px), 
+      18% calc(100% - 1px), 
+      24px 100%, 
+      calc(100% - 24px) 100%, 
+      calc(100% - 18%) calc(100% - 1px), 
+      calc(100% - 8%) calc(100% - 4px), 
+      calc(100% - 2%) calc(100% - 12px), 
+      100% calc(100% - 24px), 
+      100% 24px, 
+      calc(100% - 2%) 12px, 
+      calc(100% - 8%) 4px, 
+      calc(100% - 18%) 1px, 
+      calc(100% - 24px) 0%, 
+      24px 0%, 
+      18% 1px, 
+      8% 4px, 
+      2% 12px
+    );
+  }
+
   .bg-mesh {
     background: radial-gradient(circle at 0% 0%, rgba(67, 135, 244, 0.08) 0%, transparent 40%),
                 radial-gradient(circle at 100% 100%, rgba(75, 0, 130, 0.15) 0%, transparent 40%),
