@@ -29,6 +29,7 @@ export function Hero() {
   });
 
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   
