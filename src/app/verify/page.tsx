@@ -2,7 +2,7 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { ShieldCheck, ShieldX, Loader2, Download } from 'lucide-react';
+import { ShieldCheck, ShieldX, Loader2, Download, QrCode, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { getCertificate, generateQRCode, generateCertificatePDF, type Certificate } from '@/lib/certificates';
 import { initializeFirebase } from '@/firebase';

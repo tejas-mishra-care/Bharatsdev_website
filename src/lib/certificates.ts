@@ -193,9 +193,18 @@ export async function generateCertificatePDF(params: {
   pdf.text(desc3, W / 2, 156, { align: 'center' });
 
   // --- Footer: Signature (Left) ---
+  // Signature squiggle (hand-drawn CEO style) above name line
   pdf.setDrawColor(ONYX[0], ONYX[1], ONYX[2]);
+  pdf.setLineWidth(0.8);
+  // Cursive-style signature strokes for "Tejas"
+  pdf.lines([[6,-4],[4,-2],[3,3]], 25, H - 48, [1, 1], null, false);
+  pdf.lines([[5,0],[5,-3],[4,2],[6,-1]], 38, H - 52, [1, 1], null, false);
+  pdf.lines([[8,-2],[6,4],[4,-3]], 53, H - 49, [1, 1], null, false);
+  // Underline flourish
   pdf.setLineWidth(0.6);
-  pdf.line(25, H - 38, 85, H - 38);
+  pdf.line(25, H - 42, 75, H - 42);
+  pdf.setLineWidth(0.3);
+  pdf.line(27, H - 40, 68, H - 40); // double underline flourish
 
   pdf.setTextColor(ONYX[0], ONYX[1], ONYX[2]);
   pdf.setFont('helvetica', 'bold');
