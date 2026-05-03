@@ -134,12 +134,12 @@ export async function generateCertificatePDF(params: {
   const w1 = pdf.getTextWidth(part1);
   const w2 = pdf.getTextWidth(part2);
   const totalW = w1 + w2;
-  const startX = (W - totalW) / 2;
+  const headerStartX = (W - totalW) / 2;
 
   pdf.setTextColor(ONYX[0], ONYX[1], ONYX[2]);
-  pdf.text(part1, startX, 48);
+  pdf.text(part1, headerStartX, 48);
   pdf.setTextColor(BRAND_BLUE[0], BRAND_BLUE[1], BRAND_BLUE[2]);
-  pdf.text(part2, startX + w1, 48);
+  pdf.text(part2, headerStartX + w1, 48);
 
   // --- Header: Tagline ---
   pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
@@ -170,9 +170,9 @@ export async function generateCertificatePDF(params: {
   const nameWidth = pdf.getTextWidth(recipientName);
   pdf.setDrawColor(GOLD[0], GOLD[1], GOLD[2]);
   pdf.setLineWidth(1.5);
-  const startX = (W - nameWidth) / 2 - 12;
-  const endX = (W + nameWidth) / 2 + 12;
-  pdf.line(startX, 114, endX, 114);
+  const nameStartX = (W - nameWidth) / 2 - 12;
+  const nameEndX = (W + nameWidth) / 2 + 12;
+  pdf.line(nameStartX, 114, nameEndX, 114);
 
   // --- Description ---
   pdf.setTextColor(SLATE[0], SLATE[1], SLATE[2]);
