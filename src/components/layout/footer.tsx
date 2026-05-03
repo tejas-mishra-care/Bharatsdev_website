@@ -1,6 +1,6 @@
 'use client';
 
-import { Linkedin, Phone, Twitter, Github } from 'lucide-react';
+import { Linkedin, Twitter, Instagram } from 'lucide-react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -20,8 +20,8 @@ const companyLinks = [
 ];
 
 const bottomLinks = [
-  { href: '#', label: 'Privacy Policy' },
-  { href: '#', label: 'Terms of Service' },
+  { href: '/privacy', label: 'Privacy Policy' },
+  { href: '/terms', label: 'Terms of Service' },
 ];
 
 const containerVariants = {
@@ -70,7 +70,7 @@ export function Footer() {
               {[
                 { icon: Linkedin, href: '#', label: 'LinkedIn' },
                 { icon: Twitter, href: '#', label: 'Twitter' },
-                { icon: Github, href: '#', label: 'GitHub' },
+                { icon: Instagram, href: '#', label: 'Instagram' },
               ].map((social) => {
                 const Icon = social.icon;
                 return (
