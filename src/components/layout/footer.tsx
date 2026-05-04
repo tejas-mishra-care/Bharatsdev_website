@@ -1,6 +1,6 @@
 'use client';
 
-import { Linkedin, Twitter, Instagram } from 'lucide-react';
+import { Linkedin, Twitter, Instagram, Youtube } from 'lucide-react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -70,9 +70,10 @@ export function Footer() {
             </p>
             <div className="flex space-x-3">
               {[
-                { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                { icon: Twitter, href: '#', label: 'Twitter' },
-                { icon: Instagram, href: '#', label: 'Instagram' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/company/109890130/', label: 'LinkedIn' },
+                { icon: Twitter, href: 'https://twitter.com/bharatsdev', label: 'Twitter' },
+                { icon: Instagram, href: 'https://www.instagram.com/bharatsdev/', label: 'Instagram' },
+                { icon: Youtube, href: 'https://www.youtube.com/@bharatsdev', label: 'YouTube' },
               ].map((social) => {
                 const Icon = social.icon;
                 return (
