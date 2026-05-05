@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Box, Brain, Calculator, Clock } from 'lucide-react';
+import { ArrowRight, Box, Brain, Calculator, Clock, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const springTransition = {
   type: "spring",
@@ -21,7 +22,8 @@ const caseStudies = [
     border: "group-hover:border-[#2563EB]/50",
     shadow: "hover:shadow-[0_20px_50px_rgba(37,99,235,0.15)]",
     description: "An industry-sponsored, enterprise-grade certification portal engineered and deployed in under 48 hours. The ultimate benchmark for speed and high-stress delivery.",
-    tech: ["Next.js", "Node.js", "Enterprise Auth", "System Design"]
+    tech: ["Next.js", "Node.js", "Enterprise Auth", "System Design"],
+    link: "https://tejas-ut-shashwat.netlify.app/"
   },
   {
     title: "CareerCompassAI",
@@ -31,7 +33,30 @@ const caseStudies = [
     border: "group-hover:border-[#10B981]/50",
     shadow: "hover:shadow-[0_20px_50px_rgba(16,185,129,0.15)]",
     description: "A custom AI-powered tool built to navigate complex datasets, showcasing our capability in integrating intelligent systems into user-friendly platforms.",
-    tech: ["OpenAI API", "React", "Vector DB", "Tailwind CSS"]
+    tech: ["OpenAI API", "React", "Vector DB", "Tailwind CSS"],
+    link: "https://ai-career-compass.netlify.app/"
+  },
+  {
+    title: "EventFlow Ticketing",
+    category: "Event Management Platform",
+    icon: Box,
+    color: "from-[#8B5CF6]",
+    border: "group-hover:border-[#8B5CF6]/50",
+    shadow: "hover:shadow-[0_20px_50px_rgba(139,92,246,0.15)]",
+    description: "A high-performance event management and ticketing platform designed for seamless user experience and scalable operations.",
+    tech: ["Next.js", "Payment Gateway", "QR Ticketing"],
+    link: "https://eventflow.bharatsdev.com/"
+  },
+  {
+    title: "JEEvolve LMS",
+    category: "EdTech Platform",
+    icon: Brain,
+    color: "from-[#EF4444]",
+    border: "group-hover:border-[#EF4444]/50",
+    shadow: "hover:shadow-[0_20px_50px_rgba(239,68,68,0.15)]",
+    description: "An advanced Learning Management System engineered specifically for JEE Chemistry students with interactive testing.",
+    tech: ["React", "LMS Architecture", "Node.js"],
+    link: "https://jeevolve-old.netlify.app/"
   },
   {
     title: "SieveLab & GhamelaCalc",
@@ -40,8 +65,20 @@ const caseStudies = [
     color: "from-[#F97316]",
     border: "group-hover:border-[#F97316]/50",
     shadow: "hover:shadow-[0_20px_50px_rgba(249,115,22,0.15)]",
-    description: "Precision custom engineering calculators built for niche industrial applications, proving our ability to translate complex mathematical logic into seamless web applications.",
-    tech: ["Complex Math Logic", "TypeScript", "Data Visualization"]
+    description: "Precision custom engineering calculators built for niche industrial applications to perform sieve analysis and aggregate testing.",
+    tech: ["Complex Math Logic", "TypeScript", "Data Visualization"],
+    link: "https://ut-sivelab-tejas.netlify.app/"
+  },
+  {
+    title: "RailVision AI",
+    category: "Computer Vision System",
+    icon: Brain,
+    color: "from-[#3B82F6]",
+    border: "group-hover:border-[#3B82F6]/50",
+    shadow: "hover:shadow-[0_20px_50px_rgba(59,130,246,0.15)]",
+    description: "A proof-of-concept AI platform utilizing computer vision models to track and analyze railway infrastructure.",
+    tech: ["AI/ML", "Computer Vision", "Python"],
+    link: "https://railvision-ai-tejas.netlify.app/"
   }
 ];
 
@@ -53,8 +90,18 @@ export default function WorkPage() {
     <div className="bg-[#0A0A0A] text-white min-h-screen">
       
       {/* Hero Section */}
-      <section className="pt-40 pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(37,99,235,0.15),transparent_60%)] pointer-events-none blur-[50px]" />
+      <section className="relative pt-40 pb-32 flex items-center justify-center min-h-screen overflow-hidden border-b border-[#2A2A2E]">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-75"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260419_065931_e3ca7b53-d32e-4ad5-81de-dc9d6fcfda6d.mp4"
+          />
+          <div className="absolute inset-0 bg-black/25" />
+        </div>
         
         <div className="container mx-auto px-4 relative z-10 text-center">
           <motion.div
@@ -120,6 +167,15 @@ export default function WorkPage() {
                             {t}
                           </span>
                         ))}
+                      </div>
+
+                      <div className="pt-4">
+                        <Button asChild variant="outline" className="group rounded-full bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300">
+                          <Link href={project.link} target="_blank" rel="noopener noreferrer">
+                            Visit Live Project
+                            <ExternalLink className="w-4 h-4 ml-2 opacity-50 group-hover:opacity-100 transition-opacity" />
+                          </Link>
+                        </Button>
                       </div>
                     </div>
 

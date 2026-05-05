@@ -112,8 +112,18 @@ export default function TechnologiesPage() {
   return (
     <div className="bg-background text-foreground">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 text-center bg-gradient-to-b from-secondary/50 via-background to-background relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh opacity-30" />
+      <section className="relative pt-40 pb-32 flex items-center justify-center min-h-screen text-center overflow-hidden border-b border-[#2A2A2E]">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-75"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260324_151826_c7218672-6e92-402c-9e45-f1e0f454bdc4.mp4"
+          />
+          <div className="absolute inset-0 bg-black/25" />
+        </div>
         
         <motion.div
           ref={heroRef}

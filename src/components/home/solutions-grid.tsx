@@ -39,9 +39,18 @@ export function SolutionsGrid() {
 
     return (
         <section className="py-32 bg-[#0A0A0A] relative overflow-hidden border-t border-[#2A2A2E]">
-            {/* Unique Background: Architect Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px]" />
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#2563EB] opacity-10 blur-[120px] rounded-full pointer-events-none" />
+            {/* Cinematic Video Background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover opacity-50"
+                    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_171521_25968ba2-b594-4b32-aab7-f6b69398a6fa.mp4"
+                />
+                <div className="absolute inset-0 bg-black/50" />
+            </div>
 
             <div className="container mx-auto relative z-10 px-4">
                 <motion.div
@@ -75,7 +84,7 @@ export function SolutionsGrid() {
                             >
                                 <Link href="/services" className="block h-full group">
                                     <motion.div
-                                        className="relative flex flex-col h-full p-10 bg-[#111113]/80 backdrop-blur-xl border border-[#2A2A2E] rounded-[2rem] transition-all duration-500 hover:border-[#2563EB]/50 overflow-hidden"
+                                        className="relative flex flex-col h-full p-10 bg-[#111113]/40 backdrop-blur-lg border border-[#2A2A2E] rounded-[2rem] transition-all duration-500 hover:border-[#2563EB]/50 overflow-hidden"
                                         whileHover={{ y: -8 }}
                                         transition={springTransition}
                                     >

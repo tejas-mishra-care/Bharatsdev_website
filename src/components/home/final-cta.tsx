@@ -42,8 +42,18 @@ export function FinalCta() {
 
     return (
         <section id="contact" className="py-32 bg-[#050505] relative overflow-hidden border-t border-[#2A2A2E]">
-            {/* Massive Aurora Background */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] opacity-20 pointer-events-none blur-[150px] rounded-[100%] bg-gradient-to-r from-[#2563EB] via-[#F97316] to-[#2563EB] animate-pulse" />
+            {/* Cinematic Video Background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover opacity-50"
+                    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_074327_a4d6275d-82d9-4c83-bfbe-f1fb2213c17c.mp4"
+                />
+                <div className="absolute inset-0 bg-black/50" />
+            </div>
 
             <div className="container mx-auto max-w-6xl relative z-10 px-4">
                 <motion.div

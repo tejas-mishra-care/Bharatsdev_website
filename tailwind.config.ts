@@ -23,6 +23,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-inter)", 'sans-serif'],
         heading: ["var(--font-space)", 'sans-serif'],
+        instrument: ["var(--font-instrument)", "serif"],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -85,6 +86,10 @@ export default {
         },
         'shimmer': {
           '100%': { transform: 'translateX(100%)' },
+        },
+        'fade-rise': {
+          from: { opacity: '0', transform: 'translateY(24px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
         }
       },
       animation: {
@@ -92,6 +97,9 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'mesh-breathe': 'mesh-breathe 15s ease infinite',
         'shimmer': 'shimmer 1.5s infinite',
+        'fade-rise': 'fade-rise 0.8s ease-out both',
+        'fade-rise-delay': 'fade-rise 0.8s ease-out 0.2s both',
+        'fade-rise-delay-2': 'fade-rise 0.8s ease-out 0.4s both',
       },
       transitionTimingFunction: {
         'apple': 'cubic-bezier(0.25, 1, 0.5, 1)',

@@ -57,7 +57,17 @@ export default function ContactPage() {
 
   return (
     <div className="bg-[#050505] text-white min-h-screen pt-32 pb-24 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_top_right,rgba(37,99,235,0.1),transparent_50%)] pointer-events-none blur-[100px]" />
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-75"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4"
+        />
+        <div className="absolute inset-0 bg-black/25" />
+      </div>
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">

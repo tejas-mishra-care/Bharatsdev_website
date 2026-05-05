@@ -40,9 +40,19 @@ export default function StudentHubPage() {
 
   return (
     <div className="bg-[#050505] text-white min-h-screen">
-      <section className="pt-40 pb-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(249,115,22,0.15),transparent_60%)] pointer-events-none blur-[50px]" />
-        <div className="absolute top-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#F97316] to-transparent opacity-50" />
+      <section className="relative pt-40 pb-32 flex items-center justify-center min-h-screen overflow-hidden border-b border-[#2A2A2E]">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-75"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4"
+          />
+          <div className="absolute inset-0 bg-black/25" />
+        </div>
+        <div className="absolute top-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#F97316] to-transparent opacity-50 z-10" />
         
         <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={springTransition}>

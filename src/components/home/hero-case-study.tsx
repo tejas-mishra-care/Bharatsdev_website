@@ -41,10 +41,18 @@ export function HeroCaseStudy() {
 
   return (
     <section className="py-32 relative overflow-hidden bg-[#0A0A0A] border-t border-[#2A2A2E]">
-      {/* Animated Hexagon Background & Glows */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTIwIDAgTCA0MCAxMCBMIDQwIDMwIEwgMjAgNDAgTCAwIDMwIEwgMCAxMCBaIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==')] opacity-30" />
-      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#2563EB] opacity-10 blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#F97316] opacity-10 blur-[120px] rounded-full pointer-events-none" />
+      {/* Cinematic Video Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4"
+        />
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
 
       <div className="container mx-auto relative z-10 px-4">
         <motion.div
@@ -76,7 +84,7 @@ export function HeroCaseStudy() {
         >
           <motion.div 
             variants={itemVariants}
-            className="relative grid lg:grid-cols-2 gap-12 items-center p-8 lg:p-12 bg-[#111113]/80 backdrop-blur-2xl rounded-[2rem] border border-[#2A2A2E] shadow-2xl overflow-hidden group hover:border-[#2563EB]/40 transition-colors duration-500"
+            className="relative grid lg:grid-cols-2 gap-12 items-center p-8 lg:p-12 bg-[#111113]/40 backdrop-blur-lg rounded-[2rem] border border-[#2A2A2E] shadow-2xl overflow-hidden group hover:border-[#2563EB]/40 transition-colors duration-500"
           >
             {/* Animated top stripe */}
             <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#2563EB] via-[#F97316] to-[#2563EB] bg-[length:200%_auto] animate-gradient-x opacity-50 group-hover:opacity-100 transition-opacity" />
@@ -157,7 +165,7 @@ export function HeroCaseStudy() {
                   <span className="text-[#222222] font-heading font-bold text-2xl tracking-widest uppercase">Dashboard UI</span>
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-black/50" />
             </motion.div>
           </motion.div>
         </motion.div>

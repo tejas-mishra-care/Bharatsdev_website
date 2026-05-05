@@ -1,4 +1,5 @@
 
+import { CinematicHero } from '@/components/home/cinematic-hero';
 import { Hero } from '@/components/home/hero';
 import { TrustBar } from '@/components/home/trust-bar';
 import { TechStackShowcase } from '@/components/home/tech-stack-showcase';

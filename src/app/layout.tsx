@@ -5,10 +5,9 @@ import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/toaster";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackToTop } from "@/components/ui/back-to-top";
-import { CustomCursor } from "@/components/ui/custom-cursor";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { cn } from "@/lib/utils";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk, Instrument_Serif } from "next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,6 +21,14 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space",
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: true,
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-instrument",
+  weight: "400",
   display: "swap",
   preload: true,
 });
@@ -99,9 +106,9 @@ export default function RootLayout({
           "min-h-screen bg-background text-foreground font-sans antialiased flex flex-col",
           inter.variable,
           spaceGrotesk.variable,
+          instrumentSerif.variable,
         )}
       >
-        <CustomCursor />
         <ScrollProgress />
         <Header />
         <main className="flex-1">{children}</main>

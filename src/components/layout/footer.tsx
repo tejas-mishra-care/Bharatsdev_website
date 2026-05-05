@@ -50,43 +50,44 @@ export function Footer() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <footer className="bg-black text-chrome border-t border-[#222222] relative overflow-hidden">
-      <div
-        className="container mx-auto px-4 py-16 relative z-10"
-      >
+    <footer className="bg-[#050505] text-chrome border-t border-[#2A2A2E] relative overflow-hidden pt-24 pb-8">
+      {/* Background Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-64 bg-gradient-to-t from-[#2563EB]/10 via-[#F97316]/5 to-transparent blur-[100px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           ref={ref}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
+          className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-20"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          <motion.div variants={itemVariants} style={{ willChange: 'opacity, transform' }} className="col-span-1 md:col-span-2 lg:col-span-1">
-            <Link href="/" prefetch={true} className="flex items-center gap-2 mb-6">
-              <span className="text-2xl font-black font-heading text-white tracking-tight">Bharats<span className="text-primary">Dev</span></span>
+          <motion.div variants={itemVariants} className="lg:col-span-4">
+            <Link href="/" prefetch={true} className="flex items-center gap-2 mb-6 inline-block">
+              <span className="text-3xl font-black font-heading text-white tracking-tight">Bharats<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#F97316]">Dev</span></span>
             </Link>
-            <p className="max-w-md mb-8 text-chrome text-sm leading-relaxed font-sans">
-              Your complete digital growth engine. We build high-performance, finished digital assets.
+            <p className="max-w-sm mb-8 text-zinc-400 text-sm leading-relaxed font-sans">
+              Your complete digital growth engine. We build high-performance, finished digital assets for visionaries and enterprises.
             </p>
-            <div className="flex space-x-3">
+            <div className="flex gap-4">
               {[
-                { icon: Linkedin, href: 'https://www.linkedin.com/company/109890130/', label: 'LinkedIn' },
-                { icon: Twitter, href: 'https://twitter.com/bharatsdev', label: 'Twitter' },
-                { icon: Instagram, href: 'https://www.instagram.com/bharatsdev/', label: 'Instagram' },
-                { icon: Youtube, href: 'https://www.youtube.com/@bharatsdev', label: 'YouTube' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/company/109890130/', label: 'LinkedIn', color: 'hover:bg-[#0A66C2] hover:border-[#0A66C2]' },
+                { icon: Twitter, href: 'https://twitter.com/bharatsdev', label: 'Twitter', color: 'hover:bg-white hover:text-black hover:border-white' },
+                { icon: Instagram, href: 'https://www.instagram.com/bharatsdev/', label: 'Instagram', color: 'hover:bg-gradient-to-tr hover:from-[#fd5949] hover:to-[#d6249f] hover:border-transparent' },
+                { icon: Youtube, href: 'https://www.youtube.com/@bharatsdev', label: 'YouTube', color: 'hover:bg-[#FF0000] hover:border-[#FF0000]' },
               ].map((social) => {
                 const Icon = social.icon;
                 return (
                   <motion.div
                     key={social.label}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileHover={{ y: -4 }}
                     whileTap={{ scale: 0.9 }}
-                    style={{ willChange: 'transform' }}
                   >
                     <Link
                       href={social.href}
                       aria-label={social.label}
-                      className="bg-[#0A0A0A] text-chrome h-10 w-10 flex items-center justify-center rounded-md border border-[#222222] hover:bg-primary hover:text-black hover:border-primary transition-colors duration-300"
+                      className={`bg-black text-zinc-400 h-12 w-12 flex items-center justify-center rounded-full border border-[#2A2A2E] transition-all duration-300 hover:text-white ${social.color} shadow-lg`}
                     >
                       <Icon className="h-5 w-5" />
                     </Link>
@@ -96,16 +97,17 @@ export function Footer() {
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants} style={{ willChange: 'opacity, transform' }}>
-            <h3 className="font-bold mb-6 text-white uppercase tracking-widest text-xs">Services</h3>
+          <motion.div variants={itemVariants} className="lg:col-span-2 lg:col-start-6">
+            <h3 className="font-bold mb-8 text-white uppercase tracking-[0.2em] text-xs">Services</h3>
             <ul className="space-y-4">
               {servicesLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
                     prefetch={true}
-                    className="text-chrome hover:text-primary transition-colors text-sm font-sans"
+                    className="text-zinc-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group"
                   >
+                    <span className="h-[1px] w-0 bg-[#2563EB] transition-all duration-300 group-hover:w-4" />
                     {link.label}
                   </Link>
                 </li>
@@ -113,16 +115,17 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          <motion.div variants={itemVariants} style={{ willChange: 'opacity, transform' }}>
-            <h3 className="font-bold mb-6 text-white uppercase tracking-widest text-xs">Company</h3>
+          <motion.div variants={itemVariants} className="lg:col-span-2">
+            <h3 className="font-bold mb-8 text-white uppercase tracking-[0.2em] text-xs">Company</h3>
             <ul className="space-y-4">
               {companyLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
                     prefetch={true}
-                    className="text-chrome hover:text-primary transition-colors text-sm font-sans"
+                    className="text-zinc-400 hover:text-white transition-colors text-sm font-sans flex items-center gap-2 group"
                   >
+                    <span className="h-[1px] w-0 bg-[#F97316] transition-all duration-300 group-hover:w-4" />
                     {link.label}
                   </Link>
                 </li>
@@ -130,39 +133,46 @@ export function Footer() {
             </ul>
           </motion.div>
 
-          <motion.div variants={itemVariants} style={{ willChange: 'opacity, transform' }}>
-            <h3 className="font-bold mb-6 text-white uppercase tracking-widest text-xs">Contact</h3>
-            <ul className="space-y-4">
+          <motion.div variants={itemVariants} className="lg:col-span-3">
+            <h3 className="font-bold mb-8 text-white uppercase tracking-[0.2em] text-xs">Headquarters</h3>
+            <ul className="space-y-5">
               <li>
-                <a href="mailto:contact@bharatsdev.com" className="text-chrome hover:text-primary transition-colors text-sm font-sans">
+                <a href="mailto:contact@bharatsdev.com" className="text-zinc-400 hover:text-white transition-colors text-sm font-sans inline-block border-b border-[#2A2A2E] hover:border-white pb-1">
                   contact@bharatsdev.com
                 </a>
               </li>
               <li>
-                <a href="tel:+917077130651" className="text-chrome hover:text-primary transition-colors text-sm font-sans">
+                <a href="tel:+917077130651" className="text-zinc-400 hover:text-white transition-colors text-sm font-sans inline-block border-b border-[#2A2A2E] hover:border-white pb-1">
                   +91 70771 30651
                 </a>
               </li>
-              <li className="text-chrome text-sm font-sans">
-                Chhatrapati Sambhajinagar, India. Serving globally.
+              <li className="text-zinc-500 text-sm font-sans leading-relaxed pt-2 border-t border-[#2A2A2E]">
+                Chhatrapati Sambhajinagar, Maharashtra, India.<br />
+                Operating Globally.
               </li>
             </ul>
           </motion.div>
         </motion.div>
 
+        {/* Huge Background Typography */}
+        <div className="w-full overflow-hidden flex justify-center items-center select-none pointer-events-none mb-8 opacity-[0.02]">
+          <h2 className="text-[12vw] font-black font-heading tracking-tighter leading-none text-white whitespace-nowrap">
+            BHARATSDEV
+          </h2>
+        </div>
+
         <motion.div
-          className="mt-16 pt-8 border-t border-[#222222] flex flex-col md:flex-row justify-between items-center text-xs text-chrome"
+          className="pt-8 border-t border-[#2A2A2E] flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-500 font-mono uppercase tracking-widest"
           variants={itemVariants}
-          style={{ willChange: 'opacity, transform' }}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          <p className="mb-4 md:mb-0 uppercase tracking-widest">
-            &copy; {new Date().getFullYear()} BharatsDev. All rights reserved.
+          <p className="order-2 md:order-1">
+            &copy; {new Date().getFullYear()} BHARATSDEV. ALL RIGHTS RESERVED.
           </p>
-          <div className="flex space-x-6">
+          <div className="flex gap-8 order-1 md:order-2">
             {bottomLinks.map((link) => (
-              <Link key={link.label} href={link.href} className="hover:text-white transition-colors uppercase tracking-widest">
+              <Link key={link.label} href={link.href} className="hover:text-white transition-colors">
                 {link.label}
               </Link>
             ))}

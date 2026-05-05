@@ -73,6 +73,7 @@ const allProjects = [
     results: ['<48-hour delivery', 'Production-ready system', 'Enterprise-grade security'],
     isFeatured: true,
     image: placeholderImages.find(p => p.id === 'portfolio-ultratech'),
+    link: 'https://tejas-ut-shashwat.netlify.app/'
   },
   {
     id: 'jeevolve',
@@ -83,6 +84,7 @@ const allProjects = [
     techStack: 'React, Node.js, Custom LMS',
     isFeatured: false,
     image: placeholderImages.find(p => p.id === 'portfolio-jeevolve'),
+    link: 'https://jeevolve-old.netlify.app/'
   },
   {
     id: 'careercompass',
@@ -93,6 +95,7 @@ const allProjects = [
     techStack: 'AI/ML, Python, React',
     isFeatured: true,
     image: placeholderImages.find(p => p.id === 'portfolio-careercompass'),
+    link: 'https://ai-career-compass.netlify.app/'
   },
   {
     id: 'sievelab',
@@ -103,6 +106,7 @@ const allProjects = [
     techStack: 'Web App, Data Visualization',
     isFeatured: true,
     image: placeholderImages.find(p => p.id === 'portfolio-sievelab'),
+    link: 'https://ut-sivelab-tejas.netlify.app/'
   },
   {
     id: 'ghamelacalc',
@@ -113,17 +117,41 @@ const allProjects = [
     techStack: 'Progressive Web App',
     isFeatured: true,
     image: placeholderImages.find(p => p.id === 'portfolio-ghamelacalc'),
+    link: 'https://ut-calci.netlify.app/'
   },
   {
-    id: 'custom-website',
-    title: 'High-Conversion Website',
-    category: 'Website & E-commerce',
-    tag: 'Marketing Site',
-    description: 'A custom marketing website designed to convert visitors into customers for a leading SaaS company.',
-    techStack: 'Next.js, Sanity CMS, Vercel',
+    id: 'eventflow',
+    title: 'EventFlow Ticketing',
+    category: 'Web & E-commerce',
+    tag: 'Event Management',
+    description: 'A high-performance event management and ticketing platform designed for seamless user experience.',
+    techStack: 'Next.js, Tailwind CSS',
+    isFeatured: true,
+    image: placeholderImages.find(p => p.id === 'portfolio-custom'),
+    link: 'https://eventflow.bharatsdev.com/'
+  },
+  {
+    id: 'railvision',
+    title: 'RailVision AI',
+    category: 'Enterprise AI Solutions',
+    tag: 'Computer Vision',
+    description: 'A proof-of-concept AI platform utilizing computer vision models to track and analyze railway infrastructure.',
+    techStack: 'Python, AI/ML',
     isFeatured: false,
     image: placeholderImages.find(p => p.id === 'portfolio-custom'),
+    link: 'https://railvision-ai-tejas.netlify.app/'
   },
+  {
+    id: 'tejas-portfolio',
+    title: 'Tejas Mishra Portfolio',
+    category: 'Web Design',
+    tag: 'Personal Branding',
+    description: 'A dynamic, high-performance personal portfolio showcasing technical skills and engineering work.',
+    techStack: 'Next.js, Framer Motion',
+    isFeatured: false,
+    image: placeholderImages.find(p => p.id === 'portfolio-custom'),
+    link: 'https://tejas.bharatsdev.com/'
+  }
 ];
 
 export const portfolio = {

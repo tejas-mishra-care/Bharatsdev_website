@@ -87,10 +87,17 @@ export default function ServicesPage() {
     <div className="bg-[#0A0A0A] text-white min-h-screen font-sans selection:bg-[#2563EB] selection:text-white">
       
       {/* 3D Hero Section */}
-      <section className="relative pt-40 pb-32 overflow-hidden flex items-center justify-center min-h-[70vh]">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.15),transparent_60%)] animate-pulse" />
-          <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.1),transparent_60%)]" />
+      <section className="relative pt-40 pb-32 flex items-center justify-center min-h-screen overflow-hidden border-b border-[#2A2A2E]">
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-75"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260424_064411_9e9d7f84-9277-41f4-ab10-59172d89e6be.mp4"
+          />
+          <div className="absolute inset-0 bg-black/25" />
         </div>
         
         <motion.div

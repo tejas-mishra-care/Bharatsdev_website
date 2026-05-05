@@ -38,11 +38,7 @@ export function Hero() {
   const smoothX = useSpring(mouseX, springConfig);
   const smoothY = useSpring(mouseY, springConfig);
 
-  // Parallax multipliers for different layers
-  const orb1X = useTransform(smoothX, value => value * 0.1);
-  const orb1Y = useTransform(smoothY, value => value * 0.1);
-  const orb2X = useTransform(smoothX, value => value * -0.08);
-  const orb2Y = useTransform(smoothY, value => value * -0.08);
+  // Parallax logic is removed as the geometric orbs are replaced by the video background.
   
   return (
     <section ref={ref} 
@@ -55,23 +51,17 @@ export function Hero() {
       }}
       className="relative min-h-screen flex items-center justify-center bg-[#050505] overflow-hidden pt-20 border-b border-[#2A2A2E] cursor-crosshair"
     >
-      
-      {/* Dynamic Geometric Background with Mouse Parallax */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Massive Glowing Orb - Tracks Mouse */}
-        <motion.div 
-          className="absolute top-1/4 left-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.18),transparent_60%)] rounded-full blur-[80px]"
-          style={{ x: orb1X, y: orb1Y, translateX: '-50%' }}
+      {/* Cinematic Video Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-75"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
         />
-        
-        {/* Secondary Orange Orb - Opposing Mouse Parallax */}
-        <motion.div 
-          className="absolute top-1/3 left-1/3 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.12),transparent_60%)] rounded-full blur-[100px]"
-          style={{ x: orb2X, y: orb2Y, translateX: '-50%' }}
-        />
-
-        {/* Architect Grid overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:64px_64px]" />
+        <div className="absolute inset-0 bg-black/25" />
       </div>
 
       <motion.div style={{ opacity }} className="container mx-auto text-left relative z-10 px-4 md:px-12 w-full max-w-7xl">
