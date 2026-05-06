@@ -101,10 +101,9 @@ export default function ServicesPage() {
         </div>
         
         <motion.div
-          ref={heroRef}
           className="container mx-auto px-4 relative z-10 text-center flex flex-col items-center"
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
-          animate={heroInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.div

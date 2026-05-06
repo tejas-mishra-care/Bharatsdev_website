@@ -124,10 +124,9 @@ export default function CareersPage() {
         <div className="absolute inset-0 gradient-mesh opacity-30" />
         
         <motion.div
-          ref={heroRef}
           className="container mx-auto relative z-10"
           initial={{ opacity: 0, y: 30 }}
-          animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-balance mb-6">
