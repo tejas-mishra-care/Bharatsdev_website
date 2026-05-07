@@ -8,7 +8,7 @@ import { ArrowRight, Box, Brain, Calculator, Clock, ExternalLink } from 'lucide-
 import { Button } from '@/components/ui/button';
 
 const springTransition = {
-  type: "spring",
+  type: "spring" as const,
   stiffness: 300,
   damping: 25,
 };

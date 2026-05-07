@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Users, Megaphone, MonitorPlay, Award } from 'lucide-react';
 
-const springTransition = { type: "spring", stiffness: 300, damping: 25 };
+const springTransition = { type: "spring" as const, stiffness: 300, damping: 25 };
 
 export default function StudentHubPage() {
   const ref = useRef(null);

@@ -49,6 +49,8 @@ export function CinematicHero() {
         loop
         muted
         playsInline
+        preload="auto"
+        fetchPriority="high"
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none mix-blend-luminosity opacity-80"
       >
         <source

@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 import { motion, type Easing } from 'framer-motion';
 
 const springTransition = {
-  type: "spring",
+  type: "spring" as const,
   stiffness: 400,
   damping: 30,
 };

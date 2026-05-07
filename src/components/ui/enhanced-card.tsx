@@ -2,9 +2,9 @@
 
 import * as React from 'react';
 import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { HTMLMotionProps, motion } from 'framer-motion';
 
-interface EnhancedCardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface EnhancedCardProps extends HTMLMotionProps<"div"> {
   hoverEffect?: boolean;
   glowEffect?: boolean;
 }

@@ -9,7 +9,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 const springTransition = {
-    type: "spring",
+    type: "spring" as const,
     stiffness: 400,
     damping: 30,
 };
@@ -41,14 +41,16 @@ export function SolutionsGrid() {
         <section className="py-32 bg-[#0A0A0A] relative overflow-hidden border-t border-[#2A2A2E]">
             {/* Cinematic Video Background */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover opacity-50"
-                    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_171521_25968ba2-b594-4b32-aab7-f6b69398a6fa.mp4"
-                />
+                {isInView && (
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover opacity-50"
+                        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_171521_25968ba2-b594-4b32-aab7-f6b69398a6fa.mp4"
+                    />
+                )}
                 <div className="absolute inset-0 bg-black/50" />
             </div>
 

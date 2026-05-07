@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 
-const springTransition = { type: "spring", stiffness: 300, damping: 25 };
+const springTransition = { type: "spring" as const, stiffness: 300, damping: 25 };
 
 export default function InsightsPage() {
   const articles = [

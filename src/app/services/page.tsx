@@ -7,7 +7,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 const springTransition = {
-  type: "spring",
+  type: "spring" as const,
   stiffness: 300,
   damping: 25,
 };

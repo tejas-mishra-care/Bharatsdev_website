@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { handleContactForm } from "@/app/contact/actions";
 
-const springTransition = { type: "spring", stiffness: 300, damping: 25 };
+const springTransition = { type: "spring" as const, stiffness: 300, damping: 25 };
 
 export default function ContactPage() {
   const [step, setStep] = useState(1);

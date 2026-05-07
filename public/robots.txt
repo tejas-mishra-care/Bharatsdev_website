@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bharatsdev.com/sitemap.xml
