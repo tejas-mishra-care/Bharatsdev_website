@@ -14,7 +14,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function InsightPage({ params }: { params: { slug: string } }) {
+export default async function InsightPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const insight = insights.find((i) => i.slug === params.slug);
 
   if (!insight) {

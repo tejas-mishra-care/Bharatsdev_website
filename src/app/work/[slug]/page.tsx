@@ -23,7 +23,8 @@ const processSteps = [
     { title: 'Launch & Handover', description: 'Deployed the complete solution and handed over full source code and documentation.' }
 ]
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
+export default async function CaseStudyPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const project = portfolio.all.find(p => p.id === params.slug);
 
   if (!project) {

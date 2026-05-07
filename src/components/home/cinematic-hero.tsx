@@ -50,7 +50,7 @@ export function CinematicHero() {
         muted
         playsInline
         preload="auto"
-        fetchPriority="high"
+        {...({ fetchPriority: 'high' } as any)}
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none mix-blend-luminosity opacity-80"
       >
         <source
